@@ -1,0 +1,15 @@
+component Philosopher 
+attribute string name
+uses Fork left
+uses Fork right
+publishes StatusInfo info
+ interface Fork 
+  exception InUse 
+ void get() raises (InUse)
+ void release()
+;
+component ForkManager 
+provides Fork the_fork
+;
+home ForkHome manages ForkManager 
+;

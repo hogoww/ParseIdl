@@ -1,0 +1,34 @@
+component Philosopher {
+
+  attribute string name;
+
+  // The left fork receptacle.
+
+  uses Fork left;
+
+  // The right fork receptacle.
+
+  uses Fork right;
+
+  // The status info event source.
+
+  /* re*eoihtr
+     ert*/
+
+  publishes StatusInfo info;
+
+  interface Fork {
+
+    exception InUse {};
+
+    void get() raises (InUse);
+    void release();
+  };
+};
+
+
+// Le composant
+component ForkManager {
+  // Facette utilisé par les phisolphes.
+  provides Fork the_fork;
+};
