@@ -28,14 +28,27 @@ def printMatrice(mat):
 
 
 def printLineInFile(descFile,l,p=0):
-    for i in l:
-        if isinstance(i,list):
-            printLineInFile(descFile,i,p+1)
+    if(p):
+        p1=p-1
+    else:
+        p1=0
+    i=1;
+
+    s=""
+    for j in range(p1):
+        s=s+' '
+    descFile.write(s+l[0]+"\n")
+
+    if(p):
+        s=s+' '
+
+    length=len(l)
+    while(i<length):
+        if isinstance(l[i],list):
+            printLineInFile(descFile,l[i],p+1)
         else:
-            s=""
-            for j in range(p):
-                s=s+' '
-            descFile.write(s+i+"\n")
+            descFile.write(s+l[i]+"\n")
+        i=i+1
 
 def printInFileMatrice(descFile,mat):
     for i in mat:
@@ -111,3 +124,4 @@ def printInFile(fileName,text):
 parsing=parseItems(clean(getFile(sys.argv[1])))
 
 printInFile(sys.argv[1],parsing)
+

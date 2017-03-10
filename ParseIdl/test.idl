@@ -1,36 +1,34 @@
 component Philosopher {
 
-attribute string name;
+  attribute string name;
 
-// The left fork receptacle.
+  // The left fork receptacle.
 
-uses Fork left;
+  uses Fork left;
 
-// The right fork receptacle.
+  // The right fork receptacle.
 
-uses Fork right;
+  uses Fork right;
 
-// The status info event source.
+  // The status info event source.
 
-/* re*eoihtr
-ert*/
+  /* re*eoihtr
+     ert*/
 
-publishes StatusInfo info;
+  publishes StatusInfo info;
 
-interface Fork {
+  interface Fork {
 
-exception InUse {};
+    exception InUse {};
 
-void get() raises (InUse);
-void release();
-};
+    void get() raises (InUse);
+    void release();
+  };
 };
 
 
 // Le composant
 component ForkManager {
-// Facette utilisé par les phisolphes.
-provides Fork the_fork;
+  // Facette utilisé par les phisolphes.
+  provides Fork the_fork;
 };
-// Maison pour instancier les composants ForkManager
-home ForkHome manages ForkManager {};
