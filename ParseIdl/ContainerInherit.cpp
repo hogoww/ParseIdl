@@ -1,7 +1,8 @@
 #include "ContainerInherit.h"
+#include <unistd.h>
 
-const std::regex ContainerInherit::exprInheritSomething(":");
-const std::regex ContainerInherit::exprInherit("^ ?(.*?),");
+const std::regex ContainerInherit::exprInheritSomething(":",std::regex::optimize);
+const std::regex ContainerInherit::exprInherit("^ ?(\\w+),?",std::regex::optimize);
 
 /******Constructeurs:******/
 
@@ -15,11 +16,11 @@ ContainerInherit::ContainerInherit(std::string name,std::string type,std::string
 /* methodes private*/
 /*private*/void ContainerInherit::ParseEnd(std::string inheritFrom){
   std::smatch bogus;
-  if(std::regex_match(inheritFrom,bogus,exprInheritSomething)){
+  if(std::regex_search(inheritFrom,bogus,exprInheritSomething)){
+    inheritFrom=bogus.suffix().str();//Remove the ';
     std::smatch res;
-    inheritFrom=bogus.suffix().str();//Remove the ';'
     while(std::regex_search(inheritFrom,res,exprInherit)){
-      addInheritance(res.suffix().str());
+      addInheritance(res[1].str());
       inheritFrom=res.suffix().str();
     }
   }
@@ -36,4 +37,16 @@ const std::vector<std::string> ContainerInherit::getInheritFrom()const{
   return InheritFrom;
 }
 
+void ContainerInherit::showMeWhatYouGot(size_t depth)const{
+  showMeThatName(depth);
 
+  if(InheritFrom.size()){
+    std::cout<<" : ";
+    std::cout<<*InheritFrom.begin();
+    for(std::vector<std::string>::const_iterator it=++InheritFrom.begin();it!=InheritFrom.end();++it){
+      std::cout<<", "<<*it;
+    }
+  }
+  std::cout<<"\n";
+  showMeThatContent(depth);
+}

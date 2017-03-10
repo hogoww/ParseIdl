@@ -1,4 +1,4 @@
-component Philosopher {
+component Philosopher : pouet {
 
   attribute string name;
 

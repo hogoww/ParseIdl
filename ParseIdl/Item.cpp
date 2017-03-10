@@ -21,8 +21,8 @@ const std::string Item::getName() const{
 
 
 void Item::showMeWhatYouGot(size_t depth)const{
-  for(size_t i=0;i<depth;i++)
+  for(size_t i=0;i<depth;i++){
     std::cout<<"-";
+  }
   std::cout<<Type<<" "<<Name;
-  
 }

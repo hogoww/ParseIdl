@@ -75,37 +75,6 @@ std::string ParseurIdl::FileToString(std::string fileName){
 }
   
 
-void ParseurIdl::addItemInStack(Item*& I){//reveals the true self of an Item.
-  // {
-  //   Atom* a=dynamic_cast<Atom*>(I);
-  //   if(a){
-  //     S.top()->addItem(*a);
-  //     return;
-  //   }
-  // }
-  // {
-  //   ContainerInherit* a=dynamic_cast<ContainerInherit*>(I);
-  //   if(a){
-  //     S.top()->addItem(*a);
-  //     return;
-  //   }
-  // }
-  // {
-  //   Container* a=dynamic_cast<Container*>(I);
-  //   if(a){
-  //     S.top()->addItem(*a);
-  //     return;
-  //   }
-  // }
-  // {
-  //   Function* a=dynamic_cast<Function*>(I);
-  //   if(a){
-  //     S.top()->addItem(*a);
-  //     return;
-  //   }
-  // }
-}
-
 std::string ParseurIdl::fillMeWasHarderThanExpected(std::string& toBeParse,Container*& endOfPile){
   std::smatch res;
   if(std::regex_search(toBeParse,res,exprLine)){

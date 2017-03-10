@@ -30,7 +30,6 @@ class ParseurIdl{
   Item* createItem(std::string line);
   std::string fillMeWasHarderThanExpected(std::string& toBeParse,Container*& endOfPile);
   int getDepth(std::smatch& res)const;
-  void showMeTheTrueIdentityOfYourItems();
   void addItemInStack(Item*& I);
 
   //regex expr, to avoid multiple creation of the same thing.

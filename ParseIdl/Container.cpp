@@ -20,14 +20,19 @@ const std::vector<Item*> Container::getContent()const {
 }
 
 
-void Container::showMeWhatYouGot(size_t depth)const{
+void Container::showMeThatName(size_t depth)const{
   Item::showMeWhatYouGot(depth);
+}
+
+void Container::showMeThatContent(size_t depth)const{
+ for(std::vector<Item*>::const_iterator it=Content.begin();it!=Content.end();++it) {
+   (*it)->showMeWhatYouGot(depth+1);
+ }
+}
+
+void Container::showMeWhatYouGot(size_t depth)const{
+  showMeThatName(depth);
   std::cout<<"\n";
-
-
-  for(std::vector<Item*>::const_iterator it=Content.begin();it!=Content.end();++it) {
-    (*it)->showMeWhatYouGot(depth+1);
-
-  }
+  showMeThatContent(depth);
 }
 
