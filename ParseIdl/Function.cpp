@@ -73,8 +73,9 @@ void Function::showMeWhatYouGot(size_t depth)const{
   }
   std::cout<<")";
   if(Exception.size()){//forcement une
+    std::vector<std::string>::const_iterator end=Exception.end();
     std::cout<<" raises ("<<*Exception.begin();
-    for(std::vector<std::string>::const_iterator it=++Exception.begin();it!=Exception.end();++it) {
+    for(std::vector<std::string>::const_iterator it=++Exception.begin();it!=end;++it) {
       std::cout<<','<<*it;
     }
     std::cout<<")";

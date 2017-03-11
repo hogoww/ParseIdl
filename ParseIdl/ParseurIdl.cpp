@@ -226,7 +226,8 @@ void ParseurIdl::emptyStack(Container*& endOfPile){
 
 void ParseurIdl::showMeThatFile()const{
   std::cout<<"\n";
-  for(std::vector<Container*>::const_iterator it=file.begin();it!=file.end();++it){
+  std::vector<Container*>::const_iterator end=file.end();
+  for(std::vector<Container*>::const_iterator it=file.begin();it!=end;++it){
     (*it)->showMeWhatYouGot();
     std::cout<<"\n\n";
   }

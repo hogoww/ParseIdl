@@ -8,13 +8,13 @@ FLAGS = -Wall -ansi -pedantic -std=c++11
 
 all : $(PROGNAME)
 
-Item.o: Item.cpp Item.h
-ContainerInherit.o: ContainerInherit.cpp ContainerInherit.h
-Atom.o: Atom.cpp Atom.h
-Container.o :Container.cpp Container.h 
-Function.o: Function.cpp Function.h
-Parameter.o: Parameter.cpp Parameter.h
-ParseurIdl.o: ParseurIdl.cpp ParseurIdl.h
+Item.o: Item.cpp 
+ContainerInherit.o: ContainerInherit.cpp
+Atom.o: Atom.cpp
+Container.o :Container.cpp
+Function.o: Function.cpp
+Parameter.o: Parameter.cpp
+ParseurIdl.o: ParseurIdl.cpp
 main.o: main.cpp
 
 

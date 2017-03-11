@@ -8,6 +8,12 @@
 Container::Container(std::string name,std::string type):Item(name,type),Content(){
 }
 
+// Container::~Container(){
+// for(std::vector<Item*>::iterator it=Content.begin();it!=Content.end();++it) {
+//   delete (*it);
+//  }
+//  Content.clear();
+// }
 
 /******Methodes:******/
 /* methodes public*/
@@ -25,7 +31,8 @@ void Container::showMeThatName(size_t depth)const{
 }
 
 void Container::showMeThatContent(size_t depth)const{
- for(std::vector<Item*>::const_iterator it=Content.begin();it!=Content.end();++it) {
+  std::vector<Item*>::const_iterator end=Content.end();
+  for(std::vector<Item*>::const_iterator it=Content.begin();it!=end;++it) {
    (*it)->showMeWhatYouGot(depth+1);
  }
 }

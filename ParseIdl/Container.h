@@ -7,6 +7,7 @@
 class Container : public Item {
  private:
   std::vector<Item*> Content;
+  //virtual ~Container();
  protected:
   virtual void showMeThatName(size_t depth)const;
   virtual void showMeThatContent(size_t depth)const;

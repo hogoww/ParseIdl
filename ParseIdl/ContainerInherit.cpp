@@ -41,9 +41,10 @@ void ContainerInherit::showMeWhatYouGot(size_t depth)const{
   showMeThatName(depth);
 
   if(InheritFrom.size()){
+    std::vector<std::string>::const_iterator end=InheritFrom.end();
     std::cout<<" : ";
     std::cout<<*InheritFrom.begin();
-    for(std::vector<std::string>::const_iterator it=++InheritFrom.begin();it!=InheritFrom.end();++it){
+    for(std::vector<std::string>::const_iterator it=++InheritFrom.begin();it!=end;++it){
       std::cout<<", "<<*it;
     }
   }
