@@ -1,8 +1,19 @@
 -*- mode: compilation; default-directory: "~/Desktop/terL3/ParseIdl/" -*-
-Compilation started at Fri Mar 10 18:26:19
+Compilation started at Sun Mar 12 13:56:26
 
 make -k 
-g++-4.9 -Wall -ansi -pedantic -std=c++11 -c ContainerInherit.cpp ContainerInherit.h
+g++-4.9 -Wall -ansi -pedantic -std=c++11 -c Item.cpp
+g++-4.9 -Wall -ansi -pedantic -std=c++11 -c Atom.cpp
+g++-4.9 -Wall -ansi -pedantic -std=c++11 -c Container.cpp
+Container.cpp: In destructor ‘virtual Container::~Container()’:
+Container.cpp:32:13: warning: deleting object of polymorphic class type ‘Item’ which has non-virtual destructor might cause undefined behaviour [-Wdelete-non-virtual-dtor]
+     delete *it;
+             ^
+g++-4.9 -Wall -ansi -pedantic -std=c++11 -c ContainerInherit.cpp
+g++-4.9 -Wall -ansi -pedantic -std=c++11 -c Function.cpp
+g++-4.9 -Wall -ansi -pedantic -std=c++11 -c Parameter.cpp
+g++-4.9 -Wall -ansi -pedantic -std=c++11 -c ParseurIdl.cpp
+g++-4.9 -Wall -ansi -pedantic -std=c++11 -c main.cpp
 g++-4.9 Item.o Atom.o Container.o ContainerInherit.o Function.o Parameter.o ParseurIdl.o main.o -Wall -ansi -pedantic -std=c++11 -o main 
 
-Compilation finished at Fri Mar 10 18:26:22
+Compilation finished at Sun Mar 12 13:56:32

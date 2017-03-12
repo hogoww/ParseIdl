@@ -12,6 +12,10 @@ ContainerInherit::ContainerInherit(std::string name,std::string type,std::string
   ParseEnd(inheritFrom);
 }
 
+ContainerInherit::~ContainerInherit(){
+  InheritFrom.clear();
+}
+
 /******Methodes:******/
 /* methodes private*/
 /*private*/void ContainerInherit::ParseEnd(std::string inheritFrom){
@@ -41,10 +45,10 @@ void ContainerInherit::showMeWhatYouGot(size_t depth)const{
   showMeThatName(depth);
 
   if(InheritFrom.size()){
-    std::vector<std::string>::const_iterator end=InheritFrom.end();
+    std::vector<std::string>::const_iterator end=InheritFrom.cend();
     std::cout<<" : ";
-    std::cout<<*InheritFrom.begin();
-    for(std::vector<std::string>::const_iterator it=++InheritFrom.begin();it!=end;++it){
+    std::cout<<*InheritFrom.cbegin();
+    for(std::vector<std::string>::const_iterator it=++InheritFrom.cbegin();it!=end;++it){
       std::cout<<", "<<*it;
     }
   }

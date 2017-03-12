@@ -13,6 +13,7 @@ class Container : public Item {
   virtual void showMeThatContent(size_t depth)const;
  public:
   Container(std::string name,std::string type);
+  virtual ~Container();
   virtual void addItem(Item* i);
   virtual const std::vector<Item*> getContent()const;
   virtual void showMeWhatYouGot(size_t depth=0)const;

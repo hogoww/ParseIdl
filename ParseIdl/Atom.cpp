@@ -8,6 +8,8 @@
 Atom::Atom(std::string name,std::string type,std::string usage):Item(name,type),Usage(usage){
 }
 
+Atom::~Atom(){
+}
 
 /******Methodes:******/
 /* methodes public*/

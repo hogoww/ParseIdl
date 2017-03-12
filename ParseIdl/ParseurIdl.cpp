@@ -39,6 +39,14 @@ ParseurIdl::ParseurIdl(std::string fileToParse):file(){
   fillMe(content);
 }
 
+ParseurIdl::~ParseurIdl(){
+  std::vector<Container*>::iterator end=file.end();
+  for (std::vector<Container*>::iterator it = file.begin();it!=end;++it){
+    delete *it;
+  }
+  file.clear();
+}
+
 
 /******Methodes:******/
 /* methodes public*/
@@ -226,8 +234,8 @@ void ParseurIdl::emptyStack(Container*& endOfPile){
 
 void ParseurIdl::showMeThatFile()const{
   std::cout<<"\n";
-  std::vector<Container*>::const_iterator end=file.end();
-  for(std::vector<Container*>::const_iterator it=file.begin();it!=end;++it){
+  std::vector<Container*>::const_iterator end=file.cend();
+  for(std::vector<Container*>::const_iterator it=file.cbegin();it!=end;++it){
     (*it)->showMeWhatYouGot();
     std::cout<<"\n\n";
   }

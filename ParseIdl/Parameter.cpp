@@ -6,7 +6,6 @@
 
 /* constructeurs public*/
 Parameter::Parameter(std::string name,std::string type,bool in):Item(name,type),In(in){
-  //à implementer
 }
 
 
@@ -16,6 +15,9 @@ const bool Parameter::getIn() const{
   return In;
 }
 
+Parameter::~Parameter(){
+  std::cout<<"Parameter destructor -"<<getName()<<std::endl;
+}
 
 void Parameter::showMeThatParameter()const{
   std::cout<<(In?"In":"Out")<<" "<<Type<<" "<<Name;

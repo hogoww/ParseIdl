@@ -8,6 +8,8 @@
 Item::Item(std::string name,std::string type):Name(name),Type(type){
 }
 
+Item::~Item(){
+}
 
 /******Methodes:******/
 /* methodes public*/

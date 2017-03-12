@@ -18,6 +18,7 @@ class ContainerInherit : public Container{
   
  public:
   ContainerInherit(std::string name,std::string type,std::string inheritFrom);
+  virtual ~ContainerInherit();
   virtual const std::vector<std::string> getInheritFrom()const;
   virtual void showMeWhatYouGot(size_t depth=0)const;
 };

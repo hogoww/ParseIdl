@@ -7,6 +7,7 @@ class Parameter : public Item {
  private:
   bool In;//True if "in" parameter False if "out" parameter
  public:
+  virtual ~Parameter();
   Parameter(std::string name,std::string type,bool in);
   const bool getIn() const;
   void showMeThatParameter()const;

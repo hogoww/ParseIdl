@@ -8,6 +8,7 @@ class Atom : public Item{
   std::string Usage;
  public:
   Atom(std::string name,std::string type,std::string usage);
+  virtual ~Atom();
   virtual const std::string getUsage() const;
   virtual void showMeWhatYouGot(size_t depth=0)const;
 };

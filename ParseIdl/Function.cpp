@@ -14,6 +14,11 @@ Function::Function(std::string name,std::string type,std::string ToBeParse):Item
   parseEnd(ToBeParse);//remplis Excep&Param
 }
 
+Function::~Function(){
+  Param.clear();
+  Exception.clear();
+}
+
 void Function::parseEnd(std::string ToBeParse){
   std::smatch res;
 
@@ -68,14 +73,15 @@ const std::vector<std::string> Function::getException() const{
 void Function::showMeWhatYouGot(size_t depth)const{
   Item::showMeWhatYouGot(depth);
   std::cout<<"(";
-  for(std::vector<Parameter>::const_iterator it=Param.begin();it!=Param.end();++it) {
+  std::vector<Parameter>::const_iterator end=Param.cend();
+  for(std::vector<Parameter>::const_iterator it=Param.cbegin();it!=end;++it) {
     it->showMeThatParameter();
   }
   std::cout<<")";
   if(Exception.size()){//forcement une
-    std::vector<std::string>::const_iterator end=Exception.end();
+    std::vector<std::string>::const_iterator end=Exception.cend();
     std::cout<<" raises ("<<*Exception.begin();
-    for(std::vector<std::string>::const_iterator it=++Exception.begin();it!=end;++it) {
+    for(std::vector<std::string>::const_iterator it=++Exception.cbegin();it!=end;++it) {
       std::cout<<','<<*it;
     }
     std::cout<<")";

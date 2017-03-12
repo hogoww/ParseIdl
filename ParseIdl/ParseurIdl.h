@@ -49,8 +49,10 @@ class ParseurIdl{
   //Variables, no access to them
   std::stack<Container*> S;  
   static bool isContainerFlag;
+
  public:
   ParseurIdl(std::string fileToParse);
+  virtual ~ParseurIdl();
   const std::vector<Container*> getFile()const;  
   void showMeThatFile()const;
 };
