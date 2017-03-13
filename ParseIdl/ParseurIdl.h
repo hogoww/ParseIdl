@@ -9,6 +9,7 @@
 
 #include <string>
 #include <vector>
+#include <set>
 #include <regex>
 #include <iostream>
 #include <fstream>
@@ -31,6 +32,7 @@ class ParseurIdl{
   std::string fillMeWasHarderThanExpected(std::string& toBeParse,Container*& endOfPile);
   int getDepth(std::smatch& res)const;
   void addItemInStack(Item*& I);
+  void nameAppearedTwice(std::string);//Terminate, is an error;
 
   //regex expr, to avoid multiple creation of the same thing.
   static const std::regex exprLine;
@@ -47,7 +49,8 @@ class ParseurIdl{
   static const std::regex exprInterface;
   
   //Variables, no access to them
-  std::stack<Container*> S;  
+  std::stack<Container*>* S;//set to NULL after parsing is done.
+  std::set<std::string>* componentNames;
   static bool isContainerFlag;
 
  public:
@@ -55,6 +58,7 @@ class ParseurIdl{
   virtual ~ParseurIdl();
   const std::vector<Container*> getFile()const;  
   void showMeThatFile()const;
+  /* std::vector<std::string> getAllIdInFile()const; */
 };
 
 

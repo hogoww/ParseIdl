@@ -33,18 +33,6 @@ Container::~Container(){
   Content.clear();
 }
 
-// Container::~Container(const Container toBeCopied){
-//   if(this!=toBeCopied){
-//     Container c;
-//     std::vector<Item*>::const_iterator end=toBeCopied.Container.end();
-//     for(std::vector<Item*>::const_iterator it=toBeCopied.Container.begin();it!=end;++it){
-//       c.addItem(*it);
-//     }
-//   }
-//   else{
-//     return this;
-//   }
-// }
 
 void Container::showMeThatName(size_t depth)const{
   Item::showMeWhatYouGot(depth);
@@ -56,6 +44,10 @@ void Container::showMeThatContent(size_t depth)const{
    (*it)->showMeWhatYouGot(depth+1);
  }
 }
+
+// std::vector<std::string> getAllIdInFile(){
+
+// }
 
 void Container::showMeWhatYouGot(size_t depth)const{
   showMeThatName(depth);

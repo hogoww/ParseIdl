@@ -24,6 +24,8 @@ bool ParseurIdl::isContainerFlag=false;
 /* constructeurs public*/
 ParseurIdl::ParseurIdl(std::string fileToParse):file(){
   //std::cout<<fileToParse<<std::endl;
+  S=new std::stack<Container*>();
+  componentNames=new std::set<std::string>();
   std::string command("./parse.py ");
   command+=fileToParse;
   std::system(command.c_str());
@@ -37,6 +39,10 @@ ParseurIdl::ParseurIdl(std::string fileToParse):file(){
   std::system(command.c_str());
   //std::cout<<"Done loading the file"<<std::endl;
   fillMe(content);
+  S->~stack<Container*>();//empty at the end, so safe to call.
+  componentNames->~set<std::string>();//operation will return this later. Memory economy.
+  S=NULL;//Avoid random uses, shouldn't be used after this time.
+  componentNames=NULL;
 }
 
 ParseurIdl::~ParseurIdl(){
@@ -100,19 +106,19 @@ std::string ParseurIdl::fillMeWasHarderThanExpected(std::string& toBeParse,Conta
 	//std::cout<<"I created an item ";
 	if(isContainerFlag){
 	 //std::cout<<"container."<<std::endl;
-	  S.push(static_cast<Container*>(I));
+	  S->push(static_cast<Container*>(I));
 	}
 	else{
 	 //std::cout<<"not container."<<std::endl;
-	  int difference=S.size()-getDepth(res1);
+	  int difference=S->size()-getDepth(res1);
 
 	  if(difference>=0){
 	    multiplePop(difference,endOfPile);
-	    S.top()->addItem(I);
+	    S->top()->addItem(I);
 	    // addItemInStack(I);
 	  }
 	  else{
-	    //std::cout<<S.size()<<" "<<getDepth(res1)<<"\n";
+	    //std::cout<<S->size()<<" "<<getDepth(res1)<<"\n";
 	    std::cerr<<"Parse error, an object must be in a container! ("<<res1[0].str()<<")"<<std::endl;
 	    std::terminate();
 	  }
@@ -125,7 +131,7 @@ std::string ParseurIdl::fillMeWasHarderThanExpected(std::string& toBeParse,Conta
     return line;
   }
   
- //std::cout<<S.size()<<" "<<"I didn't found a line."<<std::endl;
+ //std::cout<<S->size()<<" "<<"I didn't found a line."<<std::endl;
   std::string c("");//Empty file.
   std::terminate();
   return c;
@@ -135,7 +141,7 @@ void ParseurIdl::fillMe(std::string toBeParse){
   while(!toBeParse.empty()){
     Container* endOfPile;
     toBeParse=fillMeWasHarderThanExpected(toBeParse,endOfPile);
-    while(!S.empty()){
+    while(!S->empty()){
       toBeParse=fillMeWasHarderThanExpected(toBeParse,endOfPile);
     }
    //std::cout<<"Stack's empty! "<<std::endl;
@@ -144,16 +150,25 @@ void ParseurIdl::fillMe(std::string toBeParse){
   }  
 }
   
+void ParseurIdl::nameAppearedTwice(std::string name){
+  std::cout<<"You can't use "<<name<<"twice !"<<std::endl;
+  std::terminate();
+}
+
 
 Item* ParseurIdl::createItem(std::string line){//Return in each if, so doesn't matter.
- //std::cout<<S.size()<<" "<<line<<std::endl;
+ //std::cout<<S->size()<<" "<<line<<std::endl;
 
   std::smatch res;
   if(std::regex_search(line,res,exprParenthesis)){//Fonction
     std::smatch parse;
     if(std::regex_search(line,parse,exprFunction)){
      //std::cout<<"It's a Function!"<<std::endl;
-      Function* f=new Function(parse[3].str(),parse[2].str(),parse[4].str());
+      std::string nom=parse[3].str();
+      if(!componentNames->insert(nom).second){
+	nameAppearedTwice(nom);
+      }
+      Function* f=new Function(nom,parse[2].str(),parse[4].str());
       isContainerFlag=false;
       return f;
     }
@@ -166,7 +181,11 @@ Item* ParseurIdl::createItem(std::string line){//Return in each if, so doesn't m
 
   if(std::regex_search(line,res,exprAtom)){//Atom
    //std::cout<<"It's an atom!"<<std::endl;
-    Atom *a=new Atom(res[4].str(),res[3].str(),res[2].str());
+    std::string nom=res[4].str();
+    if(!componentNames->insert(nom).second){
+      nameAppearedTwice(nom);
+    }    
+    Atom *a=new Atom(nom,res[3].str(),res[2].str());
     isContainerFlag=false;
     return a;
   }
@@ -177,14 +196,22 @@ Item* ParseurIdl::createItem(std::string line){//Return in each if, so doesn't m
     std::smatch bogus;
 
     if(std::regex_search(myType,bogus,exprException)){//Exception
-     //std::cout<<"It's an exception!"<<std::endl;
-      Container* c=new Container(res[3].str(),res[2].str());
+      //std::cout<<"It's an exception!"<<std::endl
+      std::string nom=res[3].str();
+      if(!componentNames->insert(nom).second){
+	nameAppearedTwice(nom);
+      }
+      Container* c=new Container(nom,res[2].str());
       isContainerFlag=true;
       return c;
     }
     else{//Component/Interface
      //std::cout<<"It's an Component or interface!"<<std::endl;
-      ContainerInherit* ci=new ContainerInherit(res[3].str(),res[2].str(),res.suffix().str());
+      std::string nom=res[3].str();
+      if(!componentNames->insert(nom).second){
+	nameAppearedTwice(nom);
+      }
+      ContainerInherit* ci=new ContainerInherit(nom,res[2].str(),res.suffix().str());
       isContainerFlag=true;
       return ci;
     }
@@ -204,14 +231,14 @@ int ParseurIdl::getDepth(std::smatch& res)const{
 void ParseurIdl::multiplePop(int numberOfTime,Container*& endOfPile){  
   for(int i=1;i<numberOfTime;i++){//if 0 times, doesn't matter.
    //std::cout<<"I like to pop things"<<std::endl;
-    if(S.size()){
-      Container* temp=S.top();
-      S.pop();
-      S.top()->addItem(temp);
+    if(S->size()){
+      Container* temp=S->top();
+      S->pop();
+      S->top()->addItem(temp);
     }
     else{
-      endOfPile=S.top();
-      S.pop();
+      endOfPile=S->top();
+      S->pop();
     }
   }
 }
@@ -220,24 +247,29 @@ void ParseurIdl::multiplePop(int numberOfTime,Container*& endOfPile){
 void ParseurIdl::emptyStack(Container*& endOfPile){  
  //std::cout<<"I like to empty things"<<std::endl;
 
-  Container* C=S.top();
-  S.pop();
-  while(!S.empty()){
-    S.top()->addItem(C);
-    C=S.top();
-    S.pop();
+  Container* C=S->top();
+  S->pop();
+  while(!S->empty()){
+    S->top()->addItem(C);
+    C=S->top();
+    S->pop();
   }
 
   endOfPile=C;
 }
 
+// std::vector<std::string> getAllIdInFile(){
+// }
+
 
 void ParseurIdl::showMeThatFile()const{
+  std::setvbuf(stdout, nullptr, _IOFBF, BUFSIZ);
+  std::cout<<std::nounitbuf;
   std::cout<<"\n";
   std::vector<Container*>::const_iterator end=file.cend();
   for(std::vector<Container*>::const_iterator it=file.cbegin();it!=end;++it){
     (*it)->showMeWhatYouGot();
-    std::cout<<"\n\n";
+    std::cout<<"\n";
   }
   std::cout<<std::flush;
 }

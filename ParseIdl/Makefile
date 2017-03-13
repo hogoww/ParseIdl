@@ -29,7 +29,7 @@ clean :
 	@rm -f $(PROGNAME) *.o *~ *.h.gch *\#
 	@ls 
 
-# launch : 
-# 	./launch.sh
-
-
+cc:
+	@rm -f $(PROGNAME) *.o *~ *.h.gch *\#
+	@ls 
+	@make
