@@ -95,7 +95,7 @@ def parseItems(ligne):#penser à rajouter les includes#sert à quelque chose si 
     res=[]
     split=re.split("{",ligne,1)
     rest=split[1]
-    if split[0][0]==" ":
+    if split[0][0]==" ":#si il y a un espace devant le premier item, on le retire
         split[0]=split[0][1:]
     res.append(split[0])
     pile.append(res)
@@ -145,4 +145,4 @@ fileName=sys.argv[1]
 parsing=parseItems(clean(getFile(fileName)))
 
 printInFile(fileName,parsing)
-printMatrice(parsing)
+#printMatrice(parsing)

@@ -4,6 +4,7 @@ const std::regex ParseurIdl::exprLine("(.*)\\n",std::regex::optimize);
 const std::regex ParseurIdl::exprSemiColon(";",std::regex::optimize);
 const std::regex ParseurIdl::exprGetLine("( *)(.*)\n",std::regex::optimize);
 
+const std::regex ParseurIdl::exprInclude("^#((?:\\w|\\.)+)\n",std::regex::optimize);
 const std::regex ParseurIdl::exprParenthesis("\\(",std::regex::optimize);//Function
 const std::regex ParseurIdl::exprFunction("( *)(\\w+) (\\w+) ?(\\(.*\\))",std::regex::optimize);//parseFunction
 const std::regex ParseurIdl::exprAtom("^( )*(\\w+) (\\w+) (\\w+) ?",std::regex::optimize);//Attrib
@@ -38,6 +39,7 @@ ParseurIdl::ParseurIdl(std::string fileToParse):file(),fileName(fileToParse){
   command+=name;
   std::system(command.c_str());
   //std::cout<<"Done loading the file"<<std::endl;
+  getIncludes(content);
   fillMe(content);
   S->~stack<Container*>();//empty at the end, so safe to call.
   componentNames->~set<std::string>();//operation will return this later. Memory economy.
@@ -53,6 +55,13 @@ ParseurIdl::~ParseurIdl(){
   file.clear();
 }
 
+void ParseurIdl::getIncludes(std::string& ToBeParse){
+  std::smatch res;
+  while(std::regex_search(ToBeParse,res,exprInclude)){
+    includes.push_back(res[2].str());
+    ToBeParse=res.suffix();
+  }
+}
 
 /******Methodes:******/
 /* methodes public*/
@@ -137,7 +146,7 @@ std::string ParseurIdl::fillMeWasHarderThanExpected(std::string& toBeParse,Conta
   return c;
 }
 
-void ParseurIdl::fillMe(std::string toBeParse){  
+void ParseurIdl::fillMe(std::string& toBeParse){  
   while(!toBeParse.empty()){
     Container* endOfPile;
     toBeParse=fillMeWasHarderThanExpected(toBeParse,endOfPile);
@@ -150,7 +159,7 @@ void ParseurIdl::fillMe(std::string toBeParse){
   }  
 }
   
-void ParseurIdl::nameAppearedTwice(std::string name){
+void ParseurIdl::nameAppearedTwice(std::string& name){
   std::cout<<"You can't use "<<name<<"twice !"<<std::endl;
   std::terminate();
 }
@@ -228,7 +237,7 @@ int ParseurIdl::getDepth(std::smatch& res)const{
   return (int)res[1].str().length();//never under 0, so cast is fine
 }
 
-void ParseurIdl::multiplePop(int numberOfTime,Container*& endOfPile){  
+void ParseurIdl::multiplePop(int& numberOfTime,Container*& endOfPile){  
   for(int i=1;i<numberOfTime;i++){//if 0 times, doesn't matter.
    //std::cout<<"I like to pop things"<<std::endl;
     if(S->size()){

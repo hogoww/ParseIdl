@@ -21,24 +21,26 @@ class ParseurIdl{
   //Only get access
   std::vector<Container*> file;
   std::string fileName;
-
+  std::vector<std::string> includes;
 
   //parse function, not to be avaible.
-  void multiplePop(int numberOfTime,Container*& endOfPile);
+  void multiplePop(int& numberOfTime,Container*& endOfPile);
   void emptyStack(Container*& endOfPile);
   std::string FileToString(std::string fileName);
-  void fillMe(std::string ToBeParse);
+  void fillMe(std::string& ToBeParse);
   Item* createItem(std::string line);
   std::string fillMeWasHarderThanExpected(std::string& toBeParse,Container*& endOfPile);
   int getDepth(std::smatch& res)const;
   void addItemInStack(Item*& I);
-  void nameAppearedTwice(std::string);//Terminate, is an error;
+  void nameAppearedTwice(std::string& name);//Terminate, is an error;
+  void getIncludes(std::string& ToBeParse);
 
   //regex expr, to avoid multiple creation of the same thing.
   static const std::regex exprLine;
   static const std::regex exprSemiColon;
   static const std::regex exprGetLine;
 
+  static const std::regex exprInclude;
   static const std::regex exprParenthesis;
   static const std::regex exprFunction;
   static const std::regex exprAtom;
