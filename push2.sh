@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ $1 = -p ]; then
+if [ $1 && $1 = -p ]; then
     git pull
 fi
     git status;

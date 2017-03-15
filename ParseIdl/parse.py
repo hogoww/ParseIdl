@@ -5,7 +5,7 @@ import os
 import sys
 
 truc='truc'
-
+includes=[]
 ##############################Miscalenious
 #   Saute une iteration d'affichage, mais récupère bien le truc.
 
@@ -20,6 +20,12 @@ def printLine(l,p=0):
             print(s+i)
 
 def printMatrice(mat):
+    if includes:
+        print("includes")
+    for i in includes:
+        print('#'+i)
+    if includes:
+        print("includes end")
     for i in mat:
         printLine(i)
         print("--------------------")
@@ -51,6 +57,8 @@ def printLineInFile(descFile,l,p=0):
         i=i+1
 
 def printInFileMatrice(descFile,mat):
+    for i in includes:
+        descFile.write('#'+i+'\n')
     for i in mat:
         printLineInFile(descFile,i)
         descFile.write(";\n")
@@ -72,6 +80,8 @@ def getFile(File):
         FileDesc=open(File,"r")
         content=FileDesc.read()
         FileDesc.close()
+        content=getInclude(content)
+
         return content
     else:
         print("\n"+File+" wasn't find in the directory"+os.getcwd()+"\n")
@@ -85,6 +95,8 @@ def parseItems(ligne):#penser à rajouter les includes#sert à quelque chose si 
     res=[]
     split=re.split("{",ligne,1)
     rest=split[1]
+    if split[0][0]==" ":
+        split[0]=split[0][1:]
     res.append(split[0])
     pile.append(res)
 
@@ -114,14 +126,23 @@ def parseItems(ligne):#penser à rajouter les includes#sert à quelque chose si 
             rest=split[1]
 
     return [res]+parseItems(rest)
-            
+    
+def getInclude(File):
+    global includes
+    FileWithoutIncludes=[]
+    regex=re.compile("#(?:(?:include)|(?:import)) ((?:\w|\.)+)",re.I)
+    includes=re.findall(regex,File)
+    File=re.sub(regex,' ',File)
+    return File
+        
 def printInFile(fileName,text):
     parsedFile=open(fileName+".letsCompileIt",'w')
     printInFileMatrice(parsedFile,text)
     parsedFile.close()
     
 
-parsing=parseItems(clean(getFile(sys.argv[1])))
+fileName=sys.argv[1]
+parsing=parseItems(clean(getFile(fileName)))
 
-printInFile(sys.argv[1],parsing)
-
+printInFile(fileName,parsing)
+printMatrice(parsing)

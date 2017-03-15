@@ -20,7 +20,7 @@ class ParseurIdl{
  private:
   //Only get access
   std::vector<Container*> file;
-
+  std::string fileName;
 
 
   //parse function, not to be avaible.

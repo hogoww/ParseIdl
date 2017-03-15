@@ -1,3 +1,9 @@
+
+#include truc
+#include machin
+#include pouet.idl
+#import khgr
+
 component Philosopher : pouet {
 
   attribute string name;

@@ -22,7 +22,7 @@ bool ParseurIdl::isContainerFlag=false;
 
 
 /* constructeurs public*/
-ParseurIdl::ParseurIdl(std::string fileToParse):file(){
+ParseurIdl::ParseurIdl(std::string fileToParse):file(),fileName(fileToParse){
   //std::cout<<fileToParse<<std::endl;
   S=new std::stack<Container*>();
   componentNames=new std::set<std::string>();
