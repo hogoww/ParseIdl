@@ -5,7 +5,7 @@
 #include "ContainerInherit.h"
 #include "Function.h"
 #include "Item.h"
-
+#include "DidNotFoundFileExcep.h"
 
 #include <string>
 #include <vector>
@@ -19,14 +19,15 @@
 class ParseurIdl{
  private:
   //Only get access
+  std::set<std::string>* includes;
   std::vector<Container*> file;
   std::string fileName;
-  std::vector<std::string> includes;
+  //std::vector<std::string> includes;
 
   //parse function, not to be avaible.
   void multiplePop(int& numberOfTime,Container*& endOfPile);
   void emptyStack(Container*& endOfPile);
-  std::string FileToString(std::string fileName);
+  std::string FileToString(std::string fileName) throw (DidNotFoundFileExcep);
   void fillMe(std::string& ToBeParse);
   Item* createItem(std::string line);
   std::string fillMeWasHarderThanExpected(std::string& toBeParse,Container*& endOfPile);
@@ -34,6 +35,8 @@ class ParseurIdl{
   void addItemInStack(Item*& I);
   void nameAppearedTwice(std::string& name);//Terminate, is an error;
   void getIncludes(std::string& ToBeParse);
+  void getFile(std::string& fileame,std::string& content) throw (DidNotFoundFileExcep);
+  
 
   //regex expr, to avoid multiple creation of the same thing.
   static const std::regex exprLine;
@@ -53,6 +56,7 @@ class ParseurIdl{
   //Variables, no access to them
   std::stack<Container*>* S;//set to NULL after parsing is done.
   std::set<std::string>* componentNames;
+
   static bool isContainerFlag;
 
  public:

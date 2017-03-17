@@ -25,29 +25,57 @@ bool ParseurIdl::isContainerFlag=false;
 /* constructeurs public*/
 ParseurIdl::ParseurIdl(std::string fileToParse):file(),fileName(fileToParse){
   //std::cout<<fileToParse<<std::endl;
+
+  //Init class
   S=new std::stack<Container*>();
   componentNames=new std::set<std::string>();
-  std::string command("./parse.py ");
-  command+=fileToParse;
-  std::system(command.c_str());
+  includes=new std::set<std::string>();
+  std::string fileName(fileToParse);
 
-  std::string name(fileToParse);
-  name+=".letsCompileIt";
-  std::string content=FileToString(name);
-  
-  command="rm ";
-  command+=name;
-  std::system(command.c_str());
+
+  std::string content;//will be initialised in getFile
+  try{
+    getFile(fileName,content); 
+  }
+  catch(DidNotFoundFileExcep& DNFF){
+    std::cerr<<DNFF.what()<<std::endl;
+    std::terminate();
+  }
   //std::cout<<"Done loading the file"<<std::endl;
+
   getIncludes(content);
   fillMe(content);
-  S->~stack<Container*>();//empty at the end, so safe to call.
-  componentNames->~set<std::string>();//operation will return this later. Memory economy.
-  S=NULL;//Avoid random uses, shouldn't be used after this time.
-  componentNames=NULL;
+
+ 
+  //to add in the destructor when you'll stop doing a hundred thing at the same time
+  //delete things it won't use anymore.
+  delete S;//empty at the end, so safe to call.
+  delete componentNames;//operation will return this later. Memory economy.
+  // S=NULL;//Avoid random uses, shouldn't be used after this time.
+  // componentNames=NULL;
+}
+
+void ParseurIdl::getFile(std::string& filename,std::string& content) throw (DidNotFoundFileExcep){
+  std::string command("./parse.py ");
+  command+=filename;
+  std::system(command.c_str());
+  std::string tempName(fileName+".letsCompileIt");
+
+  try{
+    content=FileToString(tempName);
+  }
+  catch(DidNotFoundFileExcep& DNFF){
+    throw DNFF;
+    std::cout<<"FUCK"<<std::endl;
+  }
+  
+  command="rm ";
+  command+=fileName+".letsCompileIt";
+  std::system(command.c_str());
 }
 
 ParseurIdl::~ParseurIdl(){
+  delete includes;
   std::vector<Container*>::iterator end=file.end();
   for (std::vector<Container*>::iterator it = file.begin();it!=end;++it){
     delete *it;
@@ -57,11 +85,23 @@ ParseurIdl::~ParseurIdl(){
 
 void ParseurIdl::getIncludes(std::string& ToBeParse){
   std::smatch res;
+  std::cout<<includes<<std::endl;
   while(std::regex_search(ToBeParse,res,exprInclude)){
-    includes.push_back(res[2].str());
+
+    std::string nom(res[1].str());
+    if(includes->insert(nom).second){
+      // try{
+      // 	std::string content;
+      // 	getFile(nom,content);
+      // }
+      // catch(DidNotFoundFileExcep& d){
+      // 	std::cerr<<d.what()<<"\n";//No need to interupt, as long as we don't precisely check types.
+      // }
+    }
     ToBeParse=res.suffix();
   }
 }
+
 
 /******Methodes:******/
 /* methodes public*/
@@ -69,7 +109,7 @@ const std::vector<Container*> ParseurIdl::getFile()const{
   return file;
 }
 
-std::string ParseurIdl::FileToString(std::string fileName){
+std::string ParseurIdl::FileToString(std::string fileName) throw (DidNotFoundFileExcep){
   std::ifstream stream(fileName);
   if (stream) {
     // get length of file:
@@ -92,8 +132,7 @@ std::string ParseurIdl::FileToString(std::string fileName){
     return Buffer;
   }
   else{
-    std::cerr<<"Error while trying to open "<<fileName<<"."<<std::endl;
-    std::terminate();
+    throw DidNotFoundFileExcep(fileName);
   }
 }
   
@@ -160,7 +199,7 @@ void ParseurIdl::fillMe(std::string& toBeParse){
 }
   
 void ParseurIdl::nameAppearedTwice(std::string& name){
-  std::cout<<"You can't use "<<name<<"twice !"<<std::endl;
+  std::cout<<"You can't use "<<name<<" twice !"<<std::endl;
   std::terminate();
 }
 
