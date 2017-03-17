@@ -66,13 +66,14 @@ def printInFileMatrice(descFile,mat):
 
 
 
-def clean(string):
+def cleanComment(string):
     string=re.sub("//.*","",string)#clear comment1
-    string=re.sub("/\*.*?\*/","",string,0,re.DOTALL)#clear comment2
-    return re.sub("(\n|\t| )+"," ",string)#vire les blancs pour des espaces (plus pour eviter re.S qu'autre chose..)
+    return re.sub("/\*.*?\*/","",string,0,re.DOTALL)#clear comment2
     #string=string[:len(string)-1]
     #return string
 
+def everyBlankToSpaces(string):
+    return re.sub("(\n|\t| )+"," ",string)#vire les blancs pour des espaces (plus pour eviter re.S qu'autre chose..)
 
 
 def getFile(File):
@@ -80,11 +81,12 @@ def getFile(File):
         FileDesc=open(File,"r")
         content=FileDesc.read()
         FileDesc.close()
+        content=cleanComment(content)
         content=getInclude(content)
-
+        content=everyBlankToSpaces(content)
         return content
     else:
-        print("\n"+File+" wasn't find in the directory"+os.getcwd()+"\n")
+        print(File+" wasn't find in the directory"+os.getcwd())
         exit()
 
 
@@ -108,7 +110,7 @@ def parseItems(ligne):#penser à rajouter les includes#sert à quelque chose si 
             pile[len(pile)-1].append(search.group(1))#on rajoute le bout suivant
             rest=search.group(2)#on passe à la suite
 
-        elif re.search("^ ?};.*",rest):#fin de bloc #vraiment le seul cas..?
+        elif re.search("^ ?} ?;.*",rest):#fin de bloc #vraiment le seul cas..?
             res=pile.pop()
             rest=re.split(";",rest,1)[1]#on enleve la fin du bloc
             rest=rest[1:]
@@ -142,7 +144,7 @@ def printInFile(fileName,text):
     
 
 fileName=sys.argv[1]
-parsing=parseItems(clean(getFile(fileName)))
+parsing=parseItems(getFile(fileName))
 
 printInFile(fileName,parsing)
 #printMatrice(parsing)

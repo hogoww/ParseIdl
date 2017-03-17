@@ -14,10 +14,6 @@ const std::regex ParseurIdl::exprException("exception",std::regex::icase|std::re
 //Similaires dans la structure
 const std::regex ParseurIdl::exprInterface("interface",std::regex::icase|std::regex::optimize);
 const std::regex ParseurIdl::exprComponent("component",std::regex::icase|std::regex::optimize);
-const std::regex ParseurIdl::exprSemiColonAndBackN(".*;.*\\n",std::regex::optimize);
-const std::regex ParseurIdl::exprIncludedWithColon(".* (\\w+) ?:.*\\n",std::regex::optimize);
-const std::regex ParseurIdl::exprIncludedFunction(".*? (\\w+) ?\\(.*\\n",std::regex::optimize);
-const std::regex ParseurIdl::exprIncludedNormal(".* (\\w+) ?\\n",std::regex::optimize);
 
 bool ParseurIdl::isContainerFlag=false;
 
@@ -46,12 +42,11 @@ ParseurIdl::ParseurIdl(std::string fileToParse):file(),fileName(fileToParse){
     std::terminate();
   }
   //std::cout<<"Done loading the file"<<std::endl;
-  
-  delete getIncludes(content);//already in the class attribute
+
+  getIncludes(content);
   fillMe(content);
-  launchTreatmentIncludedFiles(includes);
+
  
-  
   //to add in the destructor when you'll stop doing a hundred thing at the same time
   //delete things it won't use anymore.
   delete S;//empty at the end, so safe to call.
@@ -64,17 +59,18 @@ void ParseurIdl::getFile(std::string& filename,std::string& content) throw (DidN
   std::string command("./parse.py ");
   command+=filename;
   std::system(command.c_str());
-  std::string tempName(filename+".letsCompileIt");
+  std::string tempName(fileName+".letsCompileIt");
 
   try{
     content=FileToString(tempName);
   }
   catch(DidNotFoundFileExcep& DNFF){
     throw DNFF;
+    std::cout<<"FUCK"<<std::endl;
   }
   
   command="rm ";
-  command+=tempName;
+  command+=fileName+".letsCompileIt";
   std::system(command.c_str());
 }
 
@@ -106,6 +102,7 @@ void ParseurIdl::launchTreatmentIncludedFiles(std::set<std::string>* newIncludes
   for(std::set<std::string>::iterator it=newIncludes->begin();it!=end;++it){
     treatmentIncludedFiles(*it);
   }
+  delete newIncludes;
 }
 
 void ParseurIdl::treatmentIncludedFiles(std::string name){
@@ -117,7 +114,8 @@ void ParseurIdl::treatmentIncludedFiles(std::string name){
     std::cerr<<d.what()<<"\n"<<std::endl;//No need to interrupt, as long as we don't precisely check types.
   }
   std::set<std::string>* newIncludes=getIncludes(content);
-  getNamesInIncludedFiles(content);
+  getNamesInIncludedFiles(content);    
+  std::set<std::string>::iterator end=newIncludes->end();
   launchTreatmentIncludedFiles(newIncludes);
 }
 
@@ -143,9 +141,6 @@ void ParseurIdl::getNamesInIncludedFiles(std::string& content){
       }
     }
     name=res[1].str();
-    if(!componentNames->insert(name).second){
-      nameAppearedTwice(name);
-    }
     //std::cout<<name<<std::endl;
     content=res.suffix();
   }

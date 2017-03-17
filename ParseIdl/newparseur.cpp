@@ -3,6 +3,7 @@
 const std::regex ParseurIdl::exprLine("(.*)\\n",std::regex::optimize);
 const std::regex ParseurIdl::exprSemiColon(";",std::regex::optimize);
 const std::regex ParseurIdl::exprGetLine("( *)(.*)\n",std::regex::optimize);
+const std::regex ParseurIdl::exprSemiColonAndBackN(".*;.*\\n",std::regex::optimize);
 
 const std::regex ParseurIdl::exprInclude("^#((?:\\w|\\.)+)\n",std::regex::optimize);
 const std::regex ParseurIdl::exprParenthesis("\\(",std::regex::optimize);//Function
@@ -14,7 +15,7 @@ const std::regex ParseurIdl::exprException("exception",std::regex::icase|std::re
 //Similaires dans la structure
 const std::regex ParseurIdl::exprInterface("interface",std::regex::icase|std::regex::optimize);
 const std::regex ParseurIdl::exprComponent("component",std::regex::icase|std::regex::optimize);
-const std::regex ParseurIdl::exprSemiColonAndBackN(".*;.*\\n",std::regex::optimize);
+
 const std::regex ParseurIdl::exprIncludedWithColon(".* (\\w+) ?:.*\\n",std::regex::optimize);
 const std::regex ParseurIdl::exprIncludedFunction(".*? (\\w+) ?\\(.*\\n",std::regex::optimize);
 const std::regex ParseurIdl::exprIncludedNormal(".* (\\w+) ?\\n",std::regex::optimize);
@@ -46,12 +47,13 @@ ParseurIdl::ParseurIdl(std::string fileToParse):file(),fileName(fileToParse){
     std::terminate();
   }
   //std::cout<<"Done loading the file"<<std::endl;
-  
-  delete getIncludes(content);//already in the class attribute
+  // content=content.substr(0,content.length()-10);
+  //std::set<std::string>* newIncludes=getIncludes(content);
   fillMe(content);
-  launchTreatmentIncludedFiles(includes);
- 
   
+  //launchTreatmentIncludedFiles(newIncludes);
+
+ 
   //to add in the destructor when you'll stop doing a hundred thing at the same time
   //delete things it won't use anymore.
   delete S;//empty at the end, so safe to call.
@@ -79,14 +81,13 @@ void ParseurIdl::getFile(std::string& filename,std::string& content) throw (DidN
 }
 
 ParseurIdl::~ParseurIdl(){
-  delete includes;
+  //delete includes;
   std::vector<Container*>::iterator end=file.end();
   for (std::vector<Container*>::iterator it = file.begin();it!=end;++it){
     delete *it;
   }
   file.clear();
 }
-
 
 std::set<std::string>* ParseurIdl::getIncludes(std::string& ToBeParse){
   std::set<std::string>* newestIncludes=new std::set<std::string>();
@@ -106,6 +107,7 @@ void ParseurIdl::launchTreatmentIncludedFiles(std::set<std::string>* newIncludes
   for(std::set<std::string>::iterator it=newIncludes->begin();it!=end;++it){
     treatmentIncludedFiles(*it);
   }
+  delete newIncludes;
 }
 
 void ParseurIdl::treatmentIncludedFiles(std::string name){
@@ -117,7 +119,8 @@ void ParseurIdl::treatmentIncludedFiles(std::string name){
     std::cerr<<d.what()<<"\n"<<std::endl;//No need to interrupt, as long as we don't precisely check types.
   }
   std::set<std::string>* newIncludes=getIncludes(content);
-  getNamesInIncludedFiles(content);
+  getNamesInIncludedFiles(content);    
+  std::set<std::string>::iterator end=newIncludes->end();
   launchTreatmentIncludedFiles(newIncludes);
 }
 
@@ -143,9 +146,6 @@ void ParseurIdl::getNamesInIncludedFiles(std::string& content){
       }
     }
     name=res[1].str();
-    if(!componentNames->insert(name).second){
-      nameAppearedTwice(name);
-    }
     //std::cout<<name<<std::endl;
     content=res.suffix();
   }
@@ -167,7 +167,7 @@ std::string ParseurIdl::FileToString(std::string fileName) throw (DidNotFoundFil
 
     char* buffer=new char[length];
 
-    stream.read (buffer,length);
+    stream.read(buffer,length);
 
     if(stream){
       //std::cout<<"all characters read successfully.";
@@ -184,7 +184,6 @@ std::string ParseurIdl::FileToString(std::string fileName) throw (DidNotFoundFil
   }
 }
   
-
 std::string ParseurIdl::fillMeWasHarderThanExpected(std::string& toBeParse,Container*& endOfPile){
   std::smatch res;
   if(std::regex_search(toBeParse,res,exprLine)){
@@ -227,11 +226,12 @@ std::string ParseurIdl::fillMeWasHarderThanExpected(std::string& toBeParse,Conta
     return line;
   }
   
- //std::cout<<S->size()<<" "<<"I didn't found a line."<<std::endl;
+  //std::cout<<S->size()<<" "<<"I didn't found a line."<<std::endl;
   std::string c("");//Empty file.
-  std::terminate();
+  
   return c;
 }
+
 
 void ParseurIdl::fillMe(std::string& toBeParse){  
   while(!toBeParse.empty()){
@@ -242,12 +242,12 @@ void ParseurIdl::fillMe(std::string& toBeParse){
     }
    //std::cout<<"Stack's empty! "<<std::endl;
     //std::cout<<(endOfPile==NULL)<<std::endl;
+    //std::cout<<toBeParse.empty()<<" "<<toBeParse.length()<<std::endl;
     file.push_back(endOfPile);
   }  
 }
-  
 void ParseurIdl::nameAppearedTwice(std::string& name){
-  std::cout<<"You can't use "<<name<<" twice !"<<std::endl;
+  //std::cout<<"You can't use "<<name<<" twice !"<<std::endl;
   std::terminate();
 }
 
@@ -292,7 +292,7 @@ Item* ParseurIdl::createItem(std::string line){//Return in each if, so doesn't m
     std::smatch bogus;
 
     if(std::regex_search(myType,bogus,exprException)){//Exception
-      //std::cout<<"It's an exception!"<<std::endl
+      //std::cout<<"It's an exception!"<<std::endl;
       std::string nom=res[3].str();
       if(!componentNames->insert(nom).second){
 	nameAppearedTwice(nom);
@@ -353,9 +353,6 @@ void ParseurIdl::emptyStack(Container*& endOfPile){
 
   endOfPile=C;
 }
-
-// std::vector<std::string> getAllIdInFile(){
-// }
 
 
 void ParseurIdl::showMeThatFile()const{

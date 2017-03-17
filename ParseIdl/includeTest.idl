@@ -1,10 +1,4 @@
 
-#include truc
-#include includeTest.idl
-#include pouet.idl
-#import test2.idl
-#include test.idl
-
 component Philosopher : pouet {
 
   attribute string name;
@@ -39,13 +33,3 @@ component ForkManager {
   // Facette utilisé par les phisolphes.
   provides Fork the_fork;
 };
-
-
-
-
-
-
-
-
-
-

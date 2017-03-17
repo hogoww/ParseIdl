@@ -34,14 +34,17 @@ class ParseurIdl{
   int getDepth(std::smatch& res)const;
   void addItemInStack(Item*& I);
   void nameAppearedTwice(std::string& name);//Terminate, is an error;
-  void getIncludes(std::string& ToBeParse);
+  std::set<std::string>* getIncludes(std::string& ToBeParse);
   void getFile(std::string& fileame,std::string& content) throw (DidNotFoundFileExcep);
-  
+  void treatmentIncludedFiles(std::string name);
+  void launchTreatmentIncludedFiles(std::set<std::string>* newIncludes);
+  void getNamesInIncludedFiles(std::string& content);  
 
   //regex expr, to avoid multiple creation of the same thing.
   static const std::regex exprLine;
   static const std::regex exprSemiColon;
   static const std::regex exprGetLine;
+  static const std::regex exprSemiColonAndBackN;
 
   static const std::regex exprInclude;
   static const std::regex exprParenthesis;
@@ -52,6 +55,9 @@ class ParseurIdl{
   static const std::regex exprException;
   
   static const std::regex exprInterface;
+  static const std::regex exprIncludedWithColon;
+  static const std::regex exprIncludedFunction;
+  static const std::regex exprIncludedNormal;
   
   //Variables, no access to them
   std::stack<Container*>* S;//set to NULL after parsing is done.
