@@ -8,12 +8,13 @@
 Container::Container(std::string name,std::string type):Item(name,type),Content(){
 }
 
-// Container::~Container(){
-// for(std::vector<Item*>::iterator it=Content.begin();it!=Content.end();++it) {
-//   delete (*it);
-//  }
-//  Content.clear();
-// }
+Container::~Container(){
+  std::vector<Item*>::iterator end=Content.end();
+  for(std::vector<Item*>::iterator it=Content.begin();it!=end;++it) {
+    delete (*it);
+  }
+  Content.clear();
+}
 
 /******Methodes:******/
 /* methodes public*/
@@ -25,13 +26,6 @@ const std::vector<Item*> Container::getContent()const {
   return Content;
 }
 
-Container::~Container(){
-  std::vector<Item*>::iterator end=Content.end();
-  for (std::vector<Item*>::iterator it = Content.begin();it!=end;++it){
-    delete *it;
-  }
-  Content.clear();
-}
 
 
 void Container::showMeThatName(size_t depth)const{
@@ -45,9 +39,6 @@ void Container::showMeThatContent(size_t depth)const{
  }
 }
 
-// std::vector<std::string> getAllIdInFile(){
-
-// }
 
 void Container::showMeWhatYouGot(size_t depth)const{
   showMeThatName(depth);
@@ -55,3 +46,12 @@ void Container::showMeWhatYouGot(size_t depth)const{
   showMeThatContent(depth);
 }
 
+bool Container::doIInheritFromYou(){
+  std::vector<Item*>::iterator end=Content.end();
+  for(std::vector<Item*>::iterator it=Content.begin();it!=end;++it){
+    if((*it)->doIInheritFromYou()){
+      std::cerr<<getName()<<" shouldn't inherit from anything, much less :"<<(*it)->getName()<<std::endl;
+    }
+  }  
+  return false;
+}

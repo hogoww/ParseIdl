@@ -28,3 +28,7 @@ void Item::showMeWhatYouGot(size_t depth)const{
   }
   std::cout<<Type<<" "<<Name;
 }
+
+bool Item::doIInheritFromYou(){
+  return false;
+}

@@ -11,6 +11,8 @@ class Atom : public Item{
   virtual ~Atom();
   virtual const std::string getUsage() const;
   virtual void showMeWhatYouGot(size_t depth=0)const;
+  virtual bool doIInheritFromYou();
+
 };
 
 #endif

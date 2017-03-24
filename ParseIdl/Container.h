@@ -5,10 +5,8 @@
 #include "Item.h"
 
 class Container : public Item {
- private:
-  std::vector<Item*> Content;
-  //virtual ~Container();
  protected:
+  std::vector<Item*> Content;
   virtual void showMeThatName(size_t depth)const;
   virtual void showMeThatContent(size_t depth)const;
  public:
@@ -18,7 +16,7 @@ class Container : public Item {
   virtual void addItem(Item* i);
   virtual const std::vector<Item*> getContent()const;
   virtual void showMeWhatYouGot(size_t depth=0)const;
-
+  virtual bool doIInheritFromYou();
 };
 
 #endif

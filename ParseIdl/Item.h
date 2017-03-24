@@ -16,6 +16,7 @@ class Item{
   virtual const std::string getType() const;
   virtual const std::string getName() const;
   virtual void showMeWhatYouGot(size_t depth=0)const;
+  virtual bool doIInheritFromYou();//Only does things in containers class.
 };
 
 #endif

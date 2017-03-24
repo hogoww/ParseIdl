@@ -34,10 +34,10 @@ ContainerInherit::~ContainerInherit(){
 
 /* methodes public*/
 void ContainerInherit::addInheritance(std::string i){
-  InheritFrom.push_back(i);
+  InheritFrom.insert(i);
 }
 
-const std::vector<std::string> ContainerInherit::getInheritFrom()const{
+const std::set<std::string> ContainerInherit::getInheritFrom()const{
   return InheritFrom;
 }
 
@@ -45,13 +45,24 @@ void ContainerInherit::showMeWhatYouGot(size_t depth)const{
   showMeThatName(depth);
 
   if(InheritFrom.size()){
-    std::vector<std::string>::const_iterator end=InheritFrom.cend();
+    std::set<std::string>::const_iterator end=InheritFrom.cend();
     std::cout<<" : ";
     std::cout<<*InheritFrom.cbegin();
-    for(std::vector<std::string>::const_iterator it=++InheritFrom.cbegin();it!=end;++it){
+    for(std::set<std::string>::const_iterator it=++InheritFrom.cbegin();it!=end;++it){
       std::cout<<", "<<*it;
     }
   }
   std::cout<<"\n";
   showMeThatContent(depth);
+}
+
+
+bool ContainerInherit::doIInheritFromYou(){
+  std::vector<Item*>::iterator end=Content.end();
+  for(std::vector<Item*>::iterator it=Content.begin();it!=end;++it){
+    if((*it)->doIInheritFromYou()){
+      addInheritance((*it)->getName());
+    }
+  }
+  return false;
 }

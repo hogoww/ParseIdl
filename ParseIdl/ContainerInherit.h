@@ -3,10 +3,11 @@
 
 #include "Container.h"
 #include <regex>
+#include <set>
 
 class ContainerInherit : public Container{
  private:
-  std::vector<std::string> InheritFrom;
+  std::set<std::string> InheritFrom;
   
   //Parsing functions.
   void ParseEnd(std::string inheritFrom);
@@ -19,8 +20,9 @@ class ContainerInherit : public Container{
  public:
   ContainerInherit(std::string name,std::string type,std::string inheritFrom);
   virtual ~ContainerInherit();
-  virtual const std::vector<std::string> getInheritFrom()const;
+  virtual const std::set<std::string> getInheritFrom()const;
   virtual void showMeWhatYouGot(size_t depth=0)const;
+  virtual bool doIInheritFromYou();
 };
 
 #endif

@@ -34,6 +34,7 @@ ParseurIdl::ParseurIdl(std::string fileToParse):file(),fileName(fileToParse){
   S=new std::stack<Container*>();
   componentNames=new std::set<std::string>();
   includes=new std::set<std::string>();
+  includes->insert(fileName);//To avoid looping once on the file we're parsing.
   std::string fileName(fileToParse);
 
 
@@ -47,9 +48,10 @@ ParseurIdl::ParseurIdl(std::string fileToParse):file(),fileName(fileToParse){
   }
   //std::cout<<"Done loading the file"<<std::endl;
   
-  delete getIncludes(content);//already in the class attribute
+  std::set<std::string>* newIncludes=getIncludes(content);//already in the class attribute
   fillMe(content);
-  launchTreatmentIncludedFiles(includes);
+  launchTreatmentIncludedFiles(newIncludes);
+  delete newIncludes;
  
   
   //to add in the destructor when you'll stop doing a hundred thing at the same time
@@ -93,6 +95,7 @@ std::set<std::string>* ParseurIdl::getIncludes(std::string& ToBeParse){
   std::smatch res;
   while(std::regex_search(ToBeParse,res,exprInclude)){
     std::string name(res[1].str());
+    //std::cout<<name<<std::endl;
     if(includes->insert(name).second){
       newestIncludes->insert(name);
     }
@@ -119,6 +122,7 @@ void ParseurIdl::treatmentIncludedFiles(std::string name){
   std::set<std::string>* newIncludes=getIncludes(content);
   getNamesInIncludedFiles(content);
   launchTreatmentIncludedFiles(newIncludes);
+  delete newIncludes;
 }
 
 void ParseurIdl::getNamesInIncludedFiles(std::string& content){
@@ -368,4 +372,11 @@ void ParseurIdl::showMeThatFile()const{
     std::cout<<"\n";
   }
   std::cout<<std::flush;
+}
+
+void ParseurIdl::checkForInterfaceInheritance(){//maybe switch to file.doIInheritFromYou, less code duplication
+  std::vector<Container*>::iterator end=file.end();
+  for(std::vector<Container*>::iterator it=file.begin();it!=end;++it){
+    (*it)->doIInheritFromYou();
+  }
 }

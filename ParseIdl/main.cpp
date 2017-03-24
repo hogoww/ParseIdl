@@ -1,6 +1,8 @@
-#include "ParseurIdl.h"
+
+#include "IdlToCpp.h"
 #include <iostream>
 #include <string>
+
 
 int main(int argc,char** argv){
   if(argc!=2){
@@ -8,8 +10,9 @@ int main(int argc,char** argv){
     return 1;
   }
   std::string File(argv[1]);
+  //IdlToCpp trad(File);
   ParseurIdl p(File);
-   p.showMeThatFile();
+  p.showMeThatFile();
 
-   return 0;
+  return 0;
 }

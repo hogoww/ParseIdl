@@ -22,3 +22,8 @@ void Atom::showMeWhatYouGot(size_t depth)const{
   Item::showMeWhatYouGot(depth);
   std::cout<<" "<<Usage<<"\n";
 }
+
+
+bool Atom::doIInheritFromYou(){
+  return (Usage=="provides");
+}

@@ -1,6 +1,6 @@
 
 #include truc
-#include includeTest.idl
+//#include includeTest.idl
 #include pouet.idl
 #import test2.idl
 #include test.idl
