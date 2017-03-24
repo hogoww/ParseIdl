@@ -7,14 +7,16 @@
 #include <cstdlib>
 
 class FilePair{
- private:
+ public:
   std::ofstream h;
   std::ofstream cpp;
   std::string directoryName;
- public:
-  FilePair(std::string ifileName,std::string directoryName);
+
+  FilePair(std::string fileName,std::string directoryName="");
   void writeInCpp(std::string s);
   void writeInH(std::string s);
+  void writeInCpp(char* s);
+  void writeInH(char* s);
 };
 
 #endif

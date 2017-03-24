@@ -10,7 +10,7 @@ class DidNotFoundFileExcep : public std::exception {
   std::string errormsg;
   
  public:
-  DidNotFoundFileExcep(std::string File);
+  DidNotFoundFileExcep(std::string errorMsg);
   virtual ~DidNotFoundFileExcep() throw();
   virtual const char* what() const throw();
 

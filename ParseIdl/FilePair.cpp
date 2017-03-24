@@ -25,4 +25,12 @@ void FilePair::writeInH(std::string s){
   cpp<<s;
 }
 
+void FilePair::writeInCpp(char* s){
+  h<<s;
+}
+
+void FilePair::writeInH(char* s){
+  cpp<<s;
+}
+
 
