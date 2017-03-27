@@ -20,10 +20,14 @@ const std::string Atom::getUsage()const{
 
 void Atom::showMeWhatYouGot(size_t depth)const{
   Item::showMeWhatYouGot(depth);
-  std::cout<<" "<<Usage<<"\n";
+  std::cout<<"\n";
 }
 
 
 bool Atom::doIInheritFromYou(){
   return (Usage=="provides");
+}
+
+std::string Atom::Declaration() const{
+  return Item::Declaration()+" "+Usage;
 }

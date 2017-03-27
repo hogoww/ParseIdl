@@ -23,12 +23,30 @@ const std::string Item::getName() const{
 
 
 void Item::showMeWhatYouGot(size_t depth)const{
+  // for(size_t i=0;i<depth;i++){
+  //   std::cout<<"-";
+  // }
+  // std::cout<<Type<<" "<<Name;
+  std::cout<<getDepth(depth)<<Declaration();
+}
+
+std::string Item::getDepth(size_t depth) const{
+  std::string s="";
   for(size_t i=0;i<depth;i++){
-    std::cout<<"-";
+    s+="-";
   }
-  std::cout<<Type<<" "<<Name;
+  return s;
 }
 
 bool Item::doIInheritFromYou(){
   return false;
+}
+
+
+std::string Item::Declaration() const{
+  std::string s;
+  s=Type;
+  s+=" ";
+  s+=Name;
+  return s;
 }

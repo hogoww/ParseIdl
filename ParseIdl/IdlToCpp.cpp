@@ -1,11 +1,16 @@
 #include "IdlToCpp.h"
 
+const std::regex IdlToCpp::exprInterface("interface",std::regex::icase|std::regex::optimize);
+const std::regex IdlToCpp::exprComponent("component",std::regex::icase|std::regex::optimize);
+const std::regex IdlToCpp::exprException("exception",std::regex::icase|std::regex::optimize);
+const std::regex IdlToCpp::exprModule("module",std::regex::icase|std::regex::optimize);
+
 
 /******Constructeurs:******/
 
 
 /* constructeurs public*/
-IdlToCpp::IdlToCpp(std::string fileName,std::string DN):p(fileName),currentNamespace(),directoryName(DN),depth(0){
+IdlToCpp::IdlToCpp(std::string fileName,std::string DN):p(fileName),currentNamespace(),directoryName(DN){
 }
 
 
@@ -39,8 +44,55 @@ char* IDStringToCharUpper(std::string s){
   return res;
 }
 
-void IdlToCpp::ItemTreatment(){
+void IdlToCpp::start(){
+  const std::vector<Container *> c=p.getFile();
+  std::vector<Container*>::const_iterator end=c.cend();
+  p.fileName();
+  for(std::vector<Container*>::const_iterator it=c.cbegin();it!=end;++it){
+    FilePair* f=NULL;
+    ItemTreatment(*it,f);
+  }
 }
+
+void IdlToCpp::IterateOtherContainer(Container* c,FilePair* f){
+  std::vector<Item*>::const_iterator end=c.cend();
+  p.fileName();
+  for(std::vector<Container*>::const_iterator it=c.cbegin();it!=end;++it){
+    FilePair* f=NULL;
+    ItemTreatment(*it,f);
+  }
+}
+
+void IdlToCpp::ItemTreatment(Item* i,FilePair* f){
+  std::smatch bogus;
+  std::string name=i.getName();
+  
+  if(std::regex_search(name,bogus,exprException)){
+    if(depth<2 && !f->currentNamespace.empty()){}
+    f=new FilePair();
+    ExceptionTreatment(i,f);
+    delete f;
+    f=NULL;
+    return;
+  }
+  if(std::regex_search(name,bogus,exprModule)){
+    f=new FilePair();
+    f->depth++;
+    f->currentNamespace=name;
+    
+    delete f;
+    f=NULL;
+    return;
+  }
+
+  
+}
+
+void moduleTreatment(Container* module,FilePair *f){
+
+}
+
+
 
 char* toUpper(std::string s){//Just to be more legible
   return IDStringToCharUpper(s);
@@ -51,10 +103,11 @@ void IdlToCpp::ExceptionTreatment(Container* Exception){
   if(depth<2){//not innerclass
     std::string ExceptionName=Exception->getName();
     FilePair f(ExceptionName,directoryName);
-
+    char * upperName=toUpper(ExceptionName)
     //multidefinition Controle
-    f.h<<"#ifndef __"<<toUpper(ExceptionName)<<"_H\n";
-    f.h<<"#define __"<<toUpper(ExceptionName)<<"_H\n";
+    f.h<<"#ifndef __"<<upperName<<"_H\n";
+    f.h<<"#define __"<<upperName<<"_H\n";
+    delete upperName;
 
     f.h<<"\n";//start Includes
 

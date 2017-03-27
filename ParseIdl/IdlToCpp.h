@@ -6,19 +6,23 @@
 
 #include <exception>
 #include <iostream>
+#include <regex>
 
 class IdlToCpp{
  private:
   ParseurIdl p;
-  std::string currentNamespace;
   std::string directoryName;
-  int depth;
   
   void ItemTreatment();
   void CompleteInheritance();//check if it does implement some interfaces beforehand
 
   void ExceptionTreatment(Container* Exception);
+  void IterateOtherContainer(Container* c,FilePair* f);
 
+  static const std::regex exprInterface;
+  static const std::regex exprComponent;
+  static const std::regex exprException;
+  static const std::regex exprModule;
  public:
   IdlToCpp(std::string fileName,std::string DirectoryName);
 };

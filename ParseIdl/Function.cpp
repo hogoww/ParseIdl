@@ -71,22 +71,43 @@ const std::vector<std::string> Function::getException() const{
 
 
 void Function::showMeWhatYouGot(size_t depth)const{
-  Item::showMeWhatYouGot(depth);
-  std::cout<<"(";
-  std::vector<Parameter>::const_iterator end=Param.cend();
-  for(std::vector<Parameter>::const_iterator it=Param.cbegin();it!=end;++it) {
-    it->showMeThatParameter();
-  }
-  std::cout<<")";
-  if(Exception.size()){//forcement une
-    std::vector<std::string>::const_iterator end=Exception.cend();
-    std::cout<<" raises ("<<*Exception.begin();
-    for(std::vector<std::string>::const_iterator it=++Exception.cbegin();it!=end;++it) {
-      std::cout<<','<<*it;
-    }
-    std::cout<<")";
-  }
+  // Item::showMeWhatYouGot(depth);
+  // std::cout<<"(";
+  // std::vector<Parameter>::const_iterator end=Param.cend();
+  // for(std::vector<Parameter>::const_iterator it=Param.cbegin();it!=end;++it) {
+  //   it->showMeThatParameter();
+  // }
+  // std::cout<<")";
+  // if(Exception.size()){//forcement une
+  //   std::vector<std::string>::const_iterator end=Exception.cend();
+  //   std::cout<<" raises ("<<*Exception.begin();
+  //   for(std::vector<std::string>::const_iterator it=++Exception.cbegin();it!=end;++it) {
+  //     std::cout<<','<<*it;
+  //   }
+  //   std::cout<<")";
+  // }
+  std::cout<<Item::getDepth(depth);
+  std::cout<<Declaration();
   std::cout<<"\n";
 }
 
 
+
+std::string Function::Declaration()const{
+  std::string res=Item::Declaration();
+  res+="(";
+  std::vector<Parameter>::const_iterator end=Param.cend();
+  for(std::vector<Parameter>::const_iterator it=Param.cbegin();it!=end;++it) {
+    res+=it->showMeThatParameter();
+  }
+  res+=")";
+  if(Exception.size()){//forcement une
+    std::vector<std::string>::const_iterator end=Exception.cend();
+    res+=" raises ("+*Exception.begin();
+    for(std::vector<std::string>::const_iterator it=++Exception.cbegin();it!=end;++it) {
+      res+=','+*it;
+    }
+    res+=")";
+  }
+  return res;
+}

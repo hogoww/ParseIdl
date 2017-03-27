@@ -19,8 +19,9 @@ Parameter::~Parameter(){
   std::cout<<"Parameter destructor -"<<getName()<<std::endl;
 }
 
-void Parameter::showMeThatParameter()const{
-  std::cout<<(In?"In":"Out")<<" "<<Type<<" "<<Name;
+std::string Parameter::showMeThatParameter()const{
+  // std::cout<<(In?"In":"Out")<<" "<<Type<<" "<<Name;
+  return (In?"In ":"Out ")+Item::Declaration();
 }
 
 void Parameter::showMeWhatYouGot(size_t depth)const {

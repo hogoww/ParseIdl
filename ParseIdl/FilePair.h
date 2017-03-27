@@ -3,20 +3,21 @@
 
 #include <string>
 #include <fstream>
-#include <iostream>
-#include <cstdlib>
 
 class FilePair{
  public:
-  std::ofstream h;
-  std::ofstream cpp;
-  std::string directoryName;
+  std::string fileName;
+  std::ofstream* h;
+  std::ofstream*  cpp;
+  static std::string directoryName;
+  int depth;
+  std::string currentNamespace;
 
-  FilePair(std::string fileName,std::string directoryName="");
-  void writeInCpp(std::string s);
-  void writeInH(std::string s);
-  void writeInCpp(char* s);
-  void writeInH(char* s);
+  void connectFiles(std::string filename);
+
+  FilePair(std::string filename="",int currentdepth=0,std::string Namespace="",std::string directoryName="");
+  ~FilePair();
+  FilePair& operator=(const FilePair& other);
 };
 
 #endif

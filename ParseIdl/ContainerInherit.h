@@ -23,6 +23,7 @@ class ContainerInherit : public Container{
   virtual const std::set<std::string> getInheritFrom()const;
   virtual void showMeWhatYouGot(size_t depth=0)const;
   virtual bool doIInheritFromYou();
+  virtual std::string Declaration()const;
 };
 
 #endif

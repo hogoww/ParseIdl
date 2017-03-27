@@ -28,20 +28,20 @@ const std::vector<Item*> Container::getContent()const {
 
 
 
-void Container::showMeThatName(size_t depth)const{
-  Item::showMeWhatYouGot(depth);
-}
+// void Container::showMeThatName(size_t depth)const{
+  
+// }
 
 void Container::showMeThatContent(size_t depth)const{
   std::vector<Item*>::const_iterator end=Content.cend();
   for(std::vector<Item*>::const_iterator it=Content.cbegin();it!=end;++it) {
-   (*it)->showMeWhatYouGot(depth+1);
+    (*it)->showMeWhatYouGot(depth+1);
  }
 }
 
 
 void Container::showMeWhatYouGot(size_t depth)const{
-  showMeThatName(depth);
+  Item::showMeWhatYouGot(depth);
   std::cout<<"\n";
   showMeThatContent(depth);
 }
@@ -54,4 +54,8 @@ bool Container::doIInheritFromYou(){
     }
   }  
   return false;
+}
+
+std::string Container::Declaration()const{
+  return Item::Declaration();
 }

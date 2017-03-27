@@ -9,6 +9,7 @@ FLAGS = -Wall -ansi -pedantic -std=c++11
 
 all : $(PROGNAME)
 
+DidNotFoundFileExcep.o:DidNotFoundFileExcep.cpp
 Item.o: Item.cpp 
 ContainerInherit.o: ContainerInherit.cpp
 Atom.o: Atom.cpp

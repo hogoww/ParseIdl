@@ -42,20 +42,37 @@ const std::set<std::string> ContainerInherit::getInheritFrom()const{
 }
 
 void ContainerInherit::showMeWhatYouGot(size_t depth)const{
-  showMeThatName(depth);
+  // Container::Declaration();
+
+  // if(InheritFrom.size()){
+  //   std::set<std::string>::const_iterator end=InheritFrom.cend();
+  //   std::cout<<" : ";
+  //   std::cout<<*InheritFrom.cbegin();
+  //   for(std::set<std::string>::const_iterator it=++InheritFrom.cbegin();it!=end;++it){
+  //     std::cout<<", "<<*it;
+  //   }
+  // }
+  // std::cout<<"\n";
+  // showMeThatContent(depth);
+  Item::showMeWhatYouGot(depth);
+  std::cout<<"\n";
+  showMeThatContent(depth);
+
+}
+
+std::string ContainerInherit::Declaration()const{
+  std::string res=Container::Declaration();
 
   if(InheritFrom.size()){
     std::set<std::string>::const_iterator end=InheritFrom.cend();
-    std::cout<<" : ";
-    std::cout<<*InheritFrom.cbegin();
+    res+=" : ";
+    res+=*InheritFrom.cbegin();
     for(std::set<std::string>::const_iterator it=++InheritFrom.cbegin();it!=end;++it){
-      std::cout<<", "<<*it;
+      res+=", "+*it;
     }
   }
-  std::cout<<"\n";
-  showMeThatContent(depth);
+  return res;
 }
-
 
 bool ContainerInherit::doIInheritFromYou(){
   std::vector<Item*>::iterator end=Content.end();

@@ -12,7 +12,7 @@ class Atom : public Item{
   virtual const std::string getUsage() const;
   virtual void showMeWhatYouGot(size_t depth=0)const;
   virtual bool doIInheritFromYou();
-
+  virtual std::string Declaration()const;
 };
 
 #endif

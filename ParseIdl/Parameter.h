@@ -10,7 +10,7 @@ class Parameter : public Item {
   virtual ~Parameter();
   Parameter(std::string name,std::string type,bool in);
   const bool getIn() const;
-  void showMeThatParameter()const;
+  std::string showMeThatParameter()const;
   void showMeWhatYouGot(size_t depth=0)const;//Ne devrais pas etre utilisée.
 };
 
