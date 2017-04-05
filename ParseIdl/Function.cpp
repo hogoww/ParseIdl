@@ -111,3 +111,7 @@ std::string Function::Declaration()const{
   }
   return res;
 }
+
+bool Function::isFunction() const{
+  return true;
+}

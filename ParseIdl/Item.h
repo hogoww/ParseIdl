@@ -19,6 +19,8 @@ class Item{
   virtual bool doIInheritFromYou();//Only does things in containers class.
   virtual std::string Declaration() const;
   std::string getDepth(size_t depth) const;
+
+  virtual bool isFunction() const;
 };
 
 #endif

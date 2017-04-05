@@ -13,7 +13,9 @@ class IdlToCpp{
   ParseurIdl p;
   std::string directoryName;
   
-  void ItemTreatment();
+  void printWhatItContainInH(Container* c,FilePair& f);
+  void printWhatItContainIncpp(Container* c,FilePair& f);
+  void ItemTreatment(Item* i,FilePair* f);
   void CompleteInheritance();//check if it does implement some interfaces beforehand
 
   void ExceptionTreatment(Container* Exception);
@@ -25,6 +27,7 @@ class IdlToCpp{
   static const std::regex exprModule;
  public:
   IdlToCpp(std::string fileName,std::string DirectoryName);
+  void start();
 };
 
 #endif

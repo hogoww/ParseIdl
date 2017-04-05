@@ -50,3 +50,7 @@ std::string Item::Declaration() const{
   s+=Name;
   return s;
 }
+
+bool Item::isFunction() const{
+  return false;
+}

@@ -161,6 +161,10 @@ const std::vector<Container*> ParseurIdl::getFile()const{
   return file;
 }
 
+std::string ParseurIdl::getFileName()const{
+  return fileName;
+}
+
 std::string ParseurIdl::FileToString(std::string fileName) throw (DidNotFoundFileExcep){
   std::ifstream stream(fileName);
   if (stream) {

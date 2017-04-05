@@ -1,0 +1,18 @@
+#ifndef __NO_CONNECTION_H__
+#define __NO_CONNECTION_H__
+
+#include <string>
+#include <exception>
+#include "Component.h"
+
+class Component::NoConnection : public std::exception{
+ private:
+  std::string errormsg;
+  
+ public:
+  NoConnection(std::string errorMsg);
+  virtual ~NoConnection() throw();
+  virtual const char* what() const throw();
+};
+
+#endif

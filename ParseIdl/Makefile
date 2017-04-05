@@ -1,7 +1,7 @@
 CC = g++-4.9
 PROGNAME = main
-SOURCE = Item.cpp Atom.cpp Container.cpp ContainerInherit.cpp Function.cpp Parameter.cpp ParseurIdl.cpp main.cpp DidNotFoundFileExcep.cpp
-HEADER= Atom.h Container.h Item.h Function.h Parameter.h ParseurIdl.h ContainerInherit.h DidNotFoundFileExcep.h
+SOURCE = Item.cpp Atom.cpp Container.cpp ContainerInherit.cpp Function.cpp Parameter.cpp ParseurIdl.cpp main.cpp DidNotFoundFileExcep.cpp FilePair.cpp IdlToCpp.cpp 
+HEADER= Atom.h Container.h Item.h Function.h Parameter.h ParseurIdl.h ContainerInherit.h DidNotFoundFileExcep.h FilePair.h IdlToCpp.h 
 FLAGS = -Wall -ansi -pedantic -std=c++11
 
 
