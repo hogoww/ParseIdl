@@ -5,9 +5,12 @@ std::string FilePair::directoryName("");
 
 /* constructeurs public*/
 FilePair::FilePair(std::string filename,int currentdepth,std::string Namespace,std::string directory):fileName(filename),depth(currentdepth),currentNamespace(Namespace){
-  if(directoryName.empty()){
-    directoryName=directory;
-  }
+  h=new std::ofstream();
+  cpp=new std::ofstream();
+  // if(directoryName.empty()){
+  //   directoryName=directory;
+  // }
+  directoryName="temp";
 }
 
 FilePair::~FilePair(){
@@ -25,13 +28,9 @@ FilePair& FilePair::operator=(const FilePair& other){
 
 
 void FilePair::connectFiles(std::string filename){
-  fileName=filename;
   std::string hFileName;
-  hFileName=directoryName+"/"+hFileName+".h";
+  hFileName=directoryName+"/"+filename+".h";
   std::string cppFileName;
-  cppFileName=directoryName+"/"+cppFileName+".cpp";
-  
-  h->open(hFileName.c_str());
-  cpp->open(cppFileName.c_str());
-
+  cppFileName=directoryName+"/"+filename+".cpp";
+  h->open(hFileName.c_str()); 
 }

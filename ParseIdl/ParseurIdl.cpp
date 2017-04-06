@@ -74,7 +74,17 @@ void ParseurIdl::getFile(std::string& filename,std::string& content) throw (DidN
   catch(DidNotFoundFileExcep& DNFF){
     throw DNFF;
   }
-  
+  // std::cout<<content<<std::endl;
+  // command="cat -A ";
+  // command+=tempName;
+  // std::system(command.c_str());
+  // std::cout<<"----------\n";
+
+  // command="wc ";
+  // command+=tempName;
+  // std::system(command.c_str());
+  // std::cout<<"----------\n";
+
   command="rm ";
   command+=tempName;
   std::system(command.c_str());
@@ -157,7 +167,7 @@ void ParseurIdl::getNamesInIncludedFiles(std::string& content){
 
 /******Methodes:******/
 /* methodes public*/
-const std::vector<Container*> ParseurIdl::getFile()const{
+const std::vector<Container*> ParseurIdl::getFileContent()const{
   return file;
 }
 
@@ -167,15 +177,16 @@ std::string ParseurIdl::getFileName()const{
 
 std::string ParseurIdl::FileToString(std::string fileName) throw (DidNotFoundFileExcep){
   std::ifstream stream(fileName);
-  if (stream) {
-    // get length of file:
+  if(stream){
+    //get length of file:
     stream.seekg(0,stream.end);
     int length=stream.tellg();
     stream.seekg(0,stream.beg);
 
-    char* buffer=new char[length];
+    char* buffer=new char[length+1];
 
-    stream.read (buffer,length);
+    stream.read(buffer,length);
+    buffer[length]='\0';//So String does know where it ends...
 
     if(stream){
       //std::cout<<"all characters read successfully.";
@@ -194,9 +205,11 @@ std::string ParseurIdl::FileToString(std::string fileName) throw (DidNotFoundFil
   
 
 std::string ParseurIdl::fillMeWasHarderThanExpected(std::string& toBeParse,Container*& endOfPile){
+  //std::cout<<toBeParse<<std::endl;;
   std::smatch res;
   if(std::regex_search(toBeParse,res,exprLine)){
     std::string line=res.suffix().str();
+    //std::cout<<line<<"\n-----------"<<std::endl;
     std::smatch bogus;
     // //std::cout<<"I did find a line! "<<std::endl;
     if(std::regex_search(res[1].str(),bogus,exprSemiColon)){
@@ -235,9 +248,12 @@ std::string ParseurIdl::fillMeWasHarderThanExpected(std::string& toBeParse,Conta
     return line;
   }
   
- //std::cout<<S->size()<<" "<<"I didn't found a line."<<std::endl;
+  //Weird bug that 7 hours didn't allow me to find.... can't let it.
+  //std::cout<<S->size()<<" "<<"I didn't found a line."<<std::endl;
   std::string c("");//Empty file.
-  std::terminate();
+  // std::cout<<toBeParse<<"\n";
+  // std::cerr<<"in FMWHTE, to be investigate";
+  // std::terminate();
   return c;
 }
 

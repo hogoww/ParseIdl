@@ -68,7 +68,7 @@ class ParseurIdl{
  public:
   ParseurIdl(std::string fileToParse);
   virtual ~ParseurIdl();
-  const std::vector<Container*> getFile()const;  
+  const std::vector<Container*> getFileContent()const;  
   void showMeThatFile()const;
   std::string getFileName()const;
   void checkForInterfaceInheritance();//when using a langage that implements interfaces with multiple inheritance

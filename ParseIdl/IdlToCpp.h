@@ -26,7 +26,7 @@ class IdlToCpp{
   static const std::regex exprException;
   static const std::regex exprModule;
  public:
-  IdlToCpp(std::string fileName,std::string DirectoryName);
+  IdlToCpp(std::string fileName,std::string DirectoryName="");
   void start();
 };
 
