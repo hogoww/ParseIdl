@@ -1,48 +1,48 @@
-#include something
+// #include something
 
-exception pouet: pr{
-  provides int c;
+// exception pouet: pr{
+//   provides int c;
+// };
+
+
+
+#include truc
+//#include includeTest.idl
+#include pouet.idl
+#import test2.idl
+#include test.idl
+
+component Philosopher : pouet {
+
+  attribute string name;
+
+  // The left fork receptacle.
+
+  uses Fork left;
+
+  // The right fork receptacle.
+
+  uses Fork right;
+
+  // The status info event source.
+
+  /* re*eoihtr
+     ert*/
+
+  publishes StatusInfo info;
+
+  interface Fork {
+
+    exception InUse {};
+
+    void get() raises (InUse,anotherOne);
+    void release(in int p, out p f , inout e);
+  };
 };
 
 
-
-// #include truc
-// //#include includeTest.idl
-// #include pouet.idl
-// #import test2.idl
-// #include test.idl
-
-// component Philosopher : pouet {
-
-//   attribute string name;
-
-//   // The left fork receptacle.
-
-//   uses Fork left;
-
-//   // The right fork receptacle.
-
-//   uses Fork right;
-
-//   // The status info event source.
-
-//   /* re*eoihtr
-//      ert*/
-
-//   publishes StatusInfo info;
-
-//   interface Fork {
-
-//     exception InUse {};
-
-//     void get() raises (InUse);
-//     void release();
-//   };
-// };
-
-
-// // Le composant
-// component ForkManager {
-//   // Facette utilisé par les phisolphes.
-//   provides Fork the_fork;
-// };
+// Le composant
+component ForkManager {
+  // Facette utilisé par les phisolphes.
+  provides Fork the_fork;
+};

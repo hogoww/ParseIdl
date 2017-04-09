@@ -3,15 +3,24 @@
 
 #include "Item.h"
 
+#include <regex>
+
+
 class Parameter : public Item {
  private:
-  bool In;//True if "in" parameter False if "out" parameter
+  enum TypeParam { In, Out, InOut };
+  TypeParam t;//True if "in" parameter False if "out" parameter
+
+  static const std::regex exprIn;
+  static const std::regex exprOut;
+  static const std::regex exprInOut;
+
  public:
+  Parameter(std::string name,std::string type,std::string typeparam);
   virtual ~Parameter();
-  Parameter(std::string name,std::string type,bool in);
-  const bool getIn() const;
+  const bool getTypeParameter() const;
   std::string showMeThatParameter()const;
-  void showMeWhatYouGot(size_t depth=0)const;//Ne devrais pas etre utilisée.
+  void showMeWhatYouGot(size_t depth=0)const;//shouldn't be used
 };
 
 #endif

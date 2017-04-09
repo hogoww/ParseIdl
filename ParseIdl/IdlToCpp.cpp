@@ -12,7 +12,8 @@ const std::regex IdlToCpp::exprModule("module",std::regex::icase|std::regex::opt
 
 
 /* constructeurs public*/
-IdlToCpp::IdlToCpp(std::string fileName,std::string DN):p(fileName),directoryName(DN){
+IdlToCpp::IdlToCpp(std::string fileName,std::string DN):p(fileName),directoryName(DN),NameFileCreated(){
+  directoryName="temp";
 }
 
 
@@ -21,6 +22,10 @@ IdlToCpp::IdlToCpp(std::string fileName,std::string DN):p(fileName),directoryNam
 
 /*private*/void IdlToCpp::CompleteInheritance(){
   p.checkForInterfaceInheritance();
+}
+
+void IdlToCpp::showMeThatFile() const{
+  p.showMeThatFile();
 }
 
 std::string IDStringToCharUpper(std::string s){
@@ -102,47 +107,95 @@ std::string toUpper(std::string s){//Just to be more legible
   return IDStringToCharUpper(s);
 }
 
+void IdlToCpp::InterfaceTreatment(Container* Interface){
+  std::SAY<<"i'm creating an Interface file!"<<std::endl;
+  std::string InterfaceName=Interface->getName();
+  FilePair* f=OpenFileDescriptors(InterfaceName);
+  std::string upperName=toUpper(InterfaceName);
+  //multidefinition Controle
+  *f->h<<"#ifndef __"<<upperName<<"_H__\n";
+  *f->h<<"#define __"<<upperName<<"_H__\n";
+
+  *f->h<<"\n";//start Includes
+
+  *f->h<<"#include <exception>\n";
+  *f->h<<"#include <string>\n";
+  //add type Controle for more inclusions 
+
+
+  *f->h<<"\n";//end Includes
+
+  *f->h<<"class "<<InterfaceName<<" : std::exception {\n";//start class
+
+  //class
+  *f->h<<"private:\n";
+  *f->h<<"std::string errormsg;\n";
+  *f->h<<"\npublic:\n";
+  *f->h<<InterfaceName<<"(std::string errorMsg);\n";
+  *f->h<<"virtual ~"<<InterfaceName<<"() throw();\n";
+  *f->h<<"virtual const char* what() const throw();\n";
+  
+  //printWhatItContainInH(Interface,*f);
+    
+    
+  *f->h<<"};\n\n";//end class    
+  *f->h<<"#endif";//end multidefinitionControl
+
+
+
+  *f->cpp<<"#include \""<<InterfaceName<<".h\"\n\n";
+  *f->cpp<<InterfaceName<<"::"<<InterfaceName<<"(std::string errorMsg):errormsg(errorMsg){\n}\n\n";
+  *f->cpp<<InterfaceName<<"::~"<<InterfaceName<<"() throw (){\n}\n\n";
+  *f->cpp<<"const char* "<<InterfaceName<<"::what() const throw (){\n return errormsg.c_str();\n}\n";
+  printWhatItContainIncpp(Interface,*f);
+  delete f;
+
+}
 
 void IdlToCpp::ExceptionTreatment(Container* Exception){
   std::SAY<<"i'm creating an Exception file!"<<std::endl;
   std::string ExceptionName=Exception->getName();
-  FilePair f;
-  f.connectFiles(ExceptionName);
+  // FilePair f;
+  // f.connectFiles(ExceptionName);
+  FilePair* f=OpenFileDescriptors(ExceptionName);
   std::string upperName=toUpper(ExceptionName);
   //multidefinition Controle
-  *f.h<<"#ifndef __"<<upperName<<"_H__\n";
-  *f.h<<"#define __"<<upperName<<"_H__\n";
+  *f->h<<"#ifndef __"<<upperName<<"_H__\n";
+  *f->h<<"#define __"<<upperName<<"_H__\n";
 
-  *f.h<<"\n";//start Includes
+  *f->h<<"\n";//start Includes
 
-  *f.h<<"#include <exception>\n";
-  *f.h<<"#include <string>\n";
+  *f->h<<"#include <exception>\n";
+  *f->h<<"#include <string>\n";
   //add type Controle for more inclusions 
 
 
-  *f.h<<"\n";//end Includes
+  *f->h<<"\n";//end Includes
 
-  *f.h<<"class "<<ExceptionName<<" : std::exception {\n";//start class
+  *f->h<<"class "<<ExceptionName<<" : std::exception {\n";//start class
 
   //class
-  *f.h<<"private:\n";
-  *f.h<<"std::string errormsg;\n";
-  *f.h<<"\npublic:\n";
-  *f.h<<ExceptionName<<"(std::string errorMsg);\n";
-  *f.h<<"virtual ~"<<ExceptionName<<"() throw();\n";
-  *f.h<<"virtual const char* what() const throw();\n";
+  *f->h<<"private:\n";
+  *f->h<<"std::string errormsg;\n";
+  *f->h<<"\npublic:\n";
+  *f->h<<ExceptionName<<"(std::string errorMsg);\n";
+  *f->h<<"virtual ~"<<ExceptionName<<"() throw();\n";
+  *f->h<<"virtual const char* what() const throw();\n";
   
-  //printWhatItContainInH(Exception,f);
+  //printWhatItContainInH(Exception,*f);
     
     
-  *f.h<<"};\n\n";//end class    
-  *f.h<<"#endif";//end multidefinitionControl
+  *f->h<<"};\n\n";//end class    
+  *f->h<<"#endif";//end multidefinitionControl
 
-  *f.cpp<<"#include \""<<ExceptionName<<".h\"\n\n";
-  *f.cpp<<ExceptionName<<"::"<<ExceptionName<<"(std::string errorMsg):errormsg(errorMsg){\n}\n\n";
-  *f.cpp<<ExceptionName<<"::~"<<ExceptionName<<"() throw (){\n}\n\n";
-  *f.cpp<<"const char* "<<ExceptionName<<"::what() const throw (){\n return errormsg.c_str();\n}\n";
-  printWhatItContainIncpp(Exception,f);
+
+
+  *f->cpp<<"#include \""<<ExceptionName<<".h\"\n\n";
+  *f->cpp<<ExceptionName<<"::"<<ExceptionName<<"(std::string errorMsg):errormsg(errorMsg){\n}\n\n";
+  *f->cpp<<ExceptionName<<"::~"<<ExceptionName<<"() throw (){\n}\n\n";
+  *f->cpp<<"const char* "<<ExceptionName<<"::what() const throw (){\n return errormsg.c_str();\n}\n";
+  printWhatItContainIncpp(Exception,*f);
+  delete f;
 }
 
 
@@ -170,10 +223,65 @@ void IdlToCpp::printWhatItContainIncpp(Container* c,FilePair& f){
       if((*it)->getType()!="void"){
 	*f.cpp<<"return "<<(*it)->getType()<<" a;\n";
       }
-
       *f.cpp<<"}\n";
-      
     }
   }
   *f.cpp<<"\n";
 }
+
+FilePair* IdlToCpp::OpenFileDescriptors(std::string FileName){
+  FilePair* res=new FilePair();
+  res->connectFiles(FileName);
+  NameFileCreated.push_back(FileName);
+  return res;
+}
+
+
+void IdlToCpp::GenerateBasicMakefile(){
+  //std::SAY<<"I'm generating a Makefile!"<<std::endl;
+  // if(!NameFileCreated.size()){
+  //   std::cerr<<"No files created, so no Makefile created either."<<std::endl;
+  //   return;
+  // }
+
+  std::ofstream m;
+  std::string path("./");
+  path+=directoryName+"/Makefile";
+  m.open(path);
+
+  std::string compiler("g++");
+  std::string flags("-Wall -ansi -pedantic");
+  std::string progname("main");
+  
+  m<<"CC = "<<compiler<<"\n";
+  m<<"PROGNAME = "<<progname<<"\n";
+  m<<"FLAGS = "<<flags<<"\n";
+  m<<"SOURCES = ";
+  std::vector<std::string>::const_iterator end=NameFileCreated.cend();
+  for(std::vector<std::string>::const_iterator it=NameFileCreated.cbegin();it!=end;++it){
+    m<<*it<<".cpp ";
+  }
+  m<<"main.cpp";
+  m<<"\n\n\n";
+
+  m<<"all : $(PROGNAME)\n\n";
+  m<<".cpp.o : $(CC) $(FLAGS) -c $^\n\n";
+  m<<"$(PROGNAME) : $(SOURCES:.cpp=.o)\n\t$(CC) $(SOURCES:.cpp=.o) $(FLAGS) -o $(PROGNAME)\n\n";
+  m<<"clean :\n\t@rm -f $(PROGNAME) *.o *~ *.h.gch *\\#\n\t@ls\n\n";
+  m<<"cc:\n\tmake clean\n\t@make al\n\n"; 
+}
+
+void IdlToCpp::GenerateBasicMain(){
+  // if(!NameFileCreated.size()){
+  //   std::cerr<<"No files created, so no main created either."<<std::endl;
+  //   return;
+  // }
+
+  std::ofstream m;
+  std::string path("./");
+  path+=directoryName+"/main.cpp";
+  m.open(path);
+
+  m<<"\n\nint main()\n{\nreturn 0;\n}"; 
+}
+

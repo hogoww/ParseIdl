@@ -29,7 +29,7 @@ void Function::parseEnd(std::string ToBeParse){
 
     std::smatch parse;
     while(std::regex_search(inProgress,parse,exprParseParam)){
-      Parameter New(parse[3].str(),parse[2].str(),parse[1].str()=="in");
+      Parameter New(parse[3].str(),parse[2].str(),parse[1].str());
       this->Param.push_back(New);
       inProgress=parse.suffix().str();
     }

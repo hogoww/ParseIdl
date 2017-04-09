@@ -33,4 +33,5 @@ void FilePair::connectFiles(std::string filename){
   std::string cppFileName;
   cppFileName=directoryName+"/"+filename+".cpp";
   h->open(hFileName.c_str()); 
+  cpp->open(cppFileName.c_str()); 
 }

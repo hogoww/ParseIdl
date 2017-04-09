@@ -11,10 +11,13 @@ int main(int argc,char** argv){
   }
   std::string File(argv[1]);
   // ParseurIdl p(File);
-  // p.showMeThatFile();
+  //p.showMeThatFile();
   IdlToCpp trad(File);
   system("rm temp/*");
   trad.start();
+  trad.GenerateBasicMakefile();
+  trad.GenerateBasicMain();
+  trad.showMeThatFile();
   
   return 0;
 }
