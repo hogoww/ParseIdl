@@ -29,7 +29,7 @@ Parameter::Parameter(std::string name,std::string type,std::string typeparam):It
 
 /******Methodes:******/
 /* methodes public*/
-const bool Parameter::getTypeParameter() const{
+const Parameter::TypeParam Parameter::getTypeParameter() const{
   return t;
 }
 
