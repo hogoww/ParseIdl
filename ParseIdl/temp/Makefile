@@ -1,7 +1,7 @@
 CC = g++
 PROGNAME = main
 FLAGS = -Wall -ansi -pedantic
-SOURCES = main.cpp
+SOURCES = pouet.cpp main.cpp
 
 
 all : $(PROGNAME)

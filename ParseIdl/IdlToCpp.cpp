@@ -6,7 +6,7 @@ const std::regex IdlToCpp::exprException("exception",std::regex::icase|std::rege
 const std::regex IdlToCpp::exprModule("module",std::regex::icase|std::regex::optimize);
 
 
-#define SAY cout//For output like "i've done something!"
+#define SAY cout//For output like "i've done something!" , for quick debug
 
 /******Constructeurs:******/
 
@@ -60,7 +60,7 @@ void IdlToCpp::start(){
   }
 }
 
-void IdlToCpp::IterateOtherContainer(Container* c,FilePair* f){//Shouldn't be usefull since we're only taking a one at a time container
+void IdlToCpp::IterateOverContainer(Container* c,FilePair* f){//Shouldn't be usefull since we're only taking a one at a time container
   std::vector<Item*> Content=c->getContent();
   std::vector<Item*>::iterator end=Content.end();
   p.getFileName();
@@ -149,15 +149,20 @@ void IdlToCpp::InterfaceTreatment(Container* Interface){
   *f->cpp<<"const char* "<<InterfaceName<<"::what() const throw (){\n return errormsg.c_str();\n}\n";
   printWhatItContainIncpp(Interface,*f);
   delete f;
-
 }
 
 void IdlToCpp::ExceptionTreatment(Container* Exception){
   std::SAY<<"i'm creating an Exception file!"<<std::endl;
-  std::string ExceptionName=Exception->getName();
   // FilePair f;
   // f.connectFiles(ExceptionName);
-  FilePair* f=OpenFileDescriptors(ExceptionName);
+  FilePair* f=OpenFileDescriptors(Exception->getName());
+  ExceptionTreatmentInH(Exception,f);
+  ExceptionTreatmentInCpp(Exception,f);
+  delete f;
+}
+
+void IdlToCpp::ExceptionTreatmentInH(Container* Exception,FilePair* f){
+  std::string ExceptionName=Exception->getName();
   std::string upperName=toUpper(ExceptionName);
   //multidefinition Controle
   *f->h<<"#ifndef __"<<upperName<<"_H__\n";
@@ -187,15 +192,16 @@ void IdlToCpp::ExceptionTreatment(Container* Exception){
     
   *f->h<<"};\n\n";//end class    
   *f->h<<"#endif";//end multidefinitionControl
+}
 
-
+void IdlToCpp::ExceptionTreatmentInCpp(Container* Exception,FilePair* f){
+  std::string ExceptionName=Exception->getName();
 
   *f->cpp<<"#include \""<<ExceptionName<<".h\"\n\n";
   *f->cpp<<ExceptionName<<"::"<<ExceptionName<<"(std::string errorMsg):errormsg(errorMsg){\n}\n\n";
   *f->cpp<<ExceptionName<<"::~"<<ExceptionName<<"() throw (){\n}\n\n";
   *f->cpp<<"const char* "<<ExceptionName<<"::what() const throw (){\n return errormsg.c_str();\n}\n";
   printWhatItContainIncpp(Exception,*f);
-  delete f;
 }
 
 
@@ -218,15 +224,23 @@ void IdlToCpp::printWhatItContainIncpp(Container* c,FilePair& f){
   std::vector<Item*>::const_iterator end=Content.cend();
   for(std::vector<Item*>::const_iterator it=Content.cbegin();it!=end;++it){
     if((*it)->isFunction()){
-      *f.cpp<<(*it)->Declaration()<<"{\n Todo\n";
-      
-      if((*it)->getType()!="void"){
-	*f.cpp<<"return "<<(*it)->getType()<<" a;\n";
-      }
-      *f.cpp<<"}\n";
+      FunctionTreatmentInCpp(static_cast<Function*>(c));
     }
+    else(
   }
   *f.cpp<<"\n";
+}
+
+void IdlToCpp::FunctionTreatmentInCpp(Function* func,FilePair f){
+  *f.cpp<<(FunctionDeclaration(func))<<"{"<<std::endl<<"Todo"<<std::endl;
+  if(func->getType()!="void"){
+    *f.cpp<<"return "<<func->getType()<<" a;"<<std::endl;
+  }
+  *f.cpp<<"}\n";
+}
+
+void IdlToCpp::FunctionTreatmentInH(Function* func,FilePair f){
+  *f.h<<FunctionDeclaration(func)<<";"<<std::endl;
 }
 
 FilePair* IdlToCpp::OpenFileDescriptors(std::string FileName){
@@ -285,3 +299,150 @@ void IdlToCpp::GenerateBasicMain(){
   m<<"\n\nint main()\n{\nreturn 0;\n}"; 
 }
 
+void IdlToCpp::AttributeTreatmentInH(Atom* Attribute,FilePair* f){
+  std::string AttribUsage=Attribute->getUsage();
+  if(AttribUsage=="attribute"){
+    *f->h<<Attribute->getType()<<" "<<Attribute->getName()<<";"<<std::endl;
+    return;
+  }
+
+  if(AttribUsage=="uses"){
+    *f->h<<Attribute->getType()<<"* "<<Attribute->getName()<<";"<<std::endl;
+    *f->h<<"void connect_"<<Attribute->getName()<<"("<<Attribute->getType()<<"* a"<<") throw (Components::AlreadyConnected);"<<std::endl;
+    *f->h<<Attribute->getType()<<"* disconnect_"<<Attribute->getName()<<"( ) throw ( Components::NoConnection );"<<std::endl;
+    *f->h<<Attribute->getType()<<"* get_connection_"<<Attribute->getName()<<"() const;"<<std::endl;
+    return;
+  }
+
+  if(AttribUsage=="provides"){
+    //Nothing to do in .h, since it's inherit
+    return;
+  }
+
+  if(AttribUsage=="consumes"){
+    std::cerr<<"consumes (Event system) not supported by traductor yet"<<std::endl;
+    return;
+  }
+
+  if(AttribUsage=="publishes"){
+    std::cerr<<"publishes (Event system) not supported by traductor yet"<<std::endl;
+    return;
+  }
+
+  if(AttribUsage=="emits"){
+    std::cerr<<"emits (Event system) not supported by traductor yet"<<std::endl;
+    return;
+  }
+}
+
+void IdlToCpp::AttributeTreatmentInCpp(Atom* Attribute,FilePair* f,std::string Class){
+  std::string AttribUsage=Attribute->getUsage();
+  if(AttribUsage=="attribute"){
+    //Nothing to do there. Maybe add in a constructor down the way...
+    //*f->h<<Attribute->getType()<<" "<<AttribUsage<<";\n";
+    return;
+  }
+
+  if(AttribUsage=="uses"){
+    *f->cpp<<"void connect_"<<Attribute->getName()<<"("<<Attribute->getType()<<"* a"<<") throw ( Components::AlreadyConnected ){"<<std::endl;
+    *f->cpp<<"if(a){"<<std::endl;
+    *f->cpp<<" throw AlreadyConnected("<<Attribute->getName()<<");"<<std::endl;
+    *f->cpp<<"}"<<std::endl;
+    *f->cpp<<"else{"<<std::endl;
+    *f->cpp<<Attribute->getName()<<"=a;"<<std::endl;
+    *f->cpp<<"}"<<std::endl;
+    *f->cpp<<"}"<<std::endl;
+
+    *f->cpp<<std::endl;
+
+    *f->cpp<<Attribute->getType()<<"* disconnect_"<<Attribute->getName()<<"( ) throw ( Components::NoConnection ){";
+    *f->cpp<<"if(a){"<<std::endl;
+    *f->cpp<<Attribute->getName()<<"=NULL;"<<std::endl;
+    *f->cpp<<"}"<<std::endl;
+    *f->cpp<<"else{"<<std::endl;
+    *f->cpp<<" throw NoConnection("<<Attribute->getName()<<");"<<std::endl;
+    *f->cpp<<"}"<<std::endl;
+    *f->cpp<<"}"<<std::endl;
+
+    *f->cpp<<std::endl;
+
+    *f->cpp<<Attribute->getType()<<"* get_connection_"<<Attribute->getName()<<"() const;"<<std::endl;
+    *f->cpp<<"return "<<Attribute->getName()<<";"<<std::endl;
+    return;
+  }
+
+  if(AttribUsage=="provides"){
+    //search the interface to add here.
+    return;
+  }
+
+  if(AttribUsage=="consumes"){
+    std::cerr<<"consumes (Event system) not supported by traductor yet"<<std::endl;
+    return;
+  }
+
+  if(AttribUsage=="publishes"){
+    std::cerr<<"publishes (Event system) not supported by traductor yet"<<std::endl;
+    return;
+  }
+
+  if(AttribUsage=="emits"){
+    std::cerr<<"emits (Event system) not supported by traductor yet"<<std::endl;
+    return;
+  }
+}
+
+
+std::string IdlToCpp::FunctionDeclaration(Function* f,std::string currentClass){
+  std::string res=f->getType();
+  res+=" ";
+  if(!currentClass.empty()){
+    res+=currentClass+"::";
+  }
+  res=f->getName();
+  const std::vector<Parameter> Param=f->getParam();
+  const std::vector<std::string> Exception=f->getException();
+
+  res+="(";
+  if(Param.size()){
+    std::vector<Parameter>::const_iterator end=Param.cend();
+    res+=showMeThatParameterCppStyle(*(Param.cbegin()));
+    for(std::vector<Parameter>::const_iterator it=++Param.cbegin();it!=end;++it){
+      res+=", "+showMeThatParameterCppStyle(*it);
+    }
+  }
+  res+=")";
+  
+  if(Exception.size()){//forcement une
+    std::vector<std::string>::const_iterator end=Exception.cend();
+    res+=" raises ("+*Exception.begin();
+    for(std::vector<std::string>::const_iterator it=++Exception.cbegin();it!=end;++it) {
+      res+=", "+*it;
+    }
+    res+=")";
+  }
+  return res;
+}
+
+
+std::string IdlToCpp::showMeThatParameterCppStyle(Parameter p){
+  std::string res="";
+  switch(p.getTypeParameter()){
+  case Parameter::TypeParam::In :
+    {
+      res+=p.getType()+" "+p.getName();
+      break;
+    }
+  case Parameter::TypeParam::Out :
+    {
+      res+=p.getType()+"& "+p.getName();
+      break;
+    }
+  case Parameter::TypeParam::InOut :
+    {
+      res+=p.getType()+"& "+p.getName();
+      break;
+    }
+  }
+  return res;
+}

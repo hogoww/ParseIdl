@@ -97,15 +97,19 @@ std::string Function::Declaration()const{
   std::string res=Item::Declaration();
   res+="(";
   std::vector<Parameter>::const_iterator end=Param.cend();
-  for(std::vector<Parameter>::const_iterator it=Param.cbegin();it!=end;++it) {
-    res+=it->showMeThatParameter();
+  if(Param.size()){
+    res+=Param.cbegin()->showMeThatParameter();
+    for(std::vector<Parameter>::const_iterator it=++Param.cbegin();it!=end;++it) {
+      res+=", "+it->showMeThatParameter();
+    }
   }
   res+=")";
+  
   if(Exception.size()){//forcement une
     std::vector<std::string>::const_iterator end=Exception.cend();
     res+=" raises ("+*Exception.begin();
     for(std::vector<std::string>::const_iterator it=++Exception.cbegin();it!=end;++it) {
-      res+=','+*it;
+      res+=", "+*it;
     }
     res+=")";
   }

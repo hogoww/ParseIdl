@@ -34,7 +34,6 @@ const Parameter::TypeParam Parameter::getTypeParameter() const{
 }
 
 Parameter::~Parameter(){
-  std::cout<<"Parameter destructor -"<<getName()<<std::endl;
 }
 
 std::string Parameter::showMeThatParameter()const{

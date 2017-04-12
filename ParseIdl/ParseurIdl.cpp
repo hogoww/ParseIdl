@@ -383,7 +383,7 @@ void ParseurIdl::emptyStack(Container*& endOfPile){
 
 
 void ParseurIdl::showMeThatFile()const{
-  std::setvbuf(stdout, nullptr, _IOFBF, BUFSIZ);
+  std::setvbuf(stdout, nullptr, _IOFBF, BUFSIZ);//Switch to fully buffered mode
   std::cout<<std::nounitbuf;
   std::cout<<"\n";
   std::vector<Container*>::const_iterator end=file.cend();

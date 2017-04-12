@@ -4,10 +4,6 @@
 #include "ParseurIdl.h"
 #include "FilePair.h"
 
-#include <exception>
-#include <iostream>
-#include <regex>
-#include <vector>
 
 class IdlToCpp{
  private:
@@ -17,14 +13,26 @@ class IdlToCpp{
   
   void printWhatItContainInH(Container* c,FilePair& f);
   void printWhatItContainIncpp(Container* c,FilePair& f);
-  void ItemTreatment(Item* i,FilePair* f);
+
   void CompleteInheritance();//check if it does implement some interfaces beforehand
 
+  void ItemTreatment(Item* i,FilePair* f);
+  void FunctionTreatmentInH(Function* func,FilePair f);
+  void FunctionTreatmentInCpp(Function* func,FilePair f);
+
   void ExceptionTreatment(Container* Exception);
+  void ExceptionTreatmentInH(Container* Exception,FilePair* f);
+  void ExceptionTreatmentInCpp(Container* Exception,FilePair* f);
+
   void InterfaceTreatment(Container* Interface);
-  void IterateOtherContainer(Container* c,FilePair* f);
+  void AttributeTreatmentInH(Atom* Attribute,FilePair* f);
+  void AttributeTreatmentInCpp(Atom* Attribute,FilePair* f,std::string Class);
+
+  void IterateOverContainer(Container* c,FilePair* f);
   FilePair* OpenFileDescriptors(std::string FileName);
 
+  std::string FunctionDeclaration(Function* f,std::string currentClass="");//If current class, we're in .cpp else, we're in .h.
+  std::string showMeThatParameterCppStyle(Parameter p);
 
   static const std::regex exprInterface;
   static const std::regex exprComponent;

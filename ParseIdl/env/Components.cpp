@@ -1,4 +1,4 @@
-#include "Components.h"
+#include "Component.h"
 
 Component::AlreadyConnected::AlreadyConnected(std::string ComponentName):errormsg(ComponentName+" is already connected."){
 }
