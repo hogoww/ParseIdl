@@ -1,4 +1,4 @@
-#! /bin/bash 
+#! /usr/bin/env bash
 
 DN="temp" 
 #Directory Name
@@ -12,6 +12,7 @@ then
     ./main $TF
     if [ "$?" == 0 ]
     then
+	cp ./env/* ./"$DN"
 	cd "./$DN"
 	make
     else

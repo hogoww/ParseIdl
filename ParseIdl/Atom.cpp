@@ -31,3 +31,7 @@ bool Atom::doIInheritFromYou(){
 std::string Atom::Declaration() const{
   return Item::Declaration()+" "+Usage;
 }
+
+const Item::ClassType Atom::whoAreYou()const{
+  return Item::Atomt;
+}

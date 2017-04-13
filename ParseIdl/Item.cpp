@@ -1,6 +1,7 @@
 #include "Item.h"
 
 
+
 /******Constructeurs:******/
 
 
@@ -53,4 +54,8 @@ std::string Item::Declaration() const{
 
 bool Item::isFunction() const{
   return false;
+}
+
+const Item::ClassType Item::whoAreYou()const{
+  return Item::Itemt;
 }

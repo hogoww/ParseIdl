@@ -119,3 +119,7 @@ std::string Function::Declaration()const{
 bool Function::isFunction() const{
   return true;
 }
+
+const Item::ClassType Function::whoAreYou()const{
+  return Item::Functiont;
+}

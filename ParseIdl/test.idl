@@ -2,8 +2,8 @@
 
 exception pouet: pr{
   provides int c;
-  uses string s;
-  attribute int e;
+  uses int s;
+  attribute bool e;
 };
 
 

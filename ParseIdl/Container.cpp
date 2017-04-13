@@ -59,3 +59,7 @@ bool Container::doIInheritFromYou(){
 std::string Container::Declaration()const{
   return Item::Declaration();
 }
+
+const Item::ClassType Container::whoAreYou()const{
+  return Item::Containert;
+}

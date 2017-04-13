@@ -24,6 +24,7 @@ class ContainerInherit : public Container{
   virtual void showMeWhatYouGot(size_t depth=0)const;
   virtual bool doIInheritFromYou();
   virtual std::string Declaration()const;
+  virtual const ClassType whoAreYou()const;
 };
 
 #endif

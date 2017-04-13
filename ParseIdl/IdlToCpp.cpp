@@ -3,7 +3,7 @@
 const std::regex IdlToCpp::exprInterface("interface",std::regex::icase|std::regex::optimize);
 const std::regex IdlToCpp::exprComponent("component",std::regex::icase|std::regex::optimize);
 const std::regex IdlToCpp::exprException("exception",std::regex::icase|std::regex::optimize);
-const std::regex IdlToCpp::exprModule("module",std::regex::icase|std::regex::optimize);
+//const std::regex IdlToCpp::exprModule("module",std::regex::icase|std::regex::optimize);
 
 
 #define SAY cout//For output like "i've done something!" , for quick debug
@@ -75,31 +75,55 @@ void IdlToCpp::ItemTreatment(Item* i,FilePair* f){
   std::smatch bogus;
   std::string name=i->getName();
   
-  if(std::regex_search(i->getType(),bogus,exprException)){
-    f=new FilePair();
-    f->connectFiles(i->getName());
-    ExceptionTreatment(static_cast<Container*>(i));
-    delete f;
-    f=NULL;
-    return;
+  switch(i->whoAreYou()){
+  case Item::Itemt:{
+    std::cerr<<i->getName()<<" wasn't traduce since it wasn't recognize while parsing (ignored)."<<std::endl;
+    break;
   }
-  // if(std::regex_search(name,bogus,exprModule)){
-  //   f=new FilePair();
-  //   f->depth++;
-  //   f->currentNamespace=name;
-  //   IdlToCpp::(Container* c,f);
-
-  //   delete f;
-  //   f=NULL;
-  //   return;
-  // }
-
-  
+  case Item::Atomt:{
+    std::cerr<<i->getName()<<" (Atome) should be in a container (ignored)!"<<std::endl;
+    break;
+  }
+  case Item::Functiont:{
+    std::cerr<<i->getName()<<" (Function) should be in a container (ignored)!"<<std::endl;
+    break;
+  }
+  case Item::Containert:{
+    if(std::regex_search(i->getType(),bogus,exprException)){
+      f=new FilePair();
+      f->connectFiles(i->getName());
+      ExceptionTreatment(static_cast<Container*>(i));
+      delete f;
+      f=NULL;
+    }
+    else{
+      std::cerr<<i->Declaration()<<" should be an exception, what didn't I recognise? :( (ignored)."<<std::endl;
+    }
+    break;
+  }
+  case Item::ContainerInheritt:{
+    if(std::regex_search(i->getType(),bogus,exprComponent)){
+      // f=new FilePair();
+      // f->connectFiles(i->getName());
+      // ExceptionTreatment(static_cast<Container*>(i));
+      // delete f;
+      // f=NULL;
+      break;
+    }
+    if(std::regex_search(i->getType(),bogus,exprInterface)){
+      // f=new FilePair();
+      // f->connectFiles(i->getName());
+      // ExceptionTreatment(static_cast<Container*>(i));
+      // delete f;
+      // f=NULL;
+      break;
+    }
+    std::cerr<<"if this isn't an Interface nor a Component, what is it? :O"<<std::endl;
+    break;
+  }
+  }
 }
 
-void moduleTreatment(Container* module,FilePair *f){
-  
-}
 
 
 
@@ -120,6 +144,7 @@ void IdlToCpp::InterfaceTreatment(Container* Interface){
 
   *f->h<<"#include <exception>\n";
   *f->h<<"#include <string>\n";
+
   //add type Controle for more inclusions 
 
 
@@ -147,7 +172,7 @@ void IdlToCpp::InterfaceTreatment(Container* Interface){
   *f->cpp<<InterfaceName<<"::"<<InterfaceName<<"(std::string errorMsg):errormsg(errorMsg){\n}\n\n";
   *f->cpp<<InterfaceName<<"::~"<<InterfaceName<<"() throw (){\n}\n\n";
   *f->cpp<<"const char* "<<InterfaceName<<"::what() const throw (){\n return errormsg.c_str();\n}\n";
-  printWhatItContainIncpp(Interface,*f);
+  printWhatItContainInCpp(Interface,f);
   delete f;
 }
 
@@ -172,6 +197,7 @@ void IdlToCpp::ExceptionTreatmentInH(Container* Exception,FilePair* f){
 
   *f->h<<"#include <exception>\n";
   *f->h<<"#include <string>\n";
+  *f->h<<"#include \"Component.h\"";
   //add type Controle for more inclusions 
 
 
@@ -187,7 +213,7 @@ void IdlToCpp::ExceptionTreatmentInH(Container* Exception,FilePair* f){
   *f->h<<"virtual ~"<<ExceptionName<<"() throw();\n";
   *f->h<<"virtual const char* what() const throw();\n";
   
-  //printWhatItContainInH(Exception,*f);
+  printWhatItContainInH(Exception,f);
     
     
   *f->h<<"};\n\n";//end class    
@@ -201,46 +227,89 @@ void IdlToCpp::ExceptionTreatmentInCpp(Container* Exception,FilePair* f){
   *f->cpp<<ExceptionName<<"::"<<ExceptionName<<"(std::string errorMsg):errormsg(errorMsg){\n}\n\n";
   *f->cpp<<ExceptionName<<"::~"<<ExceptionName<<"() throw (){\n}\n\n";
   *f->cpp<<"const char* "<<ExceptionName<<"::what() const throw (){\n return errormsg.c_str();\n}\n";
-  printWhatItContainIncpp(Exception,*f);
+  printWhatItContainInCpp(Exception,f);
 }
 
 
-void  IdlToCpp::printWhatItContainInH(Container* c,FilePair& f){
-  if(!*f.h){
+void  IdlToCpp::printWhatItContainInH(Container* c,FilePair* f){
+  if(!*f->h){
     std::cout<<"The File must be already open in printWhatItContainInH !"<<std::endl;
     std::terminate();
   }
   const std::vector<Item*> Content=c->getContent();
   std::vector<Item*>::const_iterator end=Content.cend();
   for(std::vector<Item*>::const_iterator it=Content.cbegin();it!=end;++it){
-    *f.h<<(*it)->Declaration()<<";\n";
+    switch((*it)->whoAreYou()){
+    case Item::Itemt:{
+      std::cerr<<(*it)->getName()<<" wasn't traduce since it wasn't recognize while parsing (ignored)."<<std::endl;
+      break;
+    }
+    case Item::Atomt:{
+      AttributeTreatmentInH(static_cast<Atom*>(*it),f);
+      break;
+    }
+    case Item::Functiont:{
+      FunctionTreatmentInH(static_cast<Function*>(*it),f);
+      break;
+    }
+    case Item::Containert:{
+      std::cerr<<"Traductor doesn't support inner stuff yet.( "<<(*it)->Declaration()<<" ) (ignored)"<<std::endl;
+      break;
+    }
+    case Item::ContainerInheritt:{
+      std::cerr<<"Traductor doesn't support inner stuff yet.( "<<(*it)->Declaration()<<" ) (ignored)"<<std::endl;
+      break;
+    }
+
+    }
+    *f->cpp<<"\n";
   }
-  *f.h<<"\n";
+  *f->h<<"\n";
 }
 
-void IdlToCpp::printWhatItContainIncpp(Container* c,FilePair& f){  
-  *f.cpp<<"\n";
+void IdlToCpp::printWhatItContainInCpp(Container* c,FilePair* f){  
+  *f->cpp<<"\n";
+  std::string Name=c->getName();
   const std::vector<Item*> Content=c->getContent();
   std::vector<Item*>::const_iterator end=Content.cend();
   for(std::vector<Item*>::const_iterator it=Content.cbegin();it!=end;++it){
-    if((*it)->isFunction()){
-      FunctionTreatmentInCpp(static_cast<Function*>(c));
+    switch((*it)->whoAreYou()){
+    case Item::Itemt:{
+      std::cerr<<(*it)->getName()<<" wasn't traduce since it wasn't recognize while parsing (ignored)."<<std::endl;
+      break;
     }
-    else(
+    case Item::Atomt:{
+      AttributeTreatmentInCpp(static_cast<Atom*>(*it),f,Name);
+      break;
+    }
+    case Item::Functiont:{
+      FunctionTreatmentInCpp(static_cast<Function*>(*it),f);
+      break;
+    }
+    case Item::Containert:{
+      std::cerr<<"Traductor doesn't support inner stuff yet.( "<<(*it)->Declaration()<<" ) (ignored)"<<std::endl;
+      break;
+    }
+    case Item::ContainerInheritt:{
+      std::cerr<<"Traductor doesn't support inner stuff yet.( "<<(*it)->Declaration()<<" ) (ignored)"<<std::endl;
+      break;
+    }
+
+    }
+    *f->cpp<<"\n";
   }
-  *f.cpp<<"\n";
 }
 
-void IdlToCpp::FunctionTreatmentInCpp(Function* func,FilePair f){
-  *f.cpp<<(FunctionDeclaration(func))<<"{"<<std::endl<<"Todo"<<std::endl;
+void IdlToCpp::FunctionTreatmentInCpp(Function* func,FilePair* f){
+  *f->cpp<<(FunctionDeclaration(func))<<"{"<<std::endl<<"Todo"<<std::endl;
   if(func->getType()!="void"){
-    *f.cpp<<"return "<<func->getType()<<" a;"<<std::endl;
+    *f->cpp<<"return "<<func->getType()<<" a;"<<std::endl;
   }
-  *f.cpp<<"}\n";
+  *f->cpp<<"}\n";
 }
 
-void IdlToCpp::FunctionTreatmentInH(Function* func,FilePair f){
-  *f.h<<FunctionDeclaration(func)<<";"<<std::endl;
+void IdlToCpp::FunctionTreatmentInH(Function* func,FilePair* f){
+  *f->h<<FunctionDeclaration(func)<<";"<<std::endl;
 }
 
 FilePair* IdlToCpp::OpenFileDescriptors(std::string FileName){
@@ -275,7 +344,7 @@ void IdlToCpp::GenerateBasicMakefile(){
   for(std::vector<std::string>::const_iterator it=NameFileCreated.cbegin();it!=end;++it){
     m<<*it<<".cpp ";
   }
-  m<<"main.cpp";
+  m<<" Component.cpp main.cpp";
   m<<"\n\n\n";
 
   m<<"all : $(PROGNAME)\n\n";
@@ -300,6 +369,7 @@ void IdlToCpp::GenerateBasicMain(){
 }
 
 void IdlToCpp::AttributeTreatmentInH(Atom* Attribute,FilePair* f){
+  *f->h<<std::endl;
   std::string AttribUsage=Attribute->getUsage();
   if(AttribUsage=="attribute"){
     *f->h<<Attribute->getType()<<" "<<Attribute->getName()<<";"<<std::endl;
@@ -308,8 +378,8 @@ void IdlToCpp::AttributeTreatmentInH(Atom* Attribute,FilePair* f){
 
   if(AttribUsage=="uses"){
     *f->h<<Attribute->getType()<<"* "<<Attribute->getName()<<";"<<std::endl;
-    *f->h<<"void connect_"<<Attribute->getName()<<"("<<Attribute->getType()<<"* a"<<") throw (Components::AlreadyConnected);"<<std::endl;
-    *f->h<<Attribute->getType()<<"* disconnect_"<<Attribute->getName()<<"( ) throw ( Components::NoConnection );"<<std::endl;
+    *f->h<<"void connect_"<<Attribute->getName()<<"("<<Attribute->getType()<<"* a"<<") throw (Component::AlreadyConnected);"<<std::endl;
+    *f->h<<Attribute->getType()<<"* disconnect_"<<Attribute->getName()<<"() throw ( Component::NoConnection );"<<std::endl;
     *f->h<<Attribute->getType()<<"* get_connection_"<<Attribute->getName()<<"() const;"<<std::endl;
     return;
   }
@@ -336,6 +406,7 @@ void IdlToCpp::AttributeTreatmentInH(Atom* Attribute,FilePair* f){
 }
 
 void IdlToCpp::AttributeTreatmentInCpp(Atom* Attribute,FilePair* f,std::string Class){
+  *f->cpp<<std::endl;
   std::string AttribUsage=Attribute->getUsage();
   if(AttribUsage=="attribute"){
     //Nothing to do there. Maybe add in a constructor down the way...
@@ -344,30 +415,31 @@ void IdlToCpp::AttributeTreatmentInCpp(Atom* Attribute,FilePair* f,std::string C
   }
 
   if(AttribUsage=="uses"){
-    *f->cpp<<"void connect_"<<Attribute->getName()<<"("<<Attribute->getType()<<"* a"<<") throw ( Components::AlreadyConnected ){"<<std::endl;
+    *f->cpp<<"void "<<Class<<"::connect_"<<Attribute->getName()<<"("<<Attribute->getType()<<"* a"<<") throw ( Component::AlreadyConnected ){"<<std::endl;
     *f->cpp<<"if(a){"<<std::endl;
-    *f->cpp<<" throw AlreadyConnected("<<Attribute->getName()<<");"<<std::endl;
+    *f->cpp<<" throw Component::AlreadyConnected(\""<<Attribute->getName()<<"\");"<<std::endl;
     *f->cpp<<"}"<<std::endl;
     *f->cpp<<"else{"<<std::endl;
-    *f->cpp<<Attribute->getName()<<"=a;"<<std::endl;
+    *f->cpp<<"this->"<<Attribute->getName()<<"=a;"<<std::endl;
     *f->cpp<<"}"<<std::endl;
     *f->cpp<<"}"<<std::endl;
 
     *f->cpp<<std::endl;
 
-    *f->cpp<<Attribute->getType()<<"* disconnect_"<<Attribute->getName()<<"( ) throw ( Components::NoConnection ){";
-    *f->cpp<<"if(a){"<<std::endl;
-    *f->cpp<<Attribute->getName()<<"=NULL;"<<std::endl;
+    *f->cpp<<Attribute->getType()<<"* "<<Class<<"::disconnect_"<<Attribute->getName()<<"() throw ( Component::NoConnection ){";
+    *f->cpp<<"if(s){"<<std::endl;
+    *f->cpp<<"this->"<<Attribute->getName()<<"=NULL;"<<std::endl;
     *f->cpp<<"}"<<std::endl;
     *f->cpp<<"else{"<<std::endl;
-    *f->cpp<<" throw NoConnection("<<Attribute->getName()<<");"<<std::endl;
+    *f->cpp<<" throw Component::NoConnection(\""<<Attribute->getName()<<"\");"<<std::endl;
     *f->cpp<<"}"<<std::endl;
     *f->cpp<<"}"<<std::endl;
 
     *f->cpp<<std::endl;
 
-    *f->cpp<<Attribute->getType()<<"* get_connection_"<<Attribute->getName()<<"() const;"<<std::endl;
-    *f->cpp<<"return "<<Attribute->getName()<<";"<<std::endl;
+    *f->cpp<<Attribute->getType()<<"* "<<Class<<"::get_connection_"<<Attribute->getName()<<"() const{"<<std::endl;
+    *f->cpp<<"return "<<"this->"<<Attribute->getName()<<";"<<std::endl;
+    *f->cpp<<"}"<<std::endl;
     return;
   }
 

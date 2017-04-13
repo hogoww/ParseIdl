@@ -83,3 +83,7 @@ bool ContainerInherit::doIInheritFromYou(){
   }
   return false;
 }
+
+const Item::ClassType ContainerInherit::whoAreYou()const{
+  return Item::ContainerInheritt;
+}

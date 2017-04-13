@@ -28,6 +28,7 @@ class Function : public Item{
   virtual void showMeWhatYouGot(size_t depth=0)const;
   virtual std::string Declaration()const;
   virtual bool isFunction() const;
+  virtual const ClassType whoAreYou()const;
 };
 
 #endif
