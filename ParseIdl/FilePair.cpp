@@ -27,11 +27,19 @@ FilePair& FilePair::operator=(const FilePair& other){
 }
 
 
-void FilePair::connectFiles(std::string filename){
+void FilePair::connectFiles(std::string filename,bool isInterface){
+  if(fileName.empty())
+    fileName=filename;
   std::string hFileName;
   hFileName=directoryName+"/"+filename+".h";
   std::string cppFileName;
   cppFileName=directoryName+"/"+filename+".cpp";
   h->open(hFileName.c_str()); 
   cpp->open(cppFileName.c_str()); 
+}
+
+void FilePair::deleteCpp(){
+  std::string cppFileName;
+  cppFileName=directoryName+"/"+fileName+".cpp";
+  std::remove(cppFileName.c_str());
 }

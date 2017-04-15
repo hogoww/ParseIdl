@@ -5,6 +5,7 @@
 #include <fstream>
 #include <iostream>
 
+
 class FilePair{
  public:
   std::string fileName;
@@ -14,11 +15,13 @@ class FilePair{
   int depth;
   std::string currentNamespace;
 
-  void connectFiles(std::string filename);
+  void connectFiles(std::string filename,bool isInterface=false);
+  void deleteCpp();
 
   FilePair(std::string filename="",int currentdepth=0,std::string Namespace="",std::string directoryName="");
   ~FilePair();
   FilePair& operator=(const FilePair& other);
+
 };
 
 #endif

@@ -1,9 +1,19 @@
 #include something
 
-exception pouet: pr{
+component pouet: pr{
   provides int c;
   uses int s;
   attribute bool e;
+  int smth(in bool e) raises ();
+};
+
+
+
+exception car: pr{
+  provides int caze;
+  uses int sze;
+  attribute bool eac;
+  int smteahasa(inout bool e) raises ();
 };
 
 

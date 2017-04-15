@@ -1,7 +1,7 @@
 CC = g++
 PROGNAME = main
 FLAGS = -Wall -ansi -pedantic
-SOURCES = pouet.cpp  Component.cpp main.cpp
+SOURCES = pouet.cpp car.cpp  Component.cpp main.cpp
 
 
 all : $(PROGNAME)

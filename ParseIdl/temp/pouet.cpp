@@ -1,17 +1,8 @@
 
 
 
+
 #include "pouet.h"
-
-pouet::pouet(std::string errorMsg):errormsg(errorMsg){
-}
-
-pouet::~pouet() throw (){
-}
-
-const char* pouet::what() const throw (){
- return errormsg.c_str();
-}
 
 
 
@@ -25,7 +16,8 @@ this->s=a;
 }
 }
 
-int* pouet::disconnect_s() throw ( Component::NoConnection ){if(s){
+int* pouet::disconnect_s() throw ( Component::NoConnection ){
+if(s){
 this->s=NULL;
 }
 else{
@@ -38,4 +30,10 @@ return this->s;
 }
 
 
+
+int pouet::smth(bool e){
+//Todo
+int tempReturn;
+return tempReturn;
+}
 
