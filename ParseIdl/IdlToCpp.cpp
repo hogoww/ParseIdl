@@ -86,7 +86,7 @@ void IdlToCpp::ItemTreatment(Item* i,FilePair* f){
   }
   case Item::Functiont:{
     std::cerr<<i->getName()<<" (Function) should be in a container (ignored)!\n";
-    break;
+   break;
   }
   case Item::Containert:{
     if(std::regex_search(i->getType(),bogus,exprException)){

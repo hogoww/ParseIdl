@@ -11,18 +11,22 @@ const std::regex Parameter::exprInOut("InOut",std::regex::icase|std::regex::opti
 /* constructeurs public*/
 Parameter::Parameter(std::string name,std::string type,std::string typeparam):Item(name,type){
   std::smatch bogus;
-  if(std::regex_search(typeparam,bogus,exprIn))
-    t=TypeParam::In;
-  else
+  if(std::regex_search(typeparam,bogus,exprInOut)){
+    t=TypeParam::InOut;
+  }
+  else{
     if(std::regex_search(typeparam,bogus,exprOut))
       t=TypeParam::Out;
-    else
-      if(std::regex_search(typeparam,bogus,exprInOut))
-	t=TypeParam::InOut;
+    else{
+      if(std::regex_search(typeparam,bogus,exprIn)){
+	t=TypeParam::In;
+      }
       else{
 	std::cerr<<typeparam<<"isn't a parameter type for "<<name<<" "<<type<<std::endl;
 	std::terminate();
       }
+    }
+  }
 }
 
 

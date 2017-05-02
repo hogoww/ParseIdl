@@ -1,60 +1,25 @@
-#include something
+#include truc
+//#include includeTest.idl
+#include pouet.idl
+#import test2.idl
+#include test.idl
 
-component pouet: pr{
-  provides int c;
-  uses int s;
-  attribute bool e;
-  int smth(in bool e) raises ();
+component Philosopher : pouet {
+  attribute bool name;
+  // The left fork receptacle.
+  uses int left;
+  // The right fork receptacle.
+  uses int right;
+// The status info event source.
+publishes StatusInfo info;
+exception InUse {};
+void get() raises (/* InUse,anotherOne*/);
+void release(in int p, out int f , inout int e);
 };
 
 
-
-exception car: pr{
-  provides int caze;
-  uses int sze;
-  attribute bool eac;
-  int smteahasa(inout bool e) raises ();
+// Le composant
+component ForkManager {
+  // Facette utilisé par les phisolphes.
+  provides Fork the_fork;
 };
-
-
-
-// #include truc
-// //#include includeTest.idl
-// #include pouet.idl
-// #import test2.idl
-// #include test.idl
-
-// component Philosopher : pouet {
-
-//   attribute string name;
-
-//   // The left fork receptacle.
-
-//   uses Fork left;
-
-//   // The right fork receptacle.
-
-//   uses Fork right;
-
-//   // The status info event source.
-
-//   /* re*eoihtr
-//      ert*/
-
-//   publishes StatusInfo info;
-
-//   interface Fork {
-
-//     exception InUse {};
-
-//     void get() raises (InUse,anotherOne);
-//     void release(in int p, out p f , inout e);
-//   };
-// };
-
-
-// // Le composant
-// component ForkManager {
-//   // Facette utilisé par les phisolphes.
-//   provides Fork the_fork;
-// };
