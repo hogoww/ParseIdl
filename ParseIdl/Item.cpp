@@ -1,5 +1,5 @@
 #include "Item.h"
-
+#define MY_TYPE 0
 
 
 /******Constructeurs:******/
@@ -52,10 +52,6 @@ std::string Item::Declaration() const{
   return s;
 }
 
-bool Item::isFunction() const{
-  return false;
-}
-
-const Item::ClassType Item::whoAreYou()const{
-  return Item::Itemt;
+const int Item::whoAreYou()const{
+  return MY_TYPE;
 }

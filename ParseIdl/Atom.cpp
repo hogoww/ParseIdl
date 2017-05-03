@@ -1,5 +1,5 @@
 #include "Atom.h"
-
+#define MY_TYPE 1
 
 /******Constructeurs:******/
 
@@ -32,6 +32,6 @@ std::string Atom::Declaration() const{
   return Item::Declaration()+" "+Usage;
 }
 
-const Item::ClassType Atom::whoAreYou()const{
-  return Item::Atomt;
+const int Atom::whoAreYou()const{
+  return MY_TYPE;
 }

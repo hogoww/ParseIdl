@@ -11,7 +11,6 @@ class Item{
   std::string Type;
  
  public:
-  enum ClassType{Itemt,Atomt,Containert,ContainerInheritt,Functiont};
   Item(std::string name,std::string type);
   virtual ~Item();
   virtual const std::string getType() const;
@@ -20,8 +19,7 @@ class Item{
   virtual bool doIInheritFromYou();//Only does things in containers class.
   virtual std::string Declaration() const;
   std::string getDepth(size_t depth) const;
-  virtual const ClassType whoAreYou()const;
-  virtual bool isFunction() const;
+  virtual const int whoAreYou()const;
 };
 
 #endif

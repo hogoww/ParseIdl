@@ -29,7 +29,8 @@ $(PROGNAME) : $(SOURCE:.cpp=.o)
 
 clean :
 	@rm -f $(PROGNAME) *.o *~ *.h.gch *\#
-	@ls 
+	@ls
+	@rm -f ./temp/*
 
 cc:
 	@rm -f $(PROGNAME) *.o *~ *.h.gch *\#

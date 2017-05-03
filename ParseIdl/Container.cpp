@@ -1,5 +1,6 @@
 #include "Container.h"
 
+#define MY_TYPE 3
 
 /******Constructeurs:******/
 
@@ -60,6 +61,6 @@ std::string Container::Declaration()const{
   return Item::Declaration();
 }
 
-const Item::ClassType Container::whoAreYou()const{
-  return Item::Containert;
+const int Container::whoAreYou()const{
+  return MY_TYPE;
 }

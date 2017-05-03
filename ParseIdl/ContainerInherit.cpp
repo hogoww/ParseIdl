@@ -1,5 +1,7 @@
 #include "ContainerInherit.h"
-#include <unistd.h>
+
+#define MY_TYPE 4
+
 
 const std::regex ContainerInherit::exprInheritSomething(":",std::regex::optimize);
 const std::regex ContainerInherit::exprInherit("^ ?(\\w+),?",std::regex::optimize);
@@ -84,6 +86,6 @@ bool ContainerInherit::doIInheritFromYou(){
   return false;
 }
 
-const Item::ClassType ContainerInherit::whoAreYou()const{
-  return Item::ContainerInheritt;
+const int ContainerInherit::whoAreYou()const{
+  return MY_TYPE;
 }

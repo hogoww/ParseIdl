@@ -76,19 +76,19 @@ void IdlToCpp::ItemTreatment(Item* i,FilePair* f){
   std::string name=i->getName();
   
   switch(i->whoAreYou()){
-  case Item::Itemt:{
+  case 0:{//Item
     std::cerr<<i->getName()<<" wasn't traduce since it wasn't recognize while parsing (ignored).\n";
     break;
   }
-  case Item::Atomt:{
+  case 1:{//Atom
     std::cerr<<i->getName()<<" (Atome) should be in a container (ignored)!\n";
     break;
   }
-  case Item::Functiont:{
+  case 2:{//function
     std::cerr<<i->getName()<<" (Function) should be in a container (ignored)!\n";
    break;
   }
-  case Item::Containert:{
+  case 3:{//Container
     if(std::regex_search(i->getType(),bogus,exprException)){
       ExceptionTreatment(static_cast<Container*>(i));
     }
@@ -97,7 +97,7 @@ void IdlToCpp::ItemTreatment(Item* i,FilePair* f){
     }
     break;
   }
-  case Item::ContainerInheritt:{
+  case 4:{//ContainerInherit
     if(std::regex_search(i->getType(),bogus,exprComponent)){
       ComponentTreatment(static_cast<ContainerInherit*>(i));
       break;
@@ -227,23 +227,23 @@ void  IdlToCpp::printWhatItContainInH(Container* c,FilePair* f,bool isInterface)
   std::vector<Item*>::const_iterator end=Content.cend();
   for(std::vector<Item*>::const_iterator it=Content.cbegin();it!=end;++it){
     switch((*it)->whoAreYou()){
-    case Item::Itemt:{
+    case 0:{//Item
       std::cerr<<(*it)->getName()<<" wasn't traduce since it wasn't recognize while parsing (ignored).\n";
       break;
     }
-    case Item::Atomt:{
+    case 1:{//atom
       AttributeTreatmentInH(static_cast<Atom*>(*it),f,isInterface);
       break;
     }
-    case Item::Functiont:{
+    case 2:{//Function
       FunctionTreatmentInH(static_cast<Function*>(*it),f,isInterface);
       break;
     }
-    case Item::Containert:{
+    case 3:{//Container
       std::cerr<<"Traductor doesn't support inner stuff yet.( "<<(*it)->Declaration()<<" ) (ignored)\n";
       break;
     }
-    case Item::ContainerInheritt:{
+    case 4:{//ContainerInherit
       std::cerr<<"Traductor doesn't support inner stuff yet.( "<<(*it)->Declaration()<<" ) (ignored)\n";
       break;
     }
@@ -261,23 +261,23 @@ void IdlToCpp::printWhatItContainInCpp(Container* c,FilePair* f,bool isInterface
   std::vector<Item*>::const_iterator end=Content.cend();
   for(std::vector<Item*>::const_iterator it=Content.cbegin();it!=end;++it){
     switch((*it)->whoAreYou()){
-    case Item::Itemt:{
+    case 0:{//item
       std::cerr<<(*it)->getName()<<" wasn't traduce since it wasn't recognize while parsing (ignored).\n";
       break;
     }
-    case Item::Atomt:{
+    case 1:{//atom
       AttributeTreatmentInCpp(static_cast<Atom*>(*it),f,Name);
       break;
     }
-    case Item::Functiont:{
+    case 2:{//function
       FunctionTreatmentInCpp(static_cast<Function*>(*it),f,c->getName());
       break;
     }
-    case Item::Containert:{
+    case 3:{//container
       std::cerr<<"Traductor doesn't support inner stuff yet.( "<<(*it)->Declaration()<<" ) (ignored)\n";
       break;
     }
-    case Item::ContainerInheritt:{
+    case 4:{//ContainerInherit
       std::cerr<<"Traductor doesn't support inner stuff yet.( "<<(*it)->Declaration()<<" ) (ignored)\n";
       break;
     }

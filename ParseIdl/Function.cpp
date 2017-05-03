@@ -1,5 +1,6 @@
 #include "Function.h"
 
+#define MY_TYPE 2
 
 //avoid multiple exact same thing
 const std::regex Function::exprParam("^\\((.*?)\\)",std::regex::optimize);
@@ -116,10 +117,6 @@ std::string Function::Declaration()const{
   return res;
 }
 
-bool Function::isFunction() const{
-  return true;
-}
-
-const Item::ClassType Function::whoAreYou()const{
-  return Item::Functiont;
+const int Function::whoAreYou()const{
+  return MY_TYPE;
 }
