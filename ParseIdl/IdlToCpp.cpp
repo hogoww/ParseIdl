@@ -71,7 +71,7 @@ void IdlToCpp::IterateOverContainer(Container* c,FilePair* f){//Shouldn't be use
 }
 
 void IdlToCpp::ItemTreatment(Item* i,FilePair* f){
-  std::SAY<<"i'm treating an item"<<std::endl;
+  //std::SAY<<"i'm treating an item"<<std::endl;
   std::smatch bogus;
   std::string name=i->getName();
   
@@ -86,7 +86,7 @@ void IdlToCpp::ItemTreatment(Item* i,FilePair* f){
   }
   case 2:{//function
     std::cerr<<i->getName()<<" (Function) should be in a container (ignored)!\n";
-   break;
+    break;
   }
   case 3:{//Container
     if(std::regex_search(i->getType(),bogus,exprException)){
@@ -120,7 +120,7 @@ std::string toUpper(std::string s){//Just to be more legible
 }
 
 void IdlToCpp::InterfaceTreatment(Container* Interface){
-  std::SAY<<"i'm creating an Interface file!"<<std::endl;
+  //std::SAY<<"i'm creating an Interface file!"<<std::endl;
   std::string InterfaceName=Interface->getName();
   FilePair* f=OpenFileDescriptors(InterfaceName,true);
   InterfaceTreatmentInH(Interface,f);
@@ -149,7 +149,6 @@ void IdlToCpp::InterfaceTreatmentInH(Container* Interface,FilePair* f){
   *f->h<<"class "<<InterfaceName<<"{\n";//start class
 
   //class
-  *f->h<<"public:\n";
   printWhatItContainInH(Interface,f,true);
   *f->h<<"};\n"<<"\n";//end class    
   *f->h<<"#endif";//end multidefinitionControl
@@ -164,7 +163,7 @@ void IdlToCpp::InterfaceTreatmentInCpp(Container* Interface,FilePair* f){
 }
 
 void IdlToCpp::ExceptionTreatment(Container* Exception){
-  std::SAY<<"i'm creating an Exception file!"<<std::endl;
+  //std::SAY<<"i'm creating an Exception file!"<<std::endl;
   // FilePair f;
   // f.connectFiles(ExceptionName);
   FilePair* f=OpenFileDescriptors(Exception->getName());
@@ -184,7 +183,7 @@ void IdlToCpp::ExceptionTreatmentInH(Container* Exception,FilePair* f){
 
   *f->h<<"#include <exception>\n";
   *f->h<<"#include <string>\n";
-  *f->h<<"#include \"Component.h\"\n";
+  // *f->h<<"#include \"Component.h\"\n";
   //add type Controle for more inclusions 
 
 
@@ -210,17 +209,17 @@ void IdlToCpp::ExceptionTreatmentInH(Container* Exception,FilePair* f){
 void IdlToCpp::ExceptionTreatmentInCpp(Container* Exception,FilePair* f){
   std::string ExceptionName=Exception->getName();
 
-  *f->cpp<<"#include \""<<ExceptionName<<".h\"\n";
-  *f->cpp<<ExceptionName<<"::"<<ExceptionName<<"(std::string errorMsg):errormsg(errorMsg){\n"<<"}\n";
-  *f->cpp<<ExceptionName<<"::~"<<ExceptionName<<"() throw (){\n"<<"}\n";
-  *f->cpp<<"const char* "<<ExceptionName<<"::what() const throw (){\n"<<" return errormsg.c_str();}\n";
+  *f->cpp<<"#include \""<<ExceptionName<<".h\"\n\n";
+  *f->cpp<<ExceptionName<<"::"<<ExceptionName<<"(std::string errorMsg):errormsg(errorMsg){\n"<<"}\n\n";
+  *f->cpp<<ExceptionName<<"::~"<<ExceptionName<<"() throw (){\n"<<"}\n\n";
+  *f->cpp<<"const char* "<<ExceptionName<<"::what() const throw (){\n"<<" return errormsg.c_str();\n}\n\n";
   printWhatItContainInCpp(Exception,f);
 }
 
 
 void  IdlToCpp::printWhatItContainInH(Container* c,FilePair* f,bool isInterface){
   if(!*f->h){
-    std::cout<<"The File must be already open in printWhatItContainInH !\n";
+    std::cerr<<"The File must be already open in printWhatItContainInH !\n";
     std::terminate();
   }
   const std::vector<Item*> Content=c->getContent();
@@ -228,7 +227,7 @@ void  IdlToCpp::printWhatItContainInH(Container* c,FilePair* f,bool isInterface)
   for(std::vector<Item*>::const_iterator it=Content.cbegin();it!=end;++it){
     switch((*it)->whoAreYou()){
     case 0:{//Item
-      std::cerr<<(*it)->getName()<<" wasn't traduce since it wasn't recognize while parsing (ignored).\n";
+      std::cerr<<(*it)->getName()<<" wasn't translated since it wasn't recognize while parsing (ignored).\n";
       break;
     }
     case 1:{//atom
@@ -236,6 +235,7 @@ void  IdlToCpp::printWhatItContainInH(Container* c,FilePair* f,bool isInterface)
       break;
     }
     case 2:{//Function
+      *f->h<<"public:\n";
       FunctionTreatmentInH(static_cast<Function*>(*it),f,isInterface);
       break;
     }
@@ -262,7 +262,7 @@ void IdlToCpp::printWhatItContainInCpp(Container* c,FilePair* f,bool isInterface
   for(std::vector<Item*>::const_iterator it=Content.cbegin();it!=end;++it){
     switch((*it)->whoAreYou()){
     case 0:{//item
-      std::cerr<<(*it)->getName()<<" wasn't traduce since it wasn't recognize while parsing (ignored).\n";
+      std::cerr<<(*it)->getName()<<" wasn't translate since it wasn't recognize while parsing (ignored).\n";
       break;
     }
     case 1:{//atom
@@ -297,7 +297,7 @@ void IdlToCpp::FunctionTreatmentInCpp(Function* func,FilePair* f,std::string Cla
 }
 
 void IdlToCpp::FunctionTreatmentInH(Function* func,FilePair* f,bool isInterface){
-  *f->h<<FunctionDeclaration(func)<<(isInterface?"=0":"")<<";\n";
+  *f->h<<(isInterface?"virtual ":"")<<FunctionDeclaration(func)<<(isInterface?"=0":"")<<";\n";
 }
 
 FilePair* IdlToCpp::OpenFileDescriptors(std::string FileName,bool isInterface){
@@ -365,7 +365,13 @@ void IdlToCpp::AttributeTreatmentInH(Atom* Attribute,FilePair* f,bool isInterfac
       std::cerr<<"There shouldn't be any attribute types of attributes inside an interface ("<<Attribute->Declaration()<<").\n";
     }
     else{
+      *f->h<<"private:\n";
       *f->h<<Attribute->getType()<<" "<<Attribute->getName()<<";\n";
+      
+      //accesseurs simples
+      *f->h<<"public:\n";
+      *f->h<<"void set"<<Attribute->getName()<<"("<<Attribute->getType()<<" a);\n";
+      *f->h<<Attribute->getType()<<" get"<<Attribute->getName()<<"();\n";
       return;
     }
   }
@@ -374,7 +380,13 @@ void IdlToCpp::AttributeTreatmentInH(Atom* Attribute,FilePair* f,bool isInterfac
       std::cerr<<"There shouldn't be any uses types of attributes inside an interface ("<<Attribute->Declaration()<<").\n";
     }
     else{
+      *f->h<<"private:\n";
       *f->h<<Attribute->getType()<<"* "<<Attribute->getName()<<";\n";
+
+      //accesseurs simples
+      *f->h<<"public:\n";
+      *f->h<<"void set"<<Attribute->getName()<<"("<<Attribute->getType()<<"* a);\n";
+      *f->h<<Attribute->getType()<<"* get"<<Attribute->getName()<<"();\n";
       *f->h<<"void connect_"<<Attribute->getName()<<"("<<Attribute->getType()<<"* a"<<") throw (Component::AlreadyConnected);\n";
       *f->h<<Attribute->getType()<<"* disconnect_"<<Attribute->getName()<<"() throw ( Component::NoConnection );\n";
       *f->h<<Attribute->getType()<<"* get_connection_"<<Attribute->getName()<<"() const;\n";
@@ -411,9 +423,15 @@ void IdlToCpp::AttributeTreatmentInCpp(Atom* Attribute,FilePair* f,std::string C
     }
     else{
     }
-    //Nothing to do there. Maybe add in a constructor down the way...
-    //*f->h<<Attribute->getType()<<" "<<AttribUsage<<";\n";
-    return;
+      *f->cpp<<"void "<<Class<<"::set"<<Attribute->getName()<<"("<<Attribute->getType()<<" a){\n";
+      *f->cpp<<"this->"<<Attribute->getName()<<"=a;\n";
+      *f->cpp<<"}\n\n";
+
+
+      *f->cpp<<Attribute->getType()<<" "<<Class<<"::get"<<Attribute->getName()<<"(){\n";
+      *f->cpp<<"return this->"<<Attribute->getName()<<";\n";
+      *f->cpp<<"}\n\n";
+      return;
   }
 
   if(AttribUsage=="uses"){
@@ -421,6 +439,15 @@ void IdlToCpp::AttributeTreatmentInCpp(Atom* Attribute,FilePair* f,std::string C
       std::cerr<<"There shouldn't be any uses types of attributes inside an interface ("<<Attribute->Declaration()<<").\n";
     }
     else{
+      *f->cpp<<"void "<<Class<<"::set"<<Attribute->getName()<<"("<<Attribute->getType()<<"* a){\n";
+      *f->cpp<<"this->"<<Attribute->getName()<<"=a;\n";
+      *f->cpp<<"}\n\n";
+
+
+      *f->cpp<<Attribute->getType()<<"* "<<Class<<"::get"<<Attribute->getName()<<"(){\n";
+      *f->cpp<<"return this->"<<Attribute->getName()<<";\n";
+      *f->cpp<<"}\n\n";
+
       *f->cpp<<"void "<<Class<<"::connect_"<<Attribute->getName()<<"("<<Attribute->getType()<<"* a"<<") throw ( Component::AlreadyConnected ){\n";
       *f->cpp<<"if("<<Attribute->getName()<<"){\n";
       *f->cpp<<" throw Component::AlreadyConnected(\""<<Attribute->getName()<<"\");\n";
@@ -493,7 +520,7 @@ std::string IdlToCpp::FunctionDeclaration(Function* f,std::string currentClass){
   
   if(Exception.size()){//forcement une
     std::vector<std::string>::const_iterator end=Exception.cend();
-    res+=" raises ("+*Exception.begin();
+    res+=" throw ("+*Exception.begin();
     for(std::vector<std::string>::const_iterator it=++Exception.cbegin();it!=end;++it) {
       res+=", "+*it;
     }
@@ -528,7 +555,7 @@ std::string IdlToCpp::showMeThatParameterCppStyle(Parameter p){
 
 
 void IdlToCpp::ComponentTreatment(Container* Component){
-  std::SAY<<"i'm creating an Component file!"<<std::endl;
+  //std::SAY<<"i'm creating an Component file!"<<std::endl;
   // FilePair f;
   // f.connectFiles(ComponentName);
   FilePair* f=OpenFileDescriptors(Component->getName());
@@ -556,7 +583,6 @@ void IdlToCpp::ComponentTreatmentInH(Container* Component,FilePair* f){
   *f->h<<"class "<<ComponentName<<"{\n";//start class
 
   //class
-  *f->h<<"public:\n";
   
   printWhatItContainInH(Component,f);
     
@@ -571,3 +597,4 @@ void IdlToCpp::ComponentTreatmentInCpp(Container* Component,FilePair* f){
   *f->cpp<<"#include \""<<ComponentName<<".h\"\n";
   printWhatItContainInCpp(Component,f);
 }
+ 

@@ -5,23 +5,24 @@
 #include "Component.h"
 
 class Philosopher{
-public:
+ private:
+  std::string name;
+  Fork_Item* left;
+  Fork_Item* right;
 
-bool name;
-
-int* left;
-void connect_left(int* a) throw (Component::AlreadyConnected);
-int* disconnect_left() throw ( Component::NoConnection );
-int* get_connection_left() const;
-
-int* right;
-void connect_right(int* a) throw (Component::AlreadyConnected);
-int* disconnect_right() throw ( Component::NoConnection );
-int* get_connection_right() const;
-
-void get();
-void release(int p, int& f, int& e);
+ public:
+  void setname(std::string a);
+  std::string getname();
+  void setleft(Fork_Item* a);
+  Fork_Item* getleft();
+  void connect_left(Fork_Item* a) throw (Component::AlreadyConnected);
+  Fork_Item* disconnect_left() throw ( Component::NoConnection );
+  Fork_Item* get_connection_left() const;
+  void setright(Fork_Item* a);
+  Fork_Item* getright();
+  void connect_right(Fork_Item* a) throw (Component::AlreadyConnected);
+  Fork_Item* disconnect_right() throw ( Component::NoConnection );
+  Fork_Item* get_connection_right() const;
 
 };
-
 #endif

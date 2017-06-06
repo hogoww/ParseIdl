@@ -1,0 +1,16 @@
+#include <iostream>
+#include <fstream>
+#include "Parser.h"
+
+using namespace std;
+
+int main() {
+	// Rajouter commentaires dans Idl.g
+	ifstream file;
+	file.open("Idl.g");
+	Parser p;
+	p.init(file);
+
+	file.close();
+	return 0;
+}

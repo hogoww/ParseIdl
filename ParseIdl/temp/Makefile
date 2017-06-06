@@ -1,7 +1,7 @@
 CC = g++
 PROGNAME = main
 FLAGS = -Wall -ansi -pedantic
-SOURCES = Philosopher.cpp ForkManager.cpp  Component.cpp main.cpp
+SOURCES = InUse.cpp Fork_Item.cpp Philosopher.cpp  Component.cpp main.cpp
 
 
 all : $(PROGNAME)

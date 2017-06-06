@@ -1,25 +1,16 @@
-#include truc
-//#include includeTest.idl
-#include pouet.idl
-#import test2.idl
-#include test.idl
+exception InUse{};
 
-component Philosopher : pouet {
-  attribute bool name;
-  // The left fork receptacle.
-  uses int left;
-  // The right fork receptacle.
-  uses int right;
-// The status info event source.
-publishes StatusInfo info;
-exception InUse {};
-void get() raises (/* InUse,anotherOne*/);
-void release(in int p, out int f , inout int e);
+interface Fork{
+  void get() raises (InUse);
+  void release();
 };
 
-
-// Le composant
-component ForkManager {
-  // Facette utilisé par les phisolphes.
+component Fork_Item{
   provides Fork the_fork;
+};
+
+component Philosopher{
+  attribute string  name;
+  uses Fork_Item left;
+  uses Fork_Item right;
 };

@@ -14,7 +14,8 @@ class FilePair{
   static std::string directoryName;
   int depth;
   std::string currentNamespace;
-
+  bool interface;
+  
   void connectFiles(std::string filename,bool isInterface=false);
   void deleteCpp();
 

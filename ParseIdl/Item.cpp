@@ -7,6 +7,8 @@
 
 /* constructeurs public*/
 Item::Item(std::string name,std::string type):Name(name),Type(type){
+  if(Type=="string")
+    Type="std::"+Type;
 }
 
 Item::~Item(){

@@ -1,0 +1,3011 @@
+ID
+DIGIT
+CHARLIT
+STRLIT
+specification
+import_decl
+definition
+type_decl
+const_decl
+except_decl
+interface_or_forward_decl
+module
+value
+type_id_decl
+type_prefix_decl
+event
+component
+home_decl
+interface_decl
+forward_decl
+interface_header
+interface_body
+interface_inheritance_spec
+export
+attr_decl
+op_decl
+interface_name
+scoped_name
+value_decl
+value_abs_decl
+value_box_decl
+value_forward_decl
+type_spec
+value_inheritance_spec
+value_header
+value_element
+value_name
+state_member
+init_decl
+declarators
+init_param_decls
+raises_expr
+init_param_decl
+init_param_attribute
+param_type_spec
+simple_declarator
+const_type
+const_exp
+integer_type
+char_type
+wide_char_type
+boolean_type
+floating_pt_type
+string_type
+wide_string_type
+fixed_pt_const_type
+octet_type
+or_expr
+xor_expr
+and_expr
+shift_expr
+add_expr
+mult_expr
+unary_expr
+unary_operator
+primary_expr
+literal
+INTEGER_LITERAL
+WIDE_STRING_LITERAL
+WIDE_CHARACTER_LITERAL
+FIXED_PT_LITERAL
+FLOATING_PT_LITERAL
+BOOLEAN_LITERAL
+positive_int_const
+type_declarator
+struct_type
+union_type
+enum_type
+constr_forward_decl
+simple_type_spec
+constr_type_spec
+base_type_spec
+template_type_spec
+any_type
+object_type
+value_base_type
+sequence_type
+fixed_pt_type
+declarator
+complex_declarator
+array_declarator
+signed_int
+unsigned_int
+signed_short_int
+signed_long_int
+signed_longlong_int
+unsigned_short_int
+unsigned_long_int
+unsigned_longlong_int
+member_list
+member
+switch_type_spec
+switch_body
+case_stmt
+case_label
+element_spec
+enumerator
+fixed_array_size
+readonly_attr_spec
+attr_spec
+op_attribute
+op_type_spec
+parameter_decls
+context_expr
+param_decl
+param_attribute
+imported_scope
+readonly_attr_declarator
+attr_declarator
+attr_raises_expr
+get_excep_expr
+set_excep_expr
+exception_list
+component_decl
+component_forward_decl
+component_header
+component_body
+component_inheritance_spec
+supported_interface_spec
+component_export
+provides_decl
+uses_decl
+emits_decl
+publishes_decl
+consumes_decl
+interface_type
+home_header
+home_body
+home_inheritance_spec
+primary_key_spec
+home_export
+factory_decl
+finder_decl
+event_decl
+event_abs_decl
+event_forward_decl
+event_header
+INTEGER_TYPE_SUFFIX
+EXPONENT
+FLOAT_TYPE_SUFFIX
+
+
+
+
+% : mult_expr
+& : and_expr
+( : finder_decl factory_decl exception_list context_expr raises_expr parameter_decls parameter_decls union_type primary_expr init_decl
+) : finder_decl factory_decl exception_list context_expr raises_expr parameter_decls parameter_decls union_type primary_expr init_decl
+* : mult_expr
++ : EXPONENT unary_operator add_expr
+, : supported_interface_spec exception_list attr_declarator readonly_attr_declarator fixed_pt_type context_expr raises_expr parameter_decls sequence_type enum_type declarators init_param_decls value_inheritance_spec value_inheritance_spec interface_inheritance_spec
+- : EXPONENT unary_operator add_expr
+. : FLOATING_PT_LITERAL FLOATING_PT_LITERAL
+/ : mult_expr
+: : home_inheritance_spec component_inheritance_spec case_label case_label value_inheritance_spec interface_inheritance_spec
+:: : scoped_name scoped_name
+; : home_export home_export component_export component_export component_export component_export component_export component_export import_decl case_stmt member init_decl state_member export export export export export export export definition definition definition definition definition definition definition definition definition definition definition
+< : fixed_pt_type wide_string_type string_type sequence_type sequence_type
+<< : shift_expr
+= : const_decl
+> : fixed_pt_type wide_string_type string_type sequence_type sequence_type
+>> : shift_expr
+D : FLOAT_TYPE_SUFFIX
+E : EXPONENT
+F : FLOAT_TYPE_SUFFIX
+FALSE : BOOLEAN_LITERAL
+L : WIDE_STRING_LITERAL WIDE_CHARACTER_LITERAL INTEGER_TYPE_SUFFIX
+Object : interface_type object_type
+TRUE : BOOLEAN_LITERAL
+ValueBase : value_base_type
+[ : fixed_array_size
+] : fixed_array_size
+^ : xor_expr
+abstract : event_abs_decl event_forward_decl value_abs_decl value_forward_decl interface_header forward_decl
+any : any_type
+attribute : attr_spec readonly_attr_spec
+boolean : boolean_type
+case : case_label
+char : char_type
+component : component_header component_forward_decl
+const : const_decl
+consumes : consumes_decl
+context : context_expr
+custom : event_header value_header
+d : FLOAT_TYPE_SUFFIX
+default : case_label
+double : floating_pt_type floating_pt_type
+e : EXPONENT
+emits : emits_decl
+enum : enum_type
+eventtype : event_header event_abs_decl event_forward_decl
+exception : except_decl
+f : FLOAT_TYPE_SUFFIX
+factory : factory_decl init_decl
+finder : finder_decl
+fixed : fixed_pt_const_type fixed_pt_type
+float : floating_pt_type
+getraises : get_excep_expr
+home : home_header
+import : import_decl
+in : param_attribute init_param_attribute
+inout : param_attribute
+interface : interface_header forward_decl
+l : INTEGER_TYPE_SUFFIX
+local : interface_header forward_decl
+long : unsigned_longlong_int unsigned_longlong_int unsigned_long_int signed_longlong_int signed_longlong_int signed_long_int floating_pt_type
+manages : home_header
+module : module
+multiple : uses_decl
+native : type_decl
+octet : octet_type
+oneway : op_attribute
+out : param_attribute
+primarykey : primary_key_spec
+private : state_member
+provides : provides_decl
+public : state_member
+publishes : publishes_decl
+raises : raises_expr
+readonly : readonly_attr_spec
+sequence : sequence_type sequence_type
+setraises : set_excep_expr
+short : unsigned_short_int signed_short_int
+string : string_type string_type
+struct : constr_forward_decl struct_type
+supports : supported_interface_spec value_inheritance_spec
+switch : union_type
+truncatable : value_inheritance_spec
+typedef : type_decl
+typeid : type_id_decl
+typeprefix : type_prefix_decl
+union : constr_forward_decl union_type
+unsigned : unsigned_longlong_int unsigned_long_int unsigned_short_int
+uses : uses_decl
+valuetype : value_header value_abs_decl value_box_decl value_forward_decl
+void : op_type_spec
+wchar : wide_char_type
+wstring : wide_string_type wide_string_type
+{ : event_decl event_abs_decl home_body component_decl except_decl enum_type union_type struct_type value_decl value_abs_decl interface_decl module
+| : or_expr
+} : event_decl event_abs_decl home_body component_decl except_decl enum_type union_type struct_type value_decl value_abs_decl interface_decl module
+~ : unary_operator
+
+
+
+
+
+Rule : BOOLEAN_LITERAL
+0x96887b8-0x96916b8
+	| 0 - 0x96916b8
+		'TRUE' 0 - 0x96916d0
+	| 0 - 0x9691700
+		'FALSE' 0 - 0x9691730
+
+
+Rule : CHARLIT
+0x9683250-0x9683290
+	CHARLIT 0 - 0x9683290
+
+
+Rule : DIGIT
+0x96831f0-0x9683230
+	DIGIT 0 - 0x9683230
+
+
+Rule : EXPONENT
+0x9690dc8-0x9691228
+	. 0 - 0x9691228
+		| 0 - 0x96912b0
+			'e' 0 - 0x96912a0
+		| 0 - 0x96912e8
+			'E' 0 - 0x9691318
+	. 1 - 0x9691328
+		| 0 - 0x9691388
+			'+' 0 - 0x9691378
+		| 0 - 0x96913b0
+			'-' 0 - 0x96913e0
+	. 3 - 0x96913f0
+		DIGIT 3 - 0x9691278
+
+
+Rule : FIXED_PT_LITERAL
+0x9688630-0x9691258
+	FLOATING_PT_LITERAL 0 - 0x9691258
+
+
+Rule : FLOATING_PT_LITERAL
+0x96886d8-0x9690f40
+	| 0 - 0x9690f40
+		. 3 - 0x9690cf0
+			DIGIT 3 - 0x9690c68
+		. 0 - 0x9690c00
+			'.' 0 - 0x9690d60
+		. 2 - 0x9690d70
+			DIGIT 2 - 0x9690da8
+		. 1 - 0x9690d18
+			EXPONENT 1 - 0x9690de0
+		. 1 - 0x9690e68
+			FLOAT_TYPE_SUFFIX 1 - 0x9690eb8
+	| 0 - 0x9690f58
+		. 0 - 0x9690f98
+			'.' 0 - 0x9690f88
+		. 3 - 0x9690f70
+			DIGIT 3 - 0x9690fc0
+		. 1 - 0x9690fe0
+			EXPONENT 1 - 0x9691010
+		. 1 - 0x9690ff8
+			FLOAT_TYPE_SUFFIX 1 - 0x9691088
+	| 0 - 0x96910a8
+		. 3 - 0x96910e0
+			DIGIT 3 - 0x96910c0
+		. 0 - 0x96910f8
+			EXPONENT 0 - 0x9691110
+		. 1 - 0x9691130
+			FLOAT_TYPE_SUFFIX 1 - 0x9691148
+	| 0 - 0x9691168
+		. 3 - 0x96911a0
+			DIGIT 3 - 0x9691180
+		. 1 - 0x96911b8
+			EXPONENT 1 - 0x96911d0
+		. 0 - 0x96911f0
+			FLOAT_TYPE_SUFFIX 0 - 0x9691208
+
+
+Rule : FLOAT_TYPE_SUFFIX
+0x9690e20-0x9691478
+	| 0 - 0x9691478
+		'f' 0 - 0x9691468
+	| 0 - 0x96914b0
+		'F' 0 - 0x96914e0
+	| 0 - 0x96914f0
+		'd' 0 - 0x9691540
+	| 0 - 0x9691550
+		'D' 0 - 0x96915a0
+
+
+Rule : ID
+0x96831a0-0x96831b8
+	ID 0 - 0x96831b8
+
+
+Rule : INTEGER_LITERAL
+0x9688368-0x9690ab8
+	. 3 - 0x9690ab8
+		DIGIT 3 - 0x9690ad0
+	. 1 - 0x96909d8
+		INTEGER_TYPE_SUFFIX 1 - 0x9690b98
+
+
+Rule : INTEGER_TYPE_SUFFIX
+0x9690bc8-0x9690ca0
+	| 0 - 0x9690ca0
+		'l' 0 - 0x9690c90
+	| 0 - 0x9690cd8
+		'L' 0 - 0x9690d08
+
+
+Rule : STRLIT
+0x96832b0-0x96832f0
+	STRLIT 0 - 0x96832f0
+
+
+Rule : WIDE_CHARACTER_LITERAL
+0x96884e0-0x96915b0
+	. 0 - 0x96915b0
+		'L' 0 - 0x9691440
+	. 0 - 0x9691588
+		CHARLIT 0 - 0x96915f8
+
+
+Rule : WIDE_STRING_LITERAL
+0x9688380-0x9691658
+	. 0 - 0x9691658
+		'L' 0 - 0x9691648
+	. 0 - 0x9691618
+		STRLIT 0 - 0x9691680
+
+
+Rule : add_expr
+0x9687960-0x9687b78
+	. 0 - 0x9687b78
+		mult_expr 0 - 0x9687a00
+	. 2 - 0x9687b90
+		. 0 - 0x9687bb8
+			| 0 - 0x9687c08
+				'+' 0 - 0x9687bf8
+			| 0 - 0x9687c40
+				'-' 0 - 0x9687c70
+		. 0 - 0x9687c80
+			mult_expr 0 - 0x9687bd0
+
+
+Rule : and_expr
+0x96876b8-0x9687878
+	. 0 - 0x9687878
+		shift_expr 0 - 0x9687758
+	. 2 - 0x9687890
+		. 0 - 0x96878e0
+			'&' 0 - 0x96878d0
+		. 0 - 0x96878b8
+			shift_expr 0 - 0x9687940
+
+
+Rule : any_type
+0x9689270-0x968a5c8
+	'any' 0 - 0x968a5c8
+
+
+Rule : array_declarator
+0x96898c0-0x968bc48
+	. 0 - 0x968bc48
+		ID 0 - 0x968bca0
+	. 3 - 0x968bbf0
+		fixed_array_size 3 - 0x968bcd8
+
+
+Rule : attr_decl
+0x9684c98-0x968bf40
+	| 0 - 0x968bf40
+		readonly_attr_spec 0 - 0x968bef0
+	| 0 - 0x968bf58
+		attr_spec 0 - 0x968bf88
+
+
+Rule : attr_declarator
+0x968db48-0x968dca0
+	| 0 - 0x968dca0
+		. 0 - 0x968db80
+			simple_declarator 0 - 0x968dbd8
+		. 0 - 0x968db98
+			attr_raises_expr 0 - 0x968dc20
+	| 0 - 0x968dcb8
+		. 0 - 0x968dcd0
+			simple_declarator 0 - 0x968dce8
+		. 2 - 0x968dc58
+			. 0 - 0x968dd40
+				',' 0 - 0x968dd18
+			. 0 - 0x968dd28
+				simple_declarator 0 - 0x968dda0
+
+
+Rule : attr_raises_expr
+0x968dc40-0x968ded8
+	| 0 - 0x968ded8
+		. 0 - 0x968de30
+			get_excep_expr 0 - 0x968dd08
+		. 1 - 0x968de48
+			set_excep_expr 0 - 0x968de88
+	| 0 - 0x968def0
+		set_excep_expr 0 - 0x968de60
+
+
+Rule : attr_spec
+0x968bf70-0x968da90
+	. 0 - 0x968da90
+		'attribute' 0 - 0x968d9c0
+	. 0 - 0x968da78
+		param_type_spec 0 - 0x968dae0
+	. 0 - 0x968db00
+		attr_declarator 0 - 0x968db18
+
+
+Rule : base_type_spec
+0x9688df0-0x9689090
+	| 0 - 0x9689090
+		floating_pt_type 0 - 0x96890c8
+	| 0 - 0x9688f40
+		integer_type 0 - 0x9689138
+	| 0 - 0x9689158
+		char_type 0 - 0x9689170
+	| 0 - 0x9689190
+		wide_char_type 0 - 0x96891a8
+	| 0 - 0x96891c8
+		boolean_type 0 - 0x96891e0
+	| 0 - 0x9689200
+		octet_type 0 - 0x9689218
+	| 0 - 0x9689238
+		any_type 0 - 0x9689250
+	| 0 - 0x96892d0
+		object_type 0 - 0x9689300
+	| 0 - 0x9689350
+		value_base_type 0 - 0x9689380
+
+
+Rule : boolean_type
+0x96870c0-0x968a508
+	'boolean' 0 - 0x968a508
+
+
+Rule : case_label
+0x968ae68-0x968b138
+	| 0 - 0x968b138
+		. 0 - 0x968b038
+			'case' 0 - 0x968b060
+		. 0 - 0x968b020
+			const_exp 0 - 0x968b0b8
+		. 0 - 0x968b0f8
+			':' 0 - 0x968b110
+	| 0 - 0x968b160
+		. 0 - 0x968b120
+			'default' 0 - 0x968b190
+		. 0 - 0x968b1c0
+			':' 0 - 0x968b1d8
+
+
+Rule : case_stmt
+0x968ae50-0x968af38
+	. 3 - 0x968af38
+		case_label 3 - 0x968aee8
+	. 0 - 0x968aed0
+		element_spec 0 - 0x968af78
+	. 0 - 0x968aff8
+		';' 0 - 0x968b010
+
+
+Rule : char_type
+0x9686f70-0x968a468
+	'char' 0 - 0x968a468
+
+
+Rule : complex_declarator
+0x9689860-0x9689948
+	array_declarator 0 - 0x9689948
+
+
+Rule : component
+0x9683f20-0x968e300
+	| 0 - 0x968e300
+		component_decl 0 - 0x968e2b0
+	| 0 - 0x968e318
+		component_forward_decl 0 - 0x968e370
+
+
+Rule : component_body
+0x968e598-0x968ea80
+	component_export 2 - 0x968ea80
+
+
+Rule : component_decl
+0x968e248-0x968e490
+	. 0 - 0x968e490
+		component_header 0 - 0x968e4d0
+	. 0 - 0x968e570
+		'{' 0 - 0x968e588
+	. 0 - 0x968e5b0
+		component_body 0 - 0x968e5d8
+	. 0 - 0x968e640
+		'}' 0 - 0x968e658
+
+
+Rule : component_export
+0x968ea28-0x968ebe0
+	| 0 - 0x968ebe0
+		. 0 - 0x968eb88
+			provides_decl 0 - 0x968eb38
+		. 0 - 0x968eba0
+			';' 0 - 0x968ebb8
+	| 0 - 0x968ec08
+		. 0 - 0x968ec88
+			uses_decl 0 - 0x968ec38
+		. 0 - 0x968eca0
+			';' 0 - 0x968ecb8
+	| 0 - 0x968ece0
+		. 0 - 0x968ed98
+			emits_decl 0 - 0x968ed48
+		. 0 - 0x968edb0
+			';' 0 - 0x968edc8
+	| 0 - 0x968edf0
+		. 0 - 0x968eea8
+			publishes_decl 0 - 0x968ee58
+		. 0 - 0x968eec0
+			';' 0 - 0x968eed8
+	| 0 - 0x968ef00
+		. 0 - 0x968efb8
+			consumes_decl 0 - 0x968ef68
+		. 0 - 0x968efd0
+			';' 0 - 0x968efe8
+	| 0 - 0x968f010
+		. 0 - 0x968f038
+			attr_decl 0 - 0x968f078
+		. 0 - 0x968eff8
+			';' 0 - 0x968f098
+
+
+Rule : component_forward_decl
+0x968e330-0x968e3c0
+	. 0 - 0x968e3c0
+		'component' 0 - 0x968e410
+	. 0 - 0x968e440
+		ID 0 - 0x968e458
+
+
+Rule : component_header
+0x968e260-0x968e680
+	. 0 - 0x968e680
+		'component' 0 - 0x968e6d0
+	. 0 - 0x968e6f0
+		ID 0 - 0x968e708
+	. 1 - 0x968e728
+		component_inheritance_spec 0 - 0x968e768
+	. 1 - 0x968e7e0
+		supported_interface_spec 0 - 0x968e848
+
+
+Rule : component_inheritance_spec
+0x968e740-0x968e9e0
+	. 0 - 0x968e9e0
+		':' 0 - 0x968e930
+	. 0 - 0x968e9b0
+		scoped_name 0 - 0x968ea08
+
+
+Rule : const_decl
+0x9683670-0x9686c68
+	. 0 - 0x9686c68
+		'const' 0 - 0x9686ca0
+	. 0 - 0x9686c08
+		const_type 0 - 0x9686cd0
+	. 0 - 0x9686d70
+		ID 0 - 0x9686d88
+	. 0 - 0x9686da8
+		'=' 0 - 0x9686dd8
+	. 0 - 0x9686de8
+		const_exp 0 - 0x9686e48
+
+
+Rule : const_exp
+0x9686dc0-0x96874c0
+	or_expr 0 - 0x96874c0
+
+
+Rule : const_type
+0x9686d10-0x9686f40
+	| 0 - 0x9686f40
+		integer_type 0 - 0x9686ef0
+	| 0 - 0x9686f58
+		char_type 0 - 0x9686fb0
+	| 0 - 0x9687000
+		wide_char_type 0 - 0x9687058
+	| 0 - 0x96870a8
+		boolean_type 0 - 0x9687100
+	| 0 - 0x9687150
+		floating_pt_type 0 - 0x96871a8
+	| 0 - 0x9687220
+		string_type 0 - 0x9687250
+	| 0 - 0x96872a0
+		wide_string_type 0 - 0x96872f8
+	| 0 - 0x9687370
+		fixed_pt_const_type 0 - 0x96873a0
+	| 0 - 0x96873f0
+		scoped_name 0 - 0x9687420
+	| 0 - 0x9687408
+		octet_type 0 - 0x9687440
+
+
+Rule : constr_forward_decl
+0x9688d20-0x968d2a0
+	| 0 - 0x968d2a0
+		. 0 - 0x968d158
+			'struct' 0 - 0x968d248
+		. 0 - 0x968d268
+			ID 0 - 0x968d280
+	| 0 - 0x968d2b8
+		. 0 - 0x968d140
+			'union' 0 - 0x968d2e8
+		. 0 - 0x968d308
+			ID 0 - 0x968d320
+
+
+Rule : constr_type_spec
+0x9688eb0-0x96895d8
+	| 0 - 0x96895d8
+		struct_type 0 - 0x9689630
+	| 0 - 0x96895f0
+		union_type 0 - 0x9689650
+	| 0 - 0x9689670
+		enum_type 0 - 0x9689688
+
+
+Rule : consumes_decl
+0x968ef28-0x968f5e0
+	. 0 - 0x968f5e0
+		'consumes' 0 - 0x968f5f8
+	. 0 - 0x968f5c8
+		scoped_name 0 - 0x968f650
+	. 0 - 0x968f670
+		ID 0 - 0x968f688
+
+
+Rule : context_expr
+0x968c2d0-0x968cc60
+	. 0 - 0x968cc60
+		'context' 0 - 0x968cc88
+	. 0 - 0x968ccb8
+		'(' 0 - 0x968ccd0
+	. 0 - 0x968ccf8
+		STRLIT 0 - 0x968cd20
+	. 2 - 0x968cce0
+		. 0 - 0x968cd78
+			',' 0 - 0x968cd68
+		. 0 - 0x968cd40
+			STRLIT 0 - 0x968cdc0
+	. 0 - 0x968cde0
+		')' 0 - 0x968cd58
+
+
+Rule : declarator
+0x96896a8-0x96897d8
+	| 0 - 0x96897d8
+		simple_declarator 0 - 0x9689758
+	| 0 - 0x96897f0
+		complex_declarator 0 - 0x9689840
+
+
+Rule : declarators
+0x9686508-0x9689728
+	. 0 - 0x9689728
+		declarator 0 - 0x96896d8
+	. 2 - 0x9689740
+		. 0 - 0x9689790
+			',' 0 - 0x9689780
+		. 0 - 0x9689768
+			declarator 0 - 0x96897b8
+
+
+Rule : definition
+0x9683490-0x9683640
+	| 0 - 0x9683640
+		. 0 - 0x96835c8
+			type_decl 0 - 0x9683578
+		. 0 - 0x96835e0
+			';' 0 - 0x96835f8
+	| 0 - 0x9683658
+		. 0 - 0x9683700
+			const_decl 0 - 0x96836b0
+		. 0 - 0x9683718
+			';' 0 - 0x9683730
+	| 0 - 0x9683758
+		. 0 - 0x9683810
+			except_decl 0 - 0x96837c0
+		. 0 - 0x9683828
+			';' 0 - 0x9683840
+	| 0 - 0x9683868
+		. 0 - 0x9683988
+			interface_or_forward_decl 0 - 0x9683908
+		. 0 - 0x96839a0
+			';' 0 - 0x96839b8
+	| 0 - 0x96839e0
+		. 0 - 0x9683a70
+			module 0 - 0x9683a20
+		. 0 - 0x9683a88
+			';' 0 - 0x9683aa0
+	| 0 - 0x9683ac8
+		. 0 - 0x9683b58
+			value 0 - 0x9683b08
+		. 0 - 0x9683b70
+			';' 0 - 0x9683b88
+	| 0 - 0x9683bb0
+		. 0 - 0x9683c80
+			type_id_decl 0 - 0x9683c10
+		. 0 - 0x9683c98
+			';' 0 - 0x9683cb0
+	| 0 - 0x9683cd8
+		. 0 - 0x9683db8
+			type_prefix_decl 0 - 0x9683d40
+		. 0 - 0x9683dd0
+			';' 0 - 0x9683de8
+	| 0 - 0x9683e10
+		. 0 - 0x9683ea0
+			event 0 - 0x9683e50
+		. 0 - 0x9683eb8
+			';' 0 - 0x9683ed0
+	| 0 - 0x9683ef8
+		. 0 - 0x9683f88
+			component 0 - 0x9683f38
+		. 0 - 0x9683fa0
+			';' 0 - 0x9683fb8
+	| 0 - 0x9683fe0
+		. 0 - 0x96840b8
+			home_decl 0 - 0x9684048
+		. 0 - 0x96840d0
+			';' 0 - 0x96840e8
+
+
+Rule : element_spec
+0x968af98-0x968b1e8
+	. 0 - 0x968b1e8
+		type_spec 0 - 0x968b270
+	. 0 - 0x968b200
+		declarator 0 - 0x968b290
+
+
+Rule : emits_decl
+0x968ed08-0x968f428
+	. 0 - 0x968f428
+		'emits' 0 - 0x968f440
+	. 0 - 0x968f410
+		scoped_name 0 - 0x968f470
+	. 0 - 0x968f4b0
+		ID 0 - 0x968f4c8
+
+
+Rule : enum_type
+0x9688b30-0x968b2c8
+	. 0 - 0x968b2c8
+		'enum' 0 - 0x968b2e0
+	. 0 - 0x968b310
+		ID 0 - 0x968b328
+	. 0 - 0x968b348
+		'{' 0 - 0x968b378
+	. 0 - 0x968b388
+		enumerator 0 - 0x968b3b0
+	. 2 - 0x968b438
+		. 0 - 0x968b488
+			',' 0 - 0x968b478
+		. 0 - 0x968b460
+			enumerator 0 - 0x968b4d8
+	. 0 - 0x968b4f8
+		'}' 0 - 0x968b450
+
+
+Rule : enumerator
+0x968b360-0x968b550
+	ID 0 - 0x968b550
+
+
+Rule : event
+0x9683e38-0x96903f8
+	| 0 - 0x96903f8
+		event_decl 0 - 0x96903a8
+	| 0 - 0x9690410
+		event_abs_decl 0 - 0x9690440
+	| 0 - 0x9690490
+		event_forward_decl 0 - 0x96904c0
+
+
+Rule : event_abs_decl
+0x9690428-0x9690620
+	. 0 - 0x9690620
+		'abstract' 0 - 0x96906a0
+	. 0 - 0x9690590
+		'eventtype' 0 - 0x96906e8
+	. 0 - 0x9690708
+		ID 0 - 0x9690720
+	. 1 - 0x9690740
+		value_inheritance_spec 0 - 0x96907a8
+	. 0 - 0x9690758
+		'{' 0 - 0x9690770
+	. 2 - 0x96907f0
+		export 2 - 0x9690818
+	. 0 - 0x9690638
+		'}' 0 - 0x9690850
+
+
+Rule : event_decl
+0x9690240-0x96908d8
+	. 0 - 0x96908d8
+		event_header 0 - 0x9690888
+	. 0 - 0x96908f0
+		'{' 0 - 0x9690908
+	. 2 - 0x9690930
+		value_element 2 - 0x9690958
+	. 0 - 0x9690918
+		'}' 0 - 0x9690978
+
+
+Rule : event_forward_decl
+0x96904a8-0x9690390
+	. 1 - 0x9690390
+		'abstract' 1 - 0x96905a8
+	. 0 - 0x9690338
+		'eventtype' 0 - 0x9690328
+	. 0 - 0x96905c8
+		ID 0 - 0x9690600
+
+
+Rule : event_header
+0x9690838-0x9690988
+	. 1 - 0x9690988
+		'custom' 1 - 0x96909f0
+	. 0 - 0x96909a0
+		'eventtype' 0 - 0x96909c8
+	. 0 - 0x9690a68
+		ID 0 - 0x9690a80
+	. 1 - 0x9690aa0
+		value_inheritance_spec 0 - 0x9690b40
+
+
+Rule : except_decl
+0x9683780-0x968bfd8
+	. 0 - 0x968bfd8
+		'exception' 0 - 0x968bff0
+	. 0 - 0x968c020
+		ID 0 - 0x968c038
+	. 0 - 0x968c058
+		'{' 0 - 0x968c088
+	. 2 - 0x968c098
+		member 2 - 0x968c0c0
+	. 0 - 0x968c070
+		'}' 0 - 0x968c0f8
+
+
+Rule : exception_list
+0x968dfd0-0x968e128
+	. 0 - 0x968e128
+		'(' 0 - 0x968e118
+	. 0 - 0x968e0e8
+		scoped_name 0 - 0x968e150
+	. 2 - 0x968e170
+		. 0 - 0x968e1c0
+			',' 0 - 0x968e198
+		. 0 - 0x968e1a8
+			scoped_name 0 - 0x968e210
+	. 0 - 0x968e230
+		')' 0 - 0x968e188
+
+
+Rule : export
+0x96848d0-0x9684b48
+	| 0 - 0x9684b48
+		. 0 - 0x9684a50
+			type_decl 0 - 0x9684ae0
+		. 0 - 0x9684aa8
+			';' 0 - 0x9684b20
+	| 0 - 0x9684b70
+		. 0 - 0x9684b88
+			const_decl 0 - 0x9684ba0
+		. 0 - 0x9684b30
+			';' 0 - 0x9684bc0
+	| 0 - 0x9684be8
+		. 0 - 0x9684c10
+			except_decl 0 - 0x9684c28
+		. 0 - 0x9684bd0
+			';' 0 - 0x9684c48
+	| 0 - 0x9684c70
+		. 0 - 0x9684d28
+			attr_decl 0 - 0x9684cd8
+		. 0 - 0x9684d40
+			';' 0 - 0x9684d58
+	| 0 - 0x9684d80
+		. 0 - 0x9684e10
+			op_decl 0 - 0x9684dc0
+		. 0 - 0x9684e28
+			';' 0 - 0x9684e40
+	| 0 - 0x9684e68
+		. 0 - 0x9684e90
+			type_id_decl 0 - 0x9684ed0
+		. 0 - 0x9684e50
+			';' 0 - 0x9684f10
+	| 0 - 0x9684f38
+		. 0 - 0x9684f60
+			type_prefix_decl 0 - 0x9684fa0
+		. 0 - 0x9684f20
+			';' 0 - 0x9685010
+
+
+Rule : factory_decl
+0x968fdd0-0x968ff98
+	. 0 - 0x968ff98
+		'factory' 0 - 0x968ffc0
+	. 0 - 0x968ffe0
+		ID 0 - 0x968fff8
+	. 0 - 0x9690018
+		'(' 0 - 0x9690048
+	. 1 - 0x9690058
+		init_param_decls 0 - 0x96900d0
+	. 0 - 0x9690090
+		')' 0 - 0x9690080
+	. 1 - 0x9690140
+		raises_expr 0 - 0x9690190
+
+
+Rule : finder_decl
+0x968feb0-0x9690030
+	. 0 - 0x9690030
+		'finder' 0 - 0x9690168
+	. 0 - 0x96901f0
+		ID 0 - 0x9690208
+	. 0 - 0x9690228
+		'(' 0 - 0x9690258
+	. 1 - 0x9690268
+		init_param_decls 0 - 0x96902b8
+	. 0 - 0x96902a0
+		')' 0 - 0x9690290
+	. 1 - 0x9690300
+		raises_expr 0 - 0x9690350
+
+
+Rule : fixed_array_size
+0x968bcc0-0x968bd90
+	. 0 - 0x968bd90
+		'[' 0 - 0x968bd80
+	. 0 - 0x968bcf8
+		positive_int_const 0 - 0x968be00
+	. 0 - 0x968be20
+		']' 0 - 0x968be38
+
+
+Rule : fixed_pt_const_type
+0x9687388-0x968d1b8
+	'fixed' 0 - 0x968d1b8
+
+
+Rule : fixed_pt_type
+0x96895a0-0x968cfb8
+	. 0 - 0x968cfb8
+		'fixed' 0 - 0x968cfd0
+	. 0 - 0x968d000
+		'<' 0 - 0x968d018
+	. 0 - 0x968d040
+		positive_int_const 0 - 0x968d068
+	. 0 - 0x968d028
+		',' 0 - 0x968d088
+	. 0 - 0x968d0b0
+		positive_int_const 0 - 0x968d110
+	. 0 - 0x968d098
+		'>' 0 - 0x968d130
+
+
+Rule : floating_pt_type
+0x9687168-0x9689930
+	| 0 - 0x9689930
+		'float' 0 - 0x96899c0
+	| 0 - 0x96899f0
+		'double' 0 - 0x9689a20
+	| 0 - 0x9689878
+		. 0 - 0x9689a08
+			'long' 0 - 0x9689a88
+		. 0 - 0x9689a50
+			'double' 0 - 0x9689ad8
+
+
+Rule : forward_decl
+0x96843e8-0x9684668
+	. 1 - 0x9684668
+		| 0 - 0x96846b8
+			'abstract' 0 - 0x96846f8
+		| 0 - 0x9684728
+			'local' 0 - 0x9684758
+	. 0 - 0x9684680
+		'interface' 0 - 0x96846a8
+	. 0 - 0x96847b0
+		ID 0 - 0x96847e8
+
+
+Rule : get_excep_expr
+0x968ddc0-0x968ddd8
+	. 0 - 0x968ddd8
+		'getraises' 0 - 0x968df58
+	. 0 - 0x968df08
+		exception_list 0 - 0x968dfb0
+
+
+Rule : home_body
+0x968f788-0x968fc58
+	. 0 - 0x968fc58
+		'{' 0 - 0x968fc48
+	. 2 - 0x968fc18
+		home_export 2 - 0x968fc80
+	. 0 - 0x968fd00
+		'}' 0 - 0x968fd18
+
+
+Rule : home_decl
+0x9684008-0x968f728
+	. 0 - 0x968f728
+		home_header 0 - 0x968f6d8
+	. 0 - 0x968f6c0
+		home_body 0 - 0x968f768
+
+
+Rule : home_export
+0x968fca0-0x968fd28
+	| 0 - 0x968fd28
+		export 0 - 0x968fd68
+	| 0 - 0x968fd40
+		. 0 - 0x968fe30
+			factory_decl 0 - 0x968fdb0
+		. 0 - 0x968fe48
+			';' 0 - 0x968fe60
+	| 0 - 0x968fe88
+		. 0 - 0x968ff40
+			finder_decl 0 - 0x968fef0
+		. 0 - 0x968ff58
+			';' 0 - 0x968ff70
+
+
+Rule : home_header
+0x968f6a8-0x968f7e8
+	. 0 - 0x968f7e8
+		'home' 0 - 0x968f800
+	. 0 - 0x968f830
+		ID 0 - 0x968f848
+	. 1 - 0x968f868
+		home_inheritance_spec 0 - 0x968f8d0
+	. 1 - 0x968f940
+		supported_interface_spec 0 - 0x968f9a8
+	. 0 - 0x968f958
+		'manages' 0 - 0x968f898
+	. 0 - 0x968f9c8
+		scoped_name 0 - 0x968fa00
+	. 1 - 0x968f7a0
+		primary_key_spec 0 - 0x968fa30
+
+
+Rule : home_inheritance_spec
+0x968f880-0x968fb28
+	. 0 - 0x968fb28
+		':' 0 - 0x968fa20
+	. 0 - 0x968fac0
+		scoped_name 0 - 0x968fb50
+
+
+Rule : import_decl
+0x9683310-0x968d340
+	. 0 - 0x968d340
+		'import' 0 - 0x968d3b0
+	. 0 - 0x968d2d0
+		imported_scope 0 - 0x968d3e0
+	. 0 - 0x968d468
+		';' 0 - 0x968d480
+
+
+Rule : imported_scope
+0x968d358-0x968d490
+	| 0 - 0x968d490
+		scoped_name 0 - 0x968d4d0
+	| 0 - 0x968d4a8
+		STRLIT 0 - 0x968d4f0
+
+
+Rule : init_decl
+0x9686310-0x96865a8
+	. 0 - 0x96865a8
+		'factory' 0 - 0x96865d0
+	. 0 - 0x9686600
+		ID 0 - 0x9686618
+	. 0 - 0x9686638
+		'(' 0 - 0x9686668
+	. 1 - 0x9686678
+		init_param_decls 0 - 0x9686700
+	. 0 - 0x9686798
+		')' 0 - 0x96866b0
+	. 1 - 0x96867c8
+		raises_expr 0 - 0x9686828
+	. 0 - 0x9686878
+		';' 0 - 0x9686800
+
+
+Rule : init_param_attribute
+0x9686a20-0x9686c58
+	'in' 0 - 0x9686c58
+
+
+Rule : init_param_decl
+0x9686890-0x9686a90
+	. 0 - 0x9686a90
+		init_param_attribute 0 - 0x96869a0
+	. 0 - 0x9686a38
+		param_type_spec 0 - 0x9686aa8
+	. 0 - 0x9686b28
+		simple_declarator 0 - 0x9686ba0
+
+
+Rule : init_param_decls
+0x96866c0-0x9686970
+	. 0 - 0x9686970
+		init_param_decl 0 - 0x9686920
+	. 2 - 0x9686988
+		. 0 - 0x96869d8
+			',' 0 - 0x96869c8
+		. 0 - 0x96869b0
+			init_param_decl 0 - 0x9686a00
+
+
+Rule : integer_type
+0x9686e68-0x9689bb8
+	| 0 - 0x9689bb8
+		signed_int 0 - 0x9689b68
+	| 0 - 0x9689bd0
+		unsigned_int 0 - 0x9689c00
+
+
+Rule : interface_body
+0x9684598-0x96849a0
+	export 2 - 0x96849a0
+
+
+Rule : interface_decl
+0x9684288-0x9684558
+	. 0 - 0x9684558
+		interface_header 0 - 0x96844e0
+	. 0 - 0x9684570
+		'{' 0 - 0x9684588
+	. 0 - 0x96845b0
+		interface_body 0 - 0x96845d8
+	. 0 - 0x9684640
+		'}' 0 - 0x9684658
+
+
+Rule : interface_header
+0x96842a0-0x9684740
+	. 1 - 0x9684740
+		| 0 - 0x9684820
+			'abstract' 0 - 0x9684898
+		| 0 - 0x96848b8
+			'local' 0 - 0x96848e8
+	. 0 - 0x9684808
+		'interface' 0 - 0x9684888
+	. 0 - 0x9684938
+		ID 0 - 0x9684950
+	. 1 - 0x9684970
+		interface_inheritance_spec 0 - 0x96849d8
+
+
+Rule : interface_inheritance_spec
+0x9684988-0x96850a8
+	. 0 - 0x96850a8
+		':' 0 - 0x9685098
+	. 0 - 0x9685020
+		interface_name 0 - 0x96850e0
+	. 2 - 0x9685160
+		. 0 - 0x96851b0
+			',' 0 - 0x96851a0
+		. 0 - 0x9685188
+			interface_name 0 - 0x96851e8
+
+
+Rule : interface_name
+0x9685110-0x9685178
+	scoped_name 0 - 0x9685178
+
+
+Rule : interface_or_forward_decl
+0x9683890-0x96843b8
+	| 0 - 0x96843b8
+		interface_decl 0 - 0x9684368
+	| 0 - 0x96843d0
+		forward_decl 0 - 0x9684428
+
+
+Rule : interface_type
+0x968f198-0x968f1d0
+	| 0 - 0x968f1d0
+		scoped_name 0 - 0x968f278
+	| 0 - 0x968f220
+		'Object' 0 - 0x968f298
+
+
+Rule : literal
+0x9688230-0x96883f8
+	| 0 - 0x96883f8
+		INTEGER_LITERAL 0 - 0x96883a8
+	| 0 - 0x9688410
+		STRLIT 0 - 0x9688440
+	| 0 - 0x9688428
+		WIDE_STRING_LITERAL 0 - 0x96884c0
+	| 0 - 0x9688528
+		CHARLIT 0 - 0x9688558
+	| 0 - 0x9688540
+		WIDE_CHARACTER_LITERAL 0 - 0x96885b0
+	| 0 - 0x9688618
+		FIXED_PT_LITERAL 0 - 0x9688648
+	| 0 - 0x96886c0
+		FLOATING_PT_LITERAL 0 - 0x9688728
+	| 0 - 0x96887a0
+		BOOLEAN_LITERAL 0 - 0x96887d0
+
+
+Rule : member
+0x968a7c8-0x968a7e0
+	. 0 - 0x968a7e0
+		type_spec 0 - 0x968a8b0
+	. 0 - 0x968a878
+		declarators 0 - 0x968a8f0
+	. 0 - 0x968a910
+		';' 0 - 0x968a928
+
+
+Rule : member_list
+0x968a6c0-0x968a828
+	member 3 - 0x968a828
+
+
+Rule : module
+0x9683a08-0x9684110
+	. 0 - 0x9684110
+		'module' 0 - 0x9684138
+	. 0 - 0x9684168
+		ID 0 - 0x9684180
+	. 0 - 0x96841a0
+		'{' 0 - 0x96841d0
+	. 3 - 0x96841e0
+		definition 3 - 0x9684238
+	. 0 - 0x96841b8
+		'}' 0 - 0x9684278
+
+
+Rule : mult_expr
+0x9687978-0x9687d70
+	. 0 - 0x9687d70
+		unary_expr 0 - 0x9687ba8
+	. 2 - 0x9687d88
+		. 0 - 0x9687db0
+			| 0 - 0x9687e00
+				'*' 0 - 0x9687df0
+			| 0 - 0x9687e38
+				'/' 0 - 0x9687e68
+			| 0 - 0x9687e78
+				'%' 0 - 0x9687ec8
+		. 0 - 0x9687ed8
+			unary_expr 0 - 0x9687dc8
+
+
+Rule : object_type
+0x96892e8-0x968a610
+	'Object' 0 - 0x968a610
+
+
+Rule : octet_type
+0x9686eb0-0x968a558
+	'octet' 0 - 0x968a558
+
+
+Rule : op_attribute
+0x968c108-0x968c378
+	'oneway' 0 - 0x968c378
+
+
+Rule : op_decl
+0x9684da8-0x968c0e0
+	. 1 - 0x968c0e0
+		op_attribute 1 - 0x968c178
+	. 0 - 0x968c140
+		op_type_spec 0 - 0x968c130
+	. 0 - 0x968c280
+		ID 0 - 0x968c298
+	. 0 - 0x968c2b8
+		parameter_decls 0 - 0x968c310
+	. 1 - 0x968c360
+		raises_expr 0 - 0x968c3c8
+	. 1 - 0x968c388
+		context_expr 0 - 0x968c3e8
+
+
+Rule : op_type_spec
+0x968c220-0x968c408
+	| 0 - 0x968c408
+		param_type_spec 0 - 0x968c4d8
+	| 0 - 0x968c450
+		'void' 0 - 0x968c4f8
+
+
+Rule : or_expr
+0x9687460-0x96875d8
+	. 0 - 0x96875d8
+		xor_expr 0 - 0x9687548
+	. 2 - 0x96875f0
+		. 0 - 0x9687640
+			'|' 0 - 0x9687630
+		. 0 - 0x9687618
+			xor_expr 0 - 0x9687678
+
+
+Rule : param_attribute
+0x968c7e0-0x968c9d0
+	| 0 - 0x968c9d0
+		'in' 0 - 0x968c9c0
+	| 0 - 0x968c9f8
+		'out' 0 - 0x968ca28
+	| 0 - 0x968ca38
+		'inout' 0 - 0x968ca88
+
+
+Rule : param_decl
+0x968c5d8-0x968c898
+	. 0 - 0x968c898
+		param_attribute 0 - 0x968c848
+	. 0 - 0x968c7f8
+		param_type_spec 0 - 0x968c8d8
+	. 0 - 0x968c930
+		simple_declarator 0 - 0x968c948
+
+
+Rule : param_type_spec
+0x9686ac8-0x968cdf8
+	| 0 - 0x968cdf8
+		base_type_spec 0 - 0x968cea0
+	| 0 - 0x968ce10
+		string_type 0 - 0x968cec0
+	| 0 - 0x968cee0
+		wide_string_type 0 - 0x968cef8
+	| 0 - 0x968cf68
+		scoped_name 0 - 0x968cf80
+
+
+Rule : parameter_decls
+0x968c238-0x968c728
+	| 0 - 0x968c728
+		. 0 - 0x968c568
+			'(' 0 - 0x968c558
+		. 0 - 0x968c508
+			param_decl 0 - 0x968c5b8
+		. 2 - 0x968c638
+			. 0 - 0x968c688
+				',' 0 - 0x968c678
+			. 0 - 0x968c660
+				param_decl 0 - 0x968c6d8
+		. 0 - 0x968c6f8
+			')' 0 - 0x968c650
+	| 0 - 0x968c750
+		. 0 - 0x968c790
+			'(' 0 - 0x968c780
+		. 0 - 0x968c7b8
+			')' 0 - 0x968c7d0
+
+
+Rule : positive_int_const
+0x96885d0-0x96888b8
+	const_exp 0 - 0x96888b8
+
+
+Rule : primary_expr
+0x9688000-0x9688190
+	| 0 - 0x9688190
+		scoped_name 0 - 0x96881f0
+	| 0 - 0x96881b8
+		literal 0 - 0x9688210
+	| 0 - 0x9688290
+		. 0 - 0x96882d0
+			'(' 0 - 0x96882c0
+		. 0 - 0x96882a8
+			const_exp 0 - 0x9688320
+		. 0 - 0x9688340
+			')' 0 - 0x9688358
+
+
+Rule : primary_key_spec
+0x968fa88-0x968fb88
+	. 0 - 0x968fb88
+		'primarykey' 0 - 0x968fbc8
+	. 0 - 0x968fb70
+		scoped_name 0 - 0x968fbf8
+
+
+Rule : provides_decl
+0x968ea40-0x968f0c0
+	. 0 - 0x968f0c0
+		'provides' 0 - 0x968f110
+	. 0 - 0x968f0a8
+		interface_type 0 - 0x968f168
+	. 0 - 0x968f1e8
+		ID 0 - 0x968f200
+
+
+Rule : publishes_decl
+0x968ee18-0x968f500
+	. 0 - 0x968f500
+		'publishes' 0 - 0x968f518
+	. 0 - 0x968f4e8
+		scoped_name 0 - 0x968f570
+	. 0 - 0x968f590
+		ID 0 - 0x968f5a8
+
+
+Rule : raises_expr
+0x9686810-0x968c9a8
+	. 0 - 0x968c9a8
+		'raises' 0 - 0x968cad8
+	. 0 - 0x968cb08
+		'(' 0 - 0x968cb20
+	. 0 - 0x968cb48
+		scoped_name 0 - 0x968cb70
+	. 2 - 0x968cb30
+		. 0 - 0x968cbe8
+			',' 0 - 0x968cbc0
+		. 0 - 0x968cbd0
+			scoped_name 0 - 0x968cc10
+	. 0 - 0x968cc30
+		')' 0 - 0x968cbb0
+
+
+Rule : readonly_attr_declarator
+0x968d828-0x968d940
+	| 0 - 0x968d940
+		. 0 - 0x968d840
+			simple_declarator 0 - 0x968d8d8
+		. 0 - 0x968d888
+			raises_expr 0 - 0x968d920
+	| 0 - 0x968d958
+		. 0 - 0x968d990
+			simple_declarator 0 - 0x968d970
+		. 2 - 0x968d9a8
+			. 0 - 0x968d9f8
+				',' 0 - 0x968d9d0
+			. 0 - 0x968d9e0
+				simple_declarator 0 - 0x968da58
+
+
+Rule : readonly_attr_spec
+0x968be48-0x968d6e0
+	. 0 - 0x968d6e0
+		'readonly' 0 - 0x968d6f8
+	. 0 - 0x968d6c8
+		'attribute' 0 - 0x968d728
+	. 0 - 0x968d750
+		param_type_spec 0 - 0x968d7b0
+	. 0 - 0x968d738
+		readonly_attr_declarator 0 - 0x968d808
+
+
+Rule : scoped_name
+0x9685208-0x9685220
+	. 1 - 0x9685220
+		'::' 1 - 0x96852e0
+	. 0 - 0x96852f0
+		ID 0 - 0x96852b8
+	. 2 - 0x9685338
+		. 0 - 0x9685388
+			'::' 0 - 0x9685378
+		. 0 - 0x96853b0
+			ID 0 - 0x96853c8
+
+
+Rule : sequence_type
+0x9689288-0x968b770
+	| 0 - 0x968b770
+		. 0 - 0x968b510
+			'sequence' 0 - 0x968b5b0
+		. 0 - 0x968b570
+			'<' 0 - 0x968b5e0
+		. 0 - 0x968b608
+			simple_type_spec 0 - 0x968b668
+		. 0 - 0x968b5f0
+			',' 0 - 0x968b6d8
+		. 0 - 0x968b700
+			positive_int_const 0 - 0x968b728
+		. 0 - 0x968b6e8
+			'>' 0 - 0x968b748
+	| 0 - 0x968b7a8
+		. 0 - 0x968b758
+			'sequence' 0 - 0x968b7d8
+		. 0 - 0x968b7f8
+			'<' 0 - 0x968b810
+		. 0 - 0x968b838
+			simple_type_spec 0 - 0x968b860
+		. 0 - 0x968b820
+			'>' 0 - 0x968b8d0
+
+
+Rule : set_excep_expr
+0x968de70-0x968e030
+	. 0 - 0x968e030
+		'setraises' 0 - 0x968e070
+	. 0 - 0x968dfe8
+		exception_list 0 - 0x968e0c8
+
+
+Rule : shift_expr
+0x9687808-0x96879d0
+	. 0 - 0x96879d0
+		add_expr 0 - 0x96878a8
+	. 2 - 0x96879e8
+		. 0 - 0x9687a10
+			| 0 - 0x9687a60
+				'>>' 0 - 0x9687a50
+			| 0 - 0x9687a98
+				'<<' 0 - 0x9687ac8
+		. 0 - 0x9687ad8
+			add_expr 0 - 0x9687a28
+
+
+Rule : signed_int
+0x9689ae8-0x9689d08
+	| 0 - 0x9689d08
+		signed_short_int 0 - 0x9689c90
+	| 0 - 0x9689d20
+		signed_long_int 0 - 0x9689d50
+	| 0 - 0x9689da0
+		signed_longlong_int 0 - 0x9689df8
+
+
+Rule : signed_long_int
+0x9689d38-0x9689ed8
+	'long' 0 - 0x9689ed8
+
+
+Rule : signed_longlong_int
+0x9689db8-0x9689e48
+	. 0 - 0x9689e48
+		'long' 0 - 0x9689f30
+	. 0 - 0x9689c50
+		'long' 0 - 0x9689f70
+
+
+Rule : signed_short_int
+0x9689b00-0x9689e88
+	'short' 0 - 0x9689e88
+
+
+Rule : simple_declarator
+0x9686ae0-0x9689910
+	ID 0 - 0x9689910
+
+
+Rule : simple_type_spec
+0x9688dd8-0x9688fa8
+	| 0 - 0x9688fa8
+		base_type_spec 0 - 0x9688f58
+	| 0 - 0x9688fc0
+		template_type_spec 0 - 0x9689028
+	| 0 - 0x9689078
+		scoped_name 0 - 0x96890a8
+
+
+Rule : specification
+0x96832c8-0x9683430
+	. 2 - 0x9683430
+		import_decl 2 - 0x96833e0
+	. 3 - 0x96833a0
+		definition 3 - 0x9683470
+
+
+Rule : state_member
+0x9686298-0x96862b0
+	. 0 - 0x96862b0
+		| 0 - 0x96863c8
+			'public' 0 - 0x96863e0
+		| 0 - 0x9686410
+			'private' 0 - 0x9686440
+	. 0 - 0x96863a0
+		type_spec 0 - 0x96863b8
+	. 0 - 0x9686428
+		declarators 0 - 0x96864e8
+	. 0 - 0x9686568
+		';' 0 - 0x9686580
+
+
+Rule : string_type
+0x9687238-0x968ba38
+	| 0 - 0x968ba38
+		. 0 - 0x968b8f8
+			'string' 0 - 0x968b920
+		. 0 - 0x968b950
+			'<' 0 - 0x968b968
+		. 0 - 0x968b990
+			positive_int_const 0 - 0x968b9f0
+		. 0 - 0x968b978
+			'>' 0 - 0x968ba10
+	| 0 - 0x968ba60
+		'string' 0 - 0x968ba90
+
+
+Rule : struct_type
+0x96889e0-0x968a5d8
+	. 0 - 0x968a5d8
+		'struct' 0 - 0x968a640
+	. 0 - 0x968a670
+		ID 0 - 0x968a688
+	. 0 - 0x968a6a8
+		'{' 0 - 0x968a6d8
+	. 0 - 0x968a6e8
+		member_list 0 - 0x968a738
+	. 0 - 0x968a7a0
+		'}' 0 - 0x968a7b8
+
+
+Rule : supported_interface_spec
+0x968e7f8-0x968e898
+	. 0 - 0x968e898
+		'supports' 0 - 0x968e758
+	. 0 - 0x968e668
+		scoped_name 0 - 0x968e8f8
+	. 2 - 0x968e918
+		. 0 - 0x968e968
+			',' 0 - 0x968e940
+		. 0 - 0x968e950
+			scoped_name 0 - 0x968e990
+
+
+Rule : switch_body
+0x968ac08-0x968ae80
+	case_stmt 3 - 0x968ae80
+
+
+Rule : switch_type_spec
+0x968aa78-0x968acd8
+	| 0 - 0x968acd8
+		integer_type 0 - 0x968ad68
+	| 0 - 0x968acf0
+		char_type 0 - 0x968ad88
+	| 0 - 0x968ada8
+		boolean_type 0 - 0x968adc0
+	| 0 - 0x968ade0
+		enum_type 0 - 0x968adf8
+	| 0 - 0x968ae18
+		scoped_name 0 - 0x968ae30
+
+
+Rule : template_type_spec
+0x9688fd8-0x9689498
+	| 0 - 0x9689498
+		sequence_type 0 - 0x9689448
+	| 0 - 0x96894b0
+		string_type 0 - 0x96894e0
+	| 0 - 0x96894c8
+		wide_string_type 0 - 0x9689500
+	| 0 - 0x96893d0
+		fixed_pt_type 0 - 0x9689570
+
+
+Rule : type_decl
+0x96834a8-0x96889b0
+	| 0 - 0x96889b0
+		. 0 - 0x96888a0
+			'typedef' 0 - 0x96888d8
+		. 0 - 0x9688820
+			type_declarator 0 - 0x9688930
+	| 0 - 0x96889c8
+		struct_type 0 - 0x9688a20
+	| 0 - 0x9688a70
+		union_type 0 - 0x9688ac8
+	| 0 - 0x9688b18
+		enum_type 0 - 0x9688b70
+	| 0 - 0x9688bc0
+		. 0 - 0x9688998
+			'native' 0 - 0x9688bf0
+		. 0 - 0x9688bd8
+			simple_declarator 0 - 0x9688c80
+	| 0 - 0x9688cc8
+		constr_forward_decl 0 - 0x9688ce0
+
+
+Rule : type_declarator
+0x9688960-0x9688d38
+	. 0 - 0x9688d38
+		type_spec 0 - 0x9688d98
+	. 0 - 0x9688d80
+		declarators 0 - 0x9688db8
+
+
+Rule : type_id_decl
+0x9683bd8-0x968d528
+	. 0 - 0x968d528
+		'typeid' 0 - 0x968d540
+	. 0 - 0x968d510
+		scoped_name 0 - 0x968d570
+	. 0 - 0x968d5b0
+		STRLIT 0 - 0x968d5c8
+
+
+Rule : type_prefix_decl
+0x9683d00-0x968d600
+	. 0 - 0x968d600
+		'typeprefix' 0 - 0x968d640
+	. 0 - 0x968d5e8
+		scoped_name 0 - 0x968d670
+	. 0 - 0x968d690
+		STRLIT 0 - 0x968d6a8
+
+
+Rule : type_spec
+0x96856d8-0x9688e80
+	| 0 - 0x9688e80
+		simple_type_spec 0 - 0x9688e08
+	| 0 - 0x9688e98
+		constr_type_spec 0 - 0x9688ec8
+
+
+Rule : unary_expr
+0x9687c58-0x9688060
+	| 0 - 0x9688060
+		. 0 - 0x9687fa0
+			unary_operator 0 - 0x9687da0
+		. 0 - 0x9687f48
+			primary_expr 0 - 0x9687fe0
+	| 0 - 0x9688078
+		primary_expr 0 - 0x96880d0
+
+
+Rule : unary_operator
+0x9687eb0-0x9688100
+	| 0 - 0x9688100
+		'-' 0 - 0x96880f0
+	| 0 - 0x9688128
+		'+' 0 - 0x9688158
+	| 0 - 0x9688168
+		'~' 0 - 0x96881a8
+
+
+Rule : union_type
+0x9688a88-0x968a950
+	. 0 - 0x968a950
+		'union' 0 - 0x968a9a0
+	. 0 - 0x968a9d0
+		ID 0 - 0x968a9e8
+	. 0 - 0x968aa08
+		'switch' 0 - 0x968aa38
+	. 0 - 0x968aa20
+		'(' 0 - 0x968aa68
+	. 0 - 0x968aa90
+		switch_type_spec 0 - 0x968aae0
+	. 0 - 0x968ab90
+		')' 0 - 0x968aba8
+	. 0 - 0x968abd0
+		'{' 0 - 0x968abf8
+	. 0 - 0x968ac20
+		switch_body 0 - 0x968ac48
+	. 0 - 0x968acb0
+		'}' 0 - 0x968acc8
+
+
+Rule : unsigned_int
+0x9689be8-0x968a050
+	| 0 - 0x968a050
+		unsigned_short_int 0 - 0x968a000
+	| 0 - 0x968a068
+		unsigned_long_int 0 - 0x968a0d0
+	| 0 - 0x968a120
+		unsigned_longlong_int 0 - 0x968a188
+
+
+Rule : unsigned_long_int
+0x968a080-0x968a280
+	. 0 - 0x968a280
+		'unsigned' 0 - 0x968a2a8
+	. 0 - 0x968a268
+		'long' 0 - 0x968a2e8
+
+
+Rule : unsigned_longlong_int
+0x968a138-0x968a310
+	. 0 - 0x968a310
+		'unsigned' 0 - 0x968a360
+	. 0 - 0x968a2f8
+		'long' 0 - 0x968a3a0
+	. 0 - 0x968a3c8
+		'long' 0 - 0x968a3f0
+
+
+Rule : unsigned_short_int
+0x9689f80-0x968a1d8
+	. 0 - 0x968a1d8
+		'unsigned' 0 - 0x968a228
+	. 0 - 0x9689f98
+		'short' 0 - 0x968a258
+
+
+Rule : uses_decl
+0x968ec20-0x968f2a8
+	. 0 - 0x968f2a8
+		'uses' 0 - 0x968f2d0
+	. 1 - 0x968f300
+		'multiple' 0 - 0x968f368
+	. 0 - 0x968f238
+		interface_type 0 - 0x968f318
+	. 0 - 0x968f328
+		ID 0 - 0x968f3f0
+
+
+Rule : value
+0x9683af0-0x9685468
+	| 0 - 0x9685468
+		value_decl 0 - 0x9685418
+	| 0 - 0x9685480
+		value_abs_decl 0 - 0x96854d8
+	| 0 - 0x9685528
+		value_box_decl 0 - 0x9685580
+	| 0 - 0x96855d0
+		value_forward_decl 0 - 0x9685628
+
+
+Rule : value_abs_decl
+0x9685498-0x96858d0
+	. 0 - 0x96858d0
+		'abstract' 0 - 0x9685910
+	. 0 - 0x9685840
+		'valuetype' 0 - 0x9685958
+	. 0 - 0x9685990
+		ID 0 - 0x96859a8
+	. 1 - 0x96859c8
+		value_inheritance_spec 0 - 0x9685a30
+	. 0 - 0x9685aa8
+		'{' 0 - 0x96859f8
+	. 2 - 0x9685ad8
+		export 2 - 0x9685b00
+	. 0 - 0x9685ac0
+		'}' 0 - 0x9685b38
+
+
+Rule : value_base_type
+0x9689368-0x968d218
+	'ValueBase' 0 - 0x968d218
+
+
+Rule : value_box_decl
+0x9685540-0x9685768
+	. 0 - 0x9685768
+		'valuetype' 0 - 0x96857e8
+	. 0 - 0x9685780
+		ID 0 - 0x9685808
+	. 0 - 0x9685828
+		type_spec 0 - 0x9685880
+
+
+Rule : value_decl
+0x96853e8-0x9685bc0
+	. 0 - 0x9685bc0
+		value_header 0 - 0x9685b70
+	. 0 - 0x9685bd8
+		'{' 0 - 0x9685bf0
+	. 2 - 0x9685c18
+		value_element 2 - 0x9685c40
+	. 0 - 0x9685ca8
+		'}' 0 - 0x9685cc0
+
+
+Rule : value_element
+0x9685c00-0x9686200
+	| 0 - 0x9686200
+		export 0 - 0x9686258
+	| 0 - 0x9686218
+		state_member 0 - 0x9686278
+	| 0 - 0x96862f8
+		init_decl 0 - 0x9686350
+
+
+Rule : value_forward_decl
+0x96855e8-0x9685400
+	. 1 - 0x9685400
+		'abstract' 1 - 0x96856f0
+	. 0 - 0x96852c8
+		'valuetype' 0 - 0x9685368
+	. 0 - 0x9685710
+		ID 0 - 0x9685748
+
+
+Rule : value_header
+0x9685b20-0x9685cd0
+	. 1 - 0x9685cd0
+		'custom' 1 - 0x9685d38
+	. 0 - 0x9685ce8
+		'valuetype' 0 - 0x9685d10
+	. 0 - 0x9685dc0
+		ID 0 - 0x9685dd8
+	. 1 - 0x9685df8
+		value_inheritance_spec 0 - 0x9685e98
+
+
+Rule : value_inheritance_spec
+0x96859e0-0x9685e10
+	. 1 - 0x9685e10
+		. 0 - 0x9685f08
+			':' 0 - 0x9685ef8
+		. 1 - 0x9685f30
+			'truncatable' 0 - 0x9685f70
+		. 0 - 0x9685d20
+			value_name 0 - 0x9685f48
+		. 2 - 0x9685ff8
+			. 0 - 0x9686048
+				',' 0 - 0x9686038
+			. 0 - 0x9686020
+				value_name 0 - 0x9686070
+	. 1 - 0x9686090
+		. 0 - 0x96860c0
+			'supports' 0 - 0x9686010
+		. 0 - 0x96860a8
+			interface_name 0 - 0x9686120
+		. 2 - 0x9686140
+			. 0 - 0x9686190
+				',' 0 - 0x9686168
+			. 0 - 0x9686178
+				interface_name 0 - 0x96861e0
+
+
+Rule : value_name
+0x9685f58-0x9685e28
+	scoped_name 0 - 0x9685e28
+
+
+Rule : wide_char_type
+0x9687018-0x968a4b8
+	'wchar' 0 - 0x968a4b8
+
+
+Rule : wide_string_type
+0x96872b8-0x968bc08
+	| 0 - 0x968bc08
+		. 0 - 0x968ba20
+			'wstring' 0 - 0x968bad0
+		. 0 - 0x968bb00
+			'<' 0 - 0x968bb18
+		. 0 - 0x968bb40
+			positive_int_const 0 - 0x968bbc0
+		. 0 - 0x968bb28
+			'>' 0 - 0x968bbe0
+	| 0 - 0x968bc30
+		'wstring' 0 - 0x968bc60
+
+
+Rule : xor_expr
+0x96874a8-0x9687728
+	. 0 - 0x9687728
+		and_expr 0 - 0x9687608
+	. 2 - 0x9687740
+		. 0 - 0x9687790
+			'^' 0 - 0x9687780
+		. 0 - 0x9687768
+			and_expr 0 - 0x96877c8
+
+
+New word : 
+--- component
+---cur : 0x9693ac0
+---cur : 0x9693b20
+---cur : 0x9693ef0
+---cur : 0x9693f40
+ruleCursor : 0x9691770
+cursor : 0x968e6d0
+jnin0x968e6d0
+onioij
+1
+0x968e260
+uihuu
+component_headernihijo
+-----
+ruleCursor : 0x9683938
+cursor : 0x968e6d0
+jnin0x968e6d0
+onioij
+1
+0x968e260
+uihuu
+component_headernihijo
+-----
+ruleCursor : 0x9690c30
+cursor : 0x968e6d0
+jnin0x968e6d0
+onioij
+1
+0x968e260
+uihuu
+component_headernihijo
+-----component_header - 
+ruleCursor : 0x9691040
+cursor : 0x968e6d0
+jnin0x968e6d0
+onioij
+1
+0x968e260
+uihuu
+component_headernihijo
+-----component_header - 
+ruleCursor : 0x9693920
+cursor : 0x968e6d0
+jnin0x968e6d0
+onioij
+1
+0x968e260
+uihuu
+component_headernihijo
+-----component_header - component_decl - 
+ruleCursor : 0x9693970
+cursor : 0x968e6d0
+jnin0x968e6d0
+onioij
+1
+0x968e260
+uihuu
+component_headernihijo
+-----component_header - component_decl - 
+ruleCursor : 0x96939e0
+cursor : 0x968e6d0
+jnin0x968e6d0
+onioij
+1
+0x968e260
+uihuu
+component_headernihijo
+-----component_header - component_decl - component - 
+ruleCursor : 0x9693a40
+cursor : 0x968e6d0
+jnin0x968e6d0
+onioij
+1
+0x968e260
+uihuu
+component_headernihijo
+-----component_header - component_decl - component - 
+ruleCursor : 0x9693aa0
+cursor : 0x968e6d0
+jnin0x968e6d0
+onioij
+1
+0x968e260
+uihuu
+component_headernihijo
+-----component_header - component_decl - component - 
+ruleCursor : 0x9693b80
+cursor : 0x968e6d0
+jnin0x968e6d0
+onioij
+1
+0x968e260
+uihuu
+component_headernihijo
+-----component_header - component_decl - component - definition - 
+ruleCursor : 0x9693bf0
+cursor : 0x968e6d0
+jnin0x968e6d0
+onioij
+1
+0x968e260
+uihuu
+component_headernihijo
+-----component_header - component_decl - component - definition - 
+ruleCursor : 0x9693c60
+cursor : 0x968e6d0
+jnin0x968e6d0
+onioij
+1
+0x968e260
+uihuu
+component_headernihijo
+-----component_header - component_decl - component - definition - 
+ruleCursor : 0x9693cd0
+cursor : 0x968e6d0
+jnin0x968e6d0
+onioij
+1
+0x968e260
+uihuu
+component_headernihijo
+-----component_header - component_decl - component - definition - 
+ruleCursor : 0x9693d10
+cursor : 0x968e410
+jnin0x968e410
+onioij
+1
+0x968e330
+uihuu
+component_forward_declnihijo
+-----
+ruleCursor : 0x9693d40
+cursor : 0x968e410
+jnin0x968e410
+onioij
+1
+0x968e330
+uihuu
+component_forward_declnihijo
+-----
+ruleCursor : 0x9693d90
+cursor : 0x968e410
+jnin0x968e410
+onioij
+1
+0x968e330
+uihuu
+component_forward_declnihijo
+-----component_forward_decl - 
+ruleCursor : 0x9693dd0
+cursor : 0x968e410
+jnin0x968e410
+onioij
+1
+0x968e330
+uihuu
+component_forward_declnihijo
+-----component_forward_decl - 
+ruleCursor : 0x9693e30
+cursor : 0x968e410
+jnin0x968e410
+onioij
+1
+0x968e330
+uihuu
+component_forward_declnihijo
+-----component_forward_decl - component - 
+ruleCursor : 0x9693e80
+cursor : 0x968e410
+jnin0x968e410
+onioij
+1
+0x968e330
+uihuu
+component_forward_declnihijo
+-----component_forward_decl - component - 
+ruleCursor : 0x9693ed0
+cursor : 0x968e410
+jnin0x968e410
+onioij
+1
+0x968e330
+uihuu
+component_forward_declnihijo
+-----component_forward_decl - component - 
+ruleCursor : 0x9693f90
+cursor : 0x968e410
+jnin0x968e410
+onioij
+1
+0x968e330
+uihuu
+component_forward_declnihijo
+-----component_forward_decl - component - definition - 
+ruleCursor : 0x9693ff0
+cursor : 0x968e410
+jnin0x968e410
+onioij
+1
+0x968e330
+uihuu
+component_forward_declnihijo
+-----component_forward_decl - component - definition - 
+ruleCursor : 0x9694040
+cursor : 0x968e410
+jnin0x968e410
+onioij
+1
+0x968e330
+uihuu
+component_forward_declnihijo
+-----component_forward_decl - component - definition - 
+ruleCursor : 0x96940a0
+cursor : 0x968e410
+jnin0x968e410
+onioij
+1
+0x968e330
+uihuu
+component_forward_declnihijo
+-----component_forward_decl - component - definition - 
+
+New word : 
+--- ID
+---cur : 0x96943f0
+---cur : 0x9694460
+---cur : 0x96944d0
+---cur : 0x9694540
+---cur : 0x96945b0
+---cur : 0x9694620
+---cur : 0x9694690
+---cur : 0x9694700
+---cur : 0x9694770
+---cur : 0x96947e0
+---cur : 0x9694850
+---cur : 0x96948c0
+---cur : 0x9694930
+---cur : 0x96949a0
+---cur : 0x9694a10
+---cur : 0x9694a80
+---cur : 0x9694af0
+---cur : 0x9694cd0
+---cur : 0x9694d20
+---cur : 0x9694fa0
+---cur : 0x9695000
+---cur : 0x9695060
+---cur : 0x9695330
+---cur : 0x9695360
+---cur : 0x9695460
+---cur : 0x96954d0
+---cur : 0x9695540
+---cur : 0x96955f0
+---cur : 0x96958e0
+---cur : 0x9695a40
+---cur : 0x9695680
+---cur : 0x9695c10
+---cur : 0x9695d70
+---cur : 0x9695710
+---cur : 0x9695f00
+---cur : 0x9695770
+---cur : 0x96957a0
+---cur : 0x9695f40
+---cur : 0x9696230
+---cur : 0x9696280
+---cur : 0x96962d0
+---cur : 0x9696500
+---cur : 0x9696570
+---cur : 0x96965e0
+---cur : 0x9696650
+---cur : 0x96966c0
+---cur : 0x9696730
+---cur : 0x96967a0
+---cur : 0x9696880
+---cur : 0x96968b0
+---cur : 0x96968e0
+---cur : 0x9696910
+---cur : 0x9696940
+---cur : 0x9696970
+---cur : 0x9697000
+---cur : 0x96969d0
+---cur : 0x9696a00
+---cur : 0x9696a30
+---cur : 0x9696a60
+---cur : 0x9696a90
+---cur : 0x9696ac0
+---cur : 0x9696af0
+---cur : 0x9697470
+---cur : 0x9697590
+---cur : 0x9696b80
+---cur : 0x9696bb0
+---cur : 0x9697890
+---cur : 0x96979b0
+---cur : 0x9697c40
+---cur : 0x9697dd0
+---cur : 0x9697eb0
+---cur : 0x9697fd0
+---cur : 0x9697040
+---cur : 0x96975d0
+---cur : 0x9697610
+---cur : 0x96985b0
+---cur : 0x9697690
+---cur : 0x96979f0
+---cur : 0x9698c40
+---cur : 0x9697b90
+---cur : 0x9698e70
+---cur : 0x9697ef0
+---cur : 0x9698010
+---cur : 0x9698050
+---cur : 0x9698090
+---cur : 0x96992f0
+---cur : 0x9699510
+---cur : 0x9698700
+---cur : 0x9699820
+---cur : 0x9699a00
+---cur : 0x9699c00
+---cur : 0x9698b20
+---cur : 0x9698b70
+---cur : 0x9699f20
+---cur : 0x9699590
+---cur : 0x969a210
+---cur : 0x969a410
+---cur : 0x969a6d0
+---cur : 0x969a9e0
+---cur : 0x969ae10
+---cur : 0x969b2c0
+---cur : 0x969af90
+---cur : 0x969b050
+---cur : 0x969b390
+---cur : 0x969b460
+---cur : 0x969b530
+---cur : 0x969b600
+---cur : 0x969b6d0
+---cur : 0x969c430
+---cur : 0x969c4a0
+---cur : 0x969c510
+sl : 0x969b610
+curSeq : 0x969c580
+cursors ext : 0x969c580-0x96943a0
+value (rc) = 0x969c5a0
+cursors pov : 0x969c590-0x969c580
+sl : 0x969c5b0
+curSeq : 0x969c5c0
+cursors ext : 0x969c5c0-0x9694380
+value (rc) = 0x969c5e0
+cursors pov : 0x969c5d0-0x969c5c0
+sl : 0x969c5f0
+curSeq : 0x969c600
+cursors ext : 0x969c600-0x9694360
+value (rc) = 0x969c630
+cursors pov : 0x969c610-0x969c600
+sl : 0x969c640
+curSeq : 0x969c650
+cursors ext : 0x969c650-0x9694340
+value (rc) = 0x969c680
+cursors pov : 0x969c660-0x969c650
+sl : 0x969c690
+curSeq : 0x969c6a0
+cursors ext : 0x969c6a0-0x9694320
+value (rc) = 0x969c6e0
+cursors pov : 0x969c6b0-0x969c6a0
+sl : 0x969c6f0
+curSeq : 0x969c700
+cursors ext : 0x969c700-0x9694300
+value (rc) = 0x969c740
+cursors pov : 0x969c710-0x969c700
+sl : 0x969c750
+curSeq : 0x969c760
+cursors ext : 0x969c760-0x96942e0
+value (rc) = 0x969c7b0
+cursors pov : 0x969c770-0x969c760
+sl : 0x969c7c0
+curSeq : 0x969c7d0
+cursors ext : 0x969c7d0-0x96942c0
+value (rc) = 0x969c820
+cursors pov : 0x969c7e0-0x969c7d0
+sl : 0x969c830
+curSeq : 0x969c840
+cursors ext : 0x969c840-0x96942a0
+value (rc) = 0x969c890
+cursors pov : 0x969c850-0x969c840
+sl : 0x969c8a0
+curSeq : 0x969c8b0
+cursors ext : 0x969c8b0-0x9694280
+value (rc) = 0x969c910
+cursors pov : 0x969c8c0-0x969c8b0
+sl : 0x969c920
+curSeq : 0x969c930
+cursors ext : 0x969c930-0x9694260
+value (rc) = 0x969c990
+cursors pov : 0x969c940-0x969c930
+sl : 0x969c9a0
+curSeq : 0x969c9b0
+cursors ext : 0x969c9b0-0x9694240
+value (rc) = 0x969ca10
+cursors pov : 0x969c9c0-0x969c9b0
+sl : 0x969ca20
+curSeq : 0x969ca30
+cursors ext : 0x969ca30-0x9694220
+value (rc) = 0x969ca90
+cursors pov : 0x969ca40-0x969ca30
+sl : 0x969caa0
+curSeq : 0x969cab0
+cursors ext : 0x969cab0-0x9694200
+value (rc) = 0x969cad0
+cursors pov : 0x969cac0-0x969cab0
+sl : 0x969cae0
+curSeq : 0x969caf0
+cursors ext : 0x969caf0-0x96941e0
+value (rc) = 0x969cb10
+cursors pov : 0x969cb00-0x969caf0
+sl : 0x969cb20
+curSeq : 0x969cb30
+cursors ext : 0x969cb30-0x96941c0
+value (rc) = 0x969cb60
+cursors pov : 0x969cb40-0x969cb30
+sl : 0x969cb70
+curSeq : 0x969cb80
+cursors ext : 0x969cb80-0x96941a0
+value (rc) = 0x969cbb0
+cursors pov : 0x969cb90-0x969cb80
+sl : 0x969cbc0
+curSeq : 0x969cbd0
+cursors ext : 0x969cbd0-0x9694180
+value (rc) = 0x969cc10
+cursors pov : 0x969cbe0-0x969cbd0
+sl : 0x969cc20
+curSeq : 0x969cc30
+cursors ext : 0x969cc30-0x9694160
+value (rc) = 0x969cc70
+cursors pov : 0x969cc40-0x969cc30
+sl : 0x969cc80
+curSeq : 0x969cc90
+cursors ext : 0x969cc90-0x9694140
+value (rc) = 0x969ccd0
+cursors pov : 0x969cca0-0x969cc90
+sl : 0x969cce0
+curSeq : 0x969ccf0
+cursors ext : 0x969ccf0-0x9694120
+value (rc) = 0x969cd40
+cursors pov : 0x969cd00-0x969ccf0
+sl : 0x969cd50
+curSeq : 0x969cd60
+cursors ext : 0x969cd60-0x9694100
+value (rc) = 0x969cdb0
+cursors pov : 0x969cd70-0x969cd60
+sl : 0x969cdc0
+curSeq : 0x969cdd0
+cursors ext : 0x969cdd0-0x96940e0
+value (rc) = 0x969ce20
+cursors pov : 0x969cde0-0x969cdd0
+sl : 0x969ce30
+curSeq : 0x969ce40
+cursors ext : 0x969ce40-0x96940c0
+value (rc) = 0x969ce90
+cursors pov : 0x969ce50-0x969ce40
+ruleCursor : 0x969ce90
+cursor : 0x968e458
+jnin0x968e458
+onioij
+1
+0x968e330
+uihuu
+component_forward_declnihijo
+-----component_forward_decl - component - definition - 
+ruleCursor : 0x969ce20
+cursor : 0x968e458
+jnin0x968e458
+onioij
+1
+0x968e330
+uihuu
+component_forward_declnihijo
+-----component_forward_decl - component - definition - 
+ruleCursor : 0x969cdb0
+cursor : 0x968e458
+jnin0x968e458
+onioij
+1
+0x968e330
+uihuu
+component_forward_declnihijo
+-----component_forward_decl - component - definition - 
+ruleCursor : 0x969cd40
+cursor : 0x968e458
+jnin0x968e458
+onioij
+1
+0x968e330
+uihuu
+component_forward_declnihijo
+-----component_forward_decl - component - definition - 
+ruleCursor : 0x969ccd0
+cursor : 0x968e458
+jnin0x968e458
+onioij
+1
+0x968e330
+uihuu
+component_forward_declnihijo
+-----component_forward_decl - component - 
+ruleCursor : 0x969cc70
+cursor : 0x968e458
+jnin0x968e458
+onioij
+1
+0x968e330
+uihuu
+component_forward_declnihijo
+-----component_forward_decl - component - 
+ruleCursor : 0x969cc10
+cursor : 0x968e458
+jnin0x968e458
+onioij
+1
+0x968e330
+uihuu
+component_forward_declnihijo
+-----component_forward_decl - component - 
+ruleCursor : 0x969cbb0
+cursor : 0x968e458
+jnin0x968e458
+onioij
+1
+0x968e330
+uihuu
+component_forward_declnihijo
+-----component_forward_decl - 
+ruleCursor : 0x969cb60
+cursor : 0x968e458
+jnin0x968e458
+onioij
+1
+0x968e330
+uihuu
+component_forward_declnihijo
+-----component_forward_decl - 
+ruleCursor : 0x969cb10
+cursor : 0x968e458
+jnin0x968e458
+onioij
+1
+0x968e330
+uihuu
+component_forward_declnihijo
+-----
+ruleCursor : 0x969cad0
+cursor : 0x968e458
+jnin0x968e458
+onioij
+1
+0x968e330
+uihuu
+component_forward_declnihijo
+-----
+ruleCursor : 0x969ca90
+cursor : 0x968e708
+jnin0x968e708
+onioij
+1
+0x968e260
+uihuu
+component_headernihijo
+-----component_header - component_decl - component - definition - 
+ruleCursor : 0x969ca10
+cursor : 0x968e708
+jnin0x968e708
+onioij
+1
+0x968e260
+uihuu
+component_headernihijo
+-----component_header - component_decl - component - definition - 
+ruleCursor : 0x969c990
+cursor : 0x968e708
+jnin0x968e708
+onioij
+1
+0x968e260
+uihuu
+component_headernihijo
+-----component_header - component_decl - component - definition - 
+ruleCursor : 0x969c910
+cursor : 0x968e708
+jnin0x968e708
+onioij
+1
+0x968e260
+uihuu
+component_headernihijo
+-----component_header - component_decl - component - definition - 
+ruleCursor : 0x969c890
+cursor : 0x968e708
+jnin0x968e708
+onioij
+1
+0x968e260
+uihuu
+component_headernihijo
+-----component_header - component_decl - component - 
+ruleCursor : 0x969c820
+cursor : 0x968e708
+jnin0x968e708
+onioij
+1
+0x968e260
+uihuu
+component_headernihijo
+-----component_header - component_decl - component - 
+ruleCursor : 0x969c7b0
+cursor : 0x968e708
+jnin0x968e708
+onioij
+1
+0x968e260
+uihuu
+component_headernihijo
+-----component_header - component_decl - component - 
+ruleCursor : 0x969c740
+cursor : 0x968e708
+jnin0x968e708
+onioij
+1
+0x968e260
+uihuu
+component_headernihijo
+-----component_header - component_decl - 
+ruleCursor : 0x969c6e0
+cursor : 0x968e708
+jnin0x968e708
+onioij
+1
+0x968e260
+uihuu
+component_headernihijo
+-----component_header - component_decl - 
+ruleCursor : 0x969c680
+cursor : 0x968e708
+jnin0x968e708
+onioij
+1
+0x968e260
+uihuu
+component_headernihijo
+-----component_header - 
+ruleCursor : 0x969c630
+cursor : 0x968e708
+jnin0x968e708
+onioij
+1
+0x968e260
+uihuu
+component_headernihijo
+-----component_header - 
+ruleCursor : 0x969c5e0
+cursor : 0x968e708
+jnin0x968e708
+onioij
+1
+0x968e260
+uihuu
+component_headernihijo
+-----
+ruleCursor : 0x969c5a0
+cursor : 0x968e708
+jnin0x968e708
+onioij
+1
+0x968e260
+uihuu
+component_headernihijo
+-----
+
+New word : 
+--- supports
+---cur : 0x969cf80
+---cur : 0x969cfb0
+---cur : 0x969d150
+---cur : 0x969d180
+---cur : 0x969d1b0
+---cur : 0x969d1e0
+---Seq : 0x969ce40
+---cur : 0x969ce90
+---Seq : 0x96940c0
+---cur : 0x96940a0
+---Seq : 0x969cdd0
+---cur : 0x969ce20
+---Seq : 0x96940e0
+---cur : 0x9694040
+---Seq : 0x969cd60
+---cur : 0x969cdb0
+---Seq : 0x9694100
+---cur : 0x9693ff0
+---Seq : 0x969ccf0
+---cur : 0x969cd40
+---Seq : 0x9694120
+---cur : 0x9693f90
+---Seq : 0x969cc90
+---cur : 0x969ccd0
+---Seq : 0x9694140
+---cur : 0x9693ed0
+---Seq : 0x969cc30
+---cur : 0x969cc70
+---Seq : 0x9694160
+---cur : 0x9693e80
+---Seq : 0x969cbd0
+---cur : 0x969cc10
+---Seq : 0x9694180
+---cur : 0x9693e30
+---Seq : 0x969cb80
+---cur : 0x969cbb0
+---Seq : 0x96941a0
+---cur : 0x9693dd0
+---Seq : 0x969cb30
+---cur : 0x969cb60
+---Seq : 0x96941c0
+---cur : 0x9693d90
+---Seq : 0x969caf0
+---cur : 0x969cb10
+---Seq : 0x96941e0
+---cur : 0x9693d40
+---Seq : 0x969cab0
+---cur : 0x969cad0
+---Seq : 0x9694200
+---cur : 0x9693d10
+sl : 0x969cab0
+curSeq : 0x9694200
+cursors ext : 0x9694200-0x969ca30
+value (rc) = 0x96941c0
+cursors pov : 0x969cac0-0x9694200
+sl : 0x969ca90
+curSeq : 0x969cb60
+cursors ext : 0x969cb60-0x969c9b0
+value (rc) = 0x9694180
+cursors pov : 0x969cb80-0x969cb60
+sl : 0x969ca10
+curSeq : 0x969cbf0
+cursors ext : 0x969cbf0-0x969c930
+value (rc) = 0x969cc70
+cursors pov : 0x969cc10-0x969cbf0
+sl : 0x969c990
+curSeq : 0x9694140
+cursors ext : 0x9694140-0x969c8b0
+value (rc) = 0x969cd00
+cursors pov : 0x969cca0-0x9694140
+sl : 0x969c910
+curSeq : 0x969cd40
+cursors ext : 0x969cd40-0x969c840
+value (rc) = 0x969cdb0
+cursors pov : 0x969cd60-0x969cd40
+sl : 0x969c890
+curSeq : 0x96940e0
+cursors ext : 0x96940e0-0x969c7d0
+value (rc) = 0x96940c0
+cursors pov : 0x969cde0-0x96940e0
+sl : 0x969c820
+curSeq : 0x969ce60
+cursors ext : 0x969ce60-0x969c760
+value (rc) = 0x969d3e0
+cursors pov : 0x969ce90-0x969ce60
+sl : 0x969c7b0
+curSeq : 0x969d400
+cursors ext : 0x969d400-0x969c700
+value (rc) = 0x969d440
+cursors pov : 0x969d410-0x969d400
+sl : 0x969c740
+curSeq : 0x969d460
+cursors ext : 0x969d460-0x969c6a0
+value (rc) = 0x969d4a0
+cursors pov : 0x969d470-0x969d460
+sl : 0x969c6e0
+curSeq : 0x969d4c0
+cursors ext : 0x969d4c0-0x969c650
+value (rc) = 0x969d4f0
+cursors pov : 0x969d4d0-0x969d4c0
+sl : 0x969c680
+curSeq : 0x969d510
+cursors ext : 0x969d510-0x969c600
+value (rc) = 0x969d540
+cursors pov : 0x969d520-0x969d510
+sl : 0x969c630
+curSeq : 0x969d560
+cursors ext : 0x969d560-0x969c5c0
+value (rc) = 0x969d580
+cursors pov : 0x969d570-0x969d560
+sl : 0x969d5a0
+curSeq : 0x969d5b0
+cursors ext : 0x969d5b0-0x969c580
+value (rc) = 0x969d5d0
+cursors pov : 0x969d5c0-0x969d5b0
+ruleCursor : 0x969d5d0
+cursor : 0x968e758
+jnin0x968e758
+onioij
+1
+0x968e7f8
+uihuu
+supported_interface_specnihijo
+-----supported_interface_spec - 
+ruleCursor : 0x969d580
+cursor : 0x968e758
+jnin0x968e758
+onioij
+1
+0x968e7f8
+uihuu
+supported_interface_specnihijo
+-----supported_interface_spec - 
+ruleCursor : 0x969d540
+cursor : 0x968e758
+jnin0x968e758
+onioij
+1
+0x968e7f8
+uihuu
+supported_interface_specnihijo
+-----supported_interface_spec - component_header - 
+ruleCursor : 0x969d4f0
+cursor : 0x968e758
+jnin0x968e758
+onioij
+1
+0x968e7f8
+uihuu
+supported_interface_specnihijo
+-----supported_interface_spec - component_header - 
+ruleCursor : 0x969d4a0
+cursor : 0x968e758
+jnin0x968e758
+onioij
+1
+0x968e7f8
+uihuu
+supported_interface_specnihijo
+-----supported_interface_spec - component_header - component_decl - 
+ruleCursor : 0x969d440
+cursor : 0x968e758
+jnin0x968e758
+onioij
+1
+0x968e7f8
+uihuu
+supported_interface_specnihijo
+-----supported_interface_spec - component_header - component_decl - 
+ruleCursor : 0x969d3e0
+cursor : 0x968e758
+jnin0x968e758
+onioij
+1
+0x968e7f8
+uihuu
+supported_interface_specnihijo
+-----supported_interface_spec - component_header - component_decl - component - 
+ruleCursor : 0x96940c0
+cursor : 0x968e758
+jnin0x968e758
+onioij
+1
+0x968e7f8
+uihuu
+supported_interface_specnihijo
+-----supported_interface_spec - component_header - component_decl - component - 
+ruleCursor : 0x969cdb0
+cursor : 0x968e758
+jnin0x968e758
+onioij
+1
+0x968e7f8
+uihuu
+supported_interface_specnihijo
+-----supported_interface_spec - component_header - component_decl - component - 
+ruleCursor : 0x969cd00
+cursor : 0x968e758
+jnin0x968e758
+onioij
+1
+0x968e7f8
+uihuu
+supported_interface_specnihijo
+-----supported_interface_spec - component_header - component_decl - component - definition - 
+ruleCursor : 0x969cc70
+cursor : 0x968e758
+jnin0x968e758
+onioij
+1
+0x968e7f8
+uihuu
+supported_interface_specnihijo
+-----supported_interface_spec - component_header - component_decl - component - definition - 
+ruleCursor : 0x9694180
+cursor : 0x968e758
+jnin0x968e758
+onioij
+1
+0x968e7f8
+uihuu
+supported_interface_specnihijo
+-----supported_interface_spec - component_header - component_decl - component - definition - 
+ruleCursor : 0x96941c0
+cursor : 0x968e758
+jnin0x968e758
+onioij
+1
+0x968e7f8
+uihuu
+supported_interface_specnihijo
+-----supported_interface_spec - component_header - component_decl - component - definition - 
+----------------------
+cursorSeq : 0x969d5b0
+ruleCursor : 0x969d5d0
+cursor : 0x968e758
+jnin0x968e758
+onioij
+1
+0x968e7f8
+uihuu
+supported_interface_specnihijo
+-----supported_interface_spec - 
+cursorSeq : 0x969c580
+ruleCursor : 0x969c5a0
+cursor : 0x968e708
+jnin0x968e708
+onioij
+1
+0x968e260
+uihuu
+component_headernihijo
+-----
+cursorSeq : 0x96943a0
+ruleCursor : 0x9691770
+cursor : 0x968e6d0
+jnin0x968e6d0
+onioij
+1
+0x968e260
+uihuu
+component_headernihijo
+-----
+----------------------
+cursorSeq : 0x969d560
+ruleCursor : 0x969d580
+cursor : 0x968e758
+jnin0x968e758
+onioij
+1
+0x968e7f8
+uihuu
+supported_interface_specnihijo
+-----supported_interface_spec - 
+cursorSeq : 0x969c5c0
+ruleCursor : 0x969c5e0
+cursor : 0x968e708
+jnin0x968e708
+onioij
+1
+0x968e260
+uihuu
+component_headernihijo
+-----
+cursorSeq : 0x9694380
+ruleCursor : 0x9683938
+cursor : 0x968e6d0
+jnin0x968e6d0
+onioij
+1
+0x968e260
+uihuu
+component_headernihijo
+-----
+----------------------
+cursorSeq : 0x969d510
+ruleCursor : 0x969d540
+cursor : 0x968e758
+jnin0x968e758
+onioij
+1
+0x968e7f8
+uihuu
+supported_interface_specnihijo
+-----supported_interface_spec - component_header - 
+cursorSeq : 0x969c600
+ruleCursor : 0x969c630
+cursor : 0x969d560
+jnin0x969d560
+onioij
+56
+0x969c5d0
+uihuu
+‡≈i	ÄCi	p’i	   ¿≈i	           Áh	            ∆i	∞≈i	       0∆i	`Ci	 ’i	    ∆i	           –‰h	    0∆i	   `’i	Ä∆i	       P∆i	≈i	       Ä∆i	@Ci	–‘i	   P∆i	           –‰h	    Ä∆i	   ’i	‡∆i	       †∆i	@∆i	       ‡∆i	 Ci	p‘i	   †∆i	           –‰h	–∆i	‡∆i	   ∞‚h	    ¿∆i	   ¿‘i	@«i	        «i	ê∆i	       @«i	 Ci	‘i	    «i	           –‰h	0«i	@«i	   ∞‚h	     «i	   `‘i	∞«i	       `«i	∆i	       ∞«i	‡Bi	êŒi	   `«i	           –‰h	ê«i	∞«i	   ∞‚h	†«i	Ä«i	   8?h	    ê«i	    ‘i	 »i	       –«i	P«i	        »i	¿Bi	‡Õi	   –«i	           –‰h	 »i	 »i	   ∞‚h	»i	«i	   8?h	     »i	   `Œi	ê»i	       @»i	¿«i	       ê»i	†Bi	`Õi	   @»i	           –‰h	p»i	ê»i	   ∞‚h	Ä»i	`»i	   8?h	    p»i	   ‡@i	…i	       ∞»i	0»i	       …i	ÄBi	†Ãi	   ∞»i	           –‰h	‡»i	…i	   ∞‚h	»i	–»i	   8?h	 …i	‡»i	   8Bh	    »i	   @Õi	ê…i	       0…i	†»i	       ê…i	`Bi	Ãi	   0…i	           –‰h	`…i	ê…i	   ∞‚h	p…i	P…i	   8?h	Ä…i	`…i	   8Bh	    p…i	   @Ai	 i	       ∞…i	 …i	        i	@Bi	ÄÀi	   ∞…i	           –‰h	‡…i	 i	   ∞‚h	…i	–…i	   8?h	  i	‡…i	   p4h	    …i	   Ài	ê i	       0 i	†…i	       ê i	 Bi	¿ i	   0 i	           –‰h	` i	ê i	   ∞‚h	p i	P i	   8?h	Ä i	` i	   p4h	    p i	   `Ài	∞ i	       ∞ i	  i	        Bi	            Bi	           X‰h	            i	† i	       –‰h	‡Ai	@Ài	   8?h	0Ài	‡Ai	   X‰h	           0Ài	‡ i	       p4h	     Ài	   HËh	 i	¿Ai	   p„h	    `Ài	   ÄAi	∞…i	       ÄÀi	 Ài	       `Ài	           ∞‚h	∞Ài	†Ai	   p„h	    ∞Ài	   8?h	–Ài	êÀi	   –Ài	pÀi	       p4h	    ∞Ài	   HËh	†Ai	ÄAi	   pÃi	0…i	       8?h	    Ài	   Ài	           0Ãi	¿Ài	       –‰h	`Ai	êÃi	   8?h	PÃi	`Ai	   8Bh	    @Ãi	   8?h	    PÃi	   XÁh	êÃi	       êÃi	 Ãi	       HËh	0Ãi	pÃi	   @Ai	           –‰h	–Ãi	Õi	   8?h	    ∞Ãi	   ∞‚h	Ãi	∞Ãi	   Ãi	ÄÃi	       8?h	 Ai	–Ãi	   XÁh	Õi	       HËh	∞Ãi	 Õi	   8?h	0Õi	Õi	   8Bh	     Õi	   ∞Õi	@»i	       `Õi	‡Ãi	       @Õi	           ∞‚h	ÄÕi	 Ai	   8?h	    pÕi	   8?h	†Õi	ÄÕi	   8Bh	    êÕi	   XÁh	–Õi	       –Õi	PÕi	       HËh	 Ai	∞Õi	   ‡@i	           –‰h	 Œi	PŒi	   8?h	Œi	Õi	   p4h	     Œi	   ∞‚h	@Œi	Õi	   @Œi	¿Õi	       8?h	     Œi	   HËh	Õi	¿@i	   ‡”i	`«i	       8?h	ÄŒi	`Œi	   p4h	    pŒi	   `Œi	        !   ∏Œi	   ˛ˇˇˇsupports        !   ÿŒi	   ˇˇˇˇsupports        !          ˇˇˇˇsupports           P–i	 –i	       XÁh	Äœi	       0œi	           XÁh	           XÁh	           `œi	 œi	       XÁh	           òËh	@œi	       ®˘h	    œi	   Ä“i	0“i	       XÁh	∞œi	       HËh	    †œi	   ‡œi	Pœi	       ®˘h	    ‡œi	   XÁh	–œi	       ®˘h	pœi	        –i	¿œi	       ®˘h	     –i	   XÁh	–i	       @˘h	œi	       HËh	    P–i	   XÁh	@–i	       HËh	0–i	       ê–i	 œi	       HËh	    ê–i	   XÁh	Ä–i	       ‡Áh	`–i	       `h	P—i	       ––i	p–i	       `h	           `h	†–i	        —i	¿–i	       `h	           ¿`h	‡–i	       0—i	–i	       `h	           ê`h	—i	       @i	    ∞–i	   “i	†“i	       `h	Ä—i	       ®i	    p—i	   `”i	”i	       `h	∞—i	       ò^h	    †—i	   –‰h	¿”i	”i	   `h	‡—i	       0Zh	    –—i	   “i	 —i	       @i	    “i	   `h	 “i	       @i	@—i	       P“i	—i	       @i	    P“i	   `h	@“i	       †
+i	 “i	       ®i	    Ä“i	   `h	p“i	       ®i	`“i	       ¿“i	êœi	       ®i	    ¿“i	   `h	∞“i	       @i	ê“i	       ò^h	    “i	   `h	‡“i	       ò^h	–“i	       0”i	`—i	       ò^h	    0”i	   `h	 ”i	       ¯]h	 ”i	       0Zh	    `”i	   `h	P”i	       0Zh	@”i	       †”i	ê—i	       0Zh	    †”i	   `h	ê”i	       »Yh	p”i	       ∞‚h	–”i	¿—i	   8?h	    ¿”i	   XÁh	”i	       HËh	¿—i	‡”i	   @‘i	 «i	        ‘i	           –‰h	0‘i	P‘i	   ∞‚h	     ‘i	   XÁh	P‘i	       HËh	 ‘i	@‘i	   †‘i	†∆i	       `‘i	           –‰h	ê‘i	∞‘i	   ∞‚h	    Ä‘i	   XÁh	∞‘i	       HËh	Ä‘i	†‘i	   ‘i	P∆i	       ¿‘i	           –‰h	     ’i	   XÁh	 ’i	       HËh	‡‘i	‘i	   @’i	 ∆i	       ’i	           –‰h	    P’i	   XÁh	P’i	       HËh	0’i	@’i	   Ä’i	¿≈i	       `’i	           XÁh	ê’i	       HËh	    Ä’i	   ∞’i	0∆i	       –’i	Ä≈i	       ∞’i	           XÁh	‡’i	       HËh	    –’i	J                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   

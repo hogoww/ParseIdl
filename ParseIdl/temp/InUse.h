@@ -1,0 +1,17 @@
+#ifndef __INUSE_H__
+#define __INUSE_H__
+
+#include <exception>
+#include <string>
+
+class InUse : std::exception {
+ private:
+  std::string errormsg;
+
+ public:
+  InUse(std::string errorMsg);
+  virtual ~InUse() throw();
+  virtual const char* what() const throw();
+
+};
+#endif

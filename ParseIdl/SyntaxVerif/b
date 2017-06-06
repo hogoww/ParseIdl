@@ -1,0 +1,7 @@
+interface Basic
+{
+   short add(in short arg_un, in short arg_deux);
+   short sub(in short arg_un, in short arg_deux);
+};
+
+component foo supports Basic

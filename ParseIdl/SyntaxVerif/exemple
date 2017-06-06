@@ -1,0 +1,16 @@
+exception InUse {};
+
+interface Fork {
+	void get() raises (InUse);
+	void release();
+};
+
+component ForkManager {
+	provides Fork thefork;
+};
+
+component Philosopher {
+	attribute string name;
+	uses Fork left;
+	uses Fork right;
+};

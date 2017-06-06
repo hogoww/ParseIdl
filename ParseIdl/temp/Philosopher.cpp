@@ -1,16 +1,28 @@
 
 
 
-
-
-
-
 #include "Philosopher.h"
 
 
+void Philosopher::setname(std::string a){
+this->name=a;
+}
+
+std::string Philosopher::getname(){
+return this->name;
+}
 
 
-void Philosopher::connect_left(int* a) throw ( Component::AlreadyConnected ){
+
+void Philosopher::setleft(Fork_Item* a){
+this->left=a;
+}
+
+Fork_Item* Philosopher::getleft(){
+return this->left;
+}
+
+void Philosopher::connect_left(Fork_Item* a) throw ( Component::AlreadyConnected ){
 if(left){
  throw Component::AlreadyConnected("left");
 }
@@ -19,7 +31,7 @@ this->left=a;
 }
 }
 
-int* Philosopher::disconnect_left() throw ( Component::NoConnection ){
+Fork_Item* Philosopher::disconnect_left() throw ( Component::NoConnection ){
 if(left){
 this->left=NULL;
 }
@@ -28,12 +40,20 @@ else{
 }
 }
 
-int* Philosopher::get_connection_left() const{
+Fork_Item* Philosopher::get_connection_left() const{
 return this->left;
 }
 
 
-void Philosopher::connect_right(int* a) throw ( Component::AlreadyConnected ){
+void Philosopher::setright(Fork_Item* a){
+this->right=a;
+}
+
+Fork_Item* Philosopher::getright(){
+return this->right;
+}
+
+void Philosopher::connect_right(Fork_Item* a) throw ( Component::AlreadyConnected ){
 if(right){
  throw Component::AlreadyConnected("right");
 }
@@ -42,7 +62,7 @@ this->right=a;
 }
 }
 
-int* Philosopher::disconnect_right() throw ( Component::NoConnection ){
+Fork_Item* Philosopher::disconnect_right() throw ( Component::NoConnection ){
 if(right){
 this->right=NULL;
 }
@@ -51,18 +71,7 @@ else{
 }
 }
 
-int* Philosopher::get_connection_right() const{
+Fork_Item* Philosopher::get_connection_right() const{
 return this->right;
-}
-
-
-
-
-void Philosopher::get(){
-//Todo
-}
-
-void Philosopher::release(int p, int& f, int& e){
-//Todo
 }
 
