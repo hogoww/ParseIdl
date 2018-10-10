@@ -1,6 +1,9 @@
 # ParseIdl
 parseIdl
 
+
+Projet étudiant Licence 3
+
 makefile présent pour la compilation
 script test:
 ./launch.sh
